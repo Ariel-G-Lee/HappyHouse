@@ -11,26 +11,68 @@
           <form id="loginform" method="post" action="">
             <div class="form-group" align="left">
               <label for="loginId">아이디</label>
-              <input type="text" class="form-control"
-                id="loginId" name="loginId" placeholder="">
+              <input type="text" class="form-control" id="loginId" name="loginId" placeholder="" v-model="$store.state.login.userId">
             </div>
             <div class="form-group mt-3" align="left">
               <label for="loginPwd">비밀번호</label>
-              <input type="password"
-                class="form-control" id="loginPwd" name="userPwd" placeholder="">
+              <input type="password" class="form-control" id="loginPwd" name="userPwd" placeholder="" v-model="$store.state.login.userPwd">
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-green">로그인</button>
+          <button @click="login" class="btn btn-green">로그인</button>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import Vue from 'vue';
+import VueAlertify from 'vue-alertify'; 
+Vue.use(VueAlertify);
+
+import http from "@/common/axios.js";
+
 export default {
   name: 'Login',
+    methods: {
+    login(){
+      http.post(
+        "/login",
+        {
+          userEmail: this.$store.state.login.userEmail,
+          userPassword: this.$store.state.login.userPassword
+        }
+      )
+      .then(({ data }) => {
+        console.log("LoginVue: data : ");
+        console.log(data);
+
+        // $emit 사용 X
+        // login 성공 전달
+        //this.$emit('call-parent-loginSuccess', {userName: data.userName, userProfileImageUrl: data.userProfileImageUrl});
+
+        // isLogin 포함 mutator 호출
+        this.$store.commit(
+          'SET_LOGIN',
+          { isLogin: true, userName: data.userName, userProfileImageUrl: data.userProfileImageUrl}
+        );
+
+        // board 로 이동
+        this.$router.push("/board")
+      })
+      .catch( error => {
+        console.log("LoginVue: error : ");
+        console.log(error);
+        if( error.response.status == '404'){
+          this.$alertify.error('이메일 또는 비밀번호를 확인하세요.');
+        }else{
+          this.$alertify.error('Opps!! 서버에 문제가 발생했습니다.');
+        }
+
+      });
+    }
+  }
 }
 </script>
 <style>
