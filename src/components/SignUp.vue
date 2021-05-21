@@ -38,7 +38,26 @@
 
               <div class="form-group mt-3" align="left">
                 <label for="interestArea">관심 지역 설정</label>
-                <input type="text" class="form-control" name="address" id="address" placeholder="Your Address" required>
+                <ul class="navbar-nav">
+                  <li class="nav-item mx-1">
+                    <select v-model="sidoSelected" @change="updateGugun" class="province form-select py-2 btn btn-secondary">
+                      <option selected disabled>도/광역시</option>
+                      <option v-for="(option, index) in sidoOptions" :key="index" :value="option.code" >{{option.name}}</option>
+                      </select>
+                          </li>
+                  <li class="nav-item mx-1">
+                    <select v-model="gugunSelected" @change="updateDong" class="city form-select py-2 btn btn-secondary">
+                      <option selected disabled>시/구/군</option>
+                      <option v-for="(option, index) in gugunOptions" :key="index" :value="option.code">{{option.name}}</option>
+                    </select>
+                  </li>
+                  <li class="nav-item mx-1">
+                    <select v-model="dongSelected" class="dong form-select py-2 btn btn-secondary">
+                      <option selected disabled>동</option>
+                      <option v-for="(option, index) in dongOptions" :key="index" :value="option.code">{{option.name}}</option>
+                    </select>
+                  </li>
+                </ul>
               </div>
 
               <div class="form-group mt-3 mb-3" id="imgFileUploadInsertWrapper" align="left">
@@ -62,12 +81,38 @@
 </template>
 
 <script>
+import http from "@/common/axios.js";
+
 export default {
   name: 'SignUp',
   data() {
     return {
       fileList: [],
+
+      sidoOptions : [],
+      gugunOptions : [],
+      dongOptions : [],
+
+      sidoSelected : '도/광역시',
+      gugunSelected : '시/구/군',
+      dongSelected : '동',
+
     }
+  },
+  created: function(){
+    http
+      .get('/sido')
+      .then(({ data }) => {
+        // console.log("sido data : ");
+        // console.log(this.sidoOptions);
+        this.sidoOptions = data;
+        if( data.result == 'login' ){
+          this.$router.push("/login")
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
   methods: {
     changeFile(fileEvent) {
@@ -78,6 +123,43 @@ export default {
           this.fileList.push(URL.createObjectURL(file));
         }
       }
+    },
+    updateGugun() {
+      http
+      .get('/gugun')
+      .then(({data}) => {         
+      let list = [];
+      data.forEach((el) =>{
+        if(el['sido_code'] == this.sidoSelected){
+          list.push(el);
+        }
+      })
+                
+      this.gugunOptions = list;
+      // console.log(data);
+      })
+      .catch((error) =>{
+        console.log(error);
+      })
+    },
+    // 동코드 업데이트
+    updateDong() {
+      http
+      .get('/dong')
+      .then(({data}) => {
+                
+      let list = [];
+      // 원래 디비에서 필터할 활동
+      data.forEach((el) =>{
+        if(el['gugun_code'] == this.gugunSelected){
+          list.push(el);
+        }
+      })
+      this.dongOptions = list;
+      })
+      .catch((error) =>{
+        console.log(error);
+      })
     },
   }
 }
