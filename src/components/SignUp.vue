@@ -14,7 +14,7 @@
           <div class="col-lg-8 mt-5 mt-lg-0">
             <p class="mb-5">가입 정보를 입력하세요.</p>
 
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <div action="forms/contact.php" method="post" role="form" class="php-email-form">
               <div class="form-group mt-3" align="left">
                 <label for="user-id">아이디</label>
                 <input type="text" class="form-control" name="user-id" id="user-id" placeholder="Your ID" required>
@@ -35,12 +35,22 @@
                 <label for="address">주소</label>
                 <input type="text" class="form-control" name="address" id="address" placeholder="Your Address" required>
               </div>
+
               <div class="form-group mt-3" align="left">
-                <label for="phone">전화번호</label>
-                <input type="text" class="form-control" name="phone" id="phone" placeholder="Your Phone Number" required>
+                <label for="interestArea">관심 지역 설정</label>
+                <input type="text" class="form-control" name="address" id="address" placeholder="Your Address" required>
               </div>
+
+              <div class="form-group mt-3 mb-3" id="imgFileUploadInsertWrapper" align="left">
+                <p>프로필 사진 첨부</p>
+                <input @change="changeFile" type="file" id="inputFileUploadInsert">
+                <div id="imgFileUploadInsertThumbnail" class="thumbnail-wrapper">
+                  <img v-for="(file, index) in fileList" v-bind:src="file" v-bind:key="index">
+                </div>
+              </div>
+            
               <div class="text-center"><button type="submit" @click.prevent="test()">회원가입</button></div>
-            </form>
+            </div>
           </div>
 
         </div>
@@ -54,10 +64,21 @@
 <script>
 export default {
   name: 'SignUp',
-  methods: {
-    test(){
-      alert("yes");
+  data() {
+    return {
+      fileList: [],
     }
+  },
+  methods: {
+    changeFile(fileEvent) {
+      if( fileEvent.target.files && fileEvent.target.files.length > 0 ){
+
+        for( var i=0; i<fileEvent.target.files.length; i++ ){
+          const file = fileEvent.target.files[i];
+          this.fileList.push(URL.createObjectURL(file));
+        }
+      }
+    },
   }
 }
 </script>
