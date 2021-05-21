@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.ssafy.house.dao.AreaDao">
+ 
+	<select id="sido" resultType="com.ssafy.house.dto.AreaDto">
+		SELECT * FROM SIDO_CODE
+	</select>
+	
+	<select id="gugun" parameterType="string" resultType="com.ssafy.house.dto.AreaDto">
+		SELECT * FROM GUGUN_CODE WHERE SIDO_CODE = #{sidoCode}
+	</select>
+	
+	<select id="dong" parameterType="string" resultType="com.ssafy.house.dto.AreaDto">
+		SELECT * FROM DONG_CODE WHERE GUGUN_CODE = #{gugunCode}
+	</select>
+	
+</mapper> 

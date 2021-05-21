@@ -23,8 +23,9 @@ public class WebMvcConfig implements WebMvcConfigurer{
 				"/css/**", 
 				"/users/**",
 				"/js/**",
-				"/login/**", 
-				"/register/**"); // static folder
+				"/login/**",
+				"/area/**",
+				"/signup/**"); // static folder
 	}
 	
 //	@Override
