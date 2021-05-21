@@ -36,28 +36,30 @@
                 <input type="text" class="form-control" name="address" id="address" placeholder="Your Address" required>
               </div>
 
+
               <div class="form-group mt-3" align="left">
                 <label for="interestArea">관심 지역 설정</label>
-                <ul class="navbar-nav">
-                  <li class="nav-item mx-1">
-                    <select v-model="sidoSelected" @change="updateGugun" class="province form-select py-2 btn btn-secondary">
-                      <option selected disabled>도/광역시</option>
-                      <option v-for="(option, index) in sidoOptions" :key="index" :value="option.code" >{{option.name}}</option>
-                      </select>
-                          </li>
-                  <li class="nav-item mx-1">
-                    <select v-model="gugunSelected" @change="updateDong" class="city form-select py-2 btn btn-secondary">
-                      <option selected disabled>시/구/군</option>
-                      <option v-for="(option, index) in gugunOptions" :key="index" :value="option.code">{{option.name}}</option>
-                    </select>
-                  </li>
-                  <li class="nav-item mx-1">
-                    <select v-model="dongSelected" class="dong form-select py-2 btn btn-secondary">
-                      <option selected disabled>동</option>
-                      <option v-for="(option, index) in dongOptions" :key="index" :value="option.code">{{option.name}}</option>
-                    </select>
-                  </li>
-                </ul>
+                  <div class="d-flex mt-2">
+                      <div class="selectbox me-2">
+                        <select v-model="sidoSelected" @change="updateGugun" class="form-select py-2 btn btn-light">
+                          <option selected>도/광역시</option>
+                          <option v-for="(option, index) in sidoOptions" :key="index" :value="option.sidoCode" >{{option.sidoName}}</option>
+                        </select>
+                      </div>
+                      <div class="selectbox me-2">
+                        <select v-model="gugunSelected" @change="updateDong" class="form-select py-2 btn btn-light">
+                          <option selected>시/구/군</option>
+                          <option v-for="(option, index) in gugunOptions" :key="index" :value="option.gugunCode">{{option.gugunName}}</option>
+                        </select>
+                      </div>
+                      <div class="selectbox">
+                        <select v-model="dongSelected" class="form-select py-2 btn btn-light">
+                          <option selected>동</option>
+                          <option v-for="(option, index) in dongOptions" :key="index" :value="option.dongCode">{{option.dongName}}</option>
+                        </select>
+                      </div>
+
+                  </div>
               </div>
 
               <div class="form-group mt-3 mb-3" id="imgFileUploadInsertWrapper" align="left">
@@ -101,11 +103,11 @@ export default {
   },
   created: function(){
     http
-      .get('/sido')
+      .get('/area/sido')
       .then(({ data }) => {
         // console.log("sido data : ");
-        // console.log(this.sidoOptions);
         this.sidoOptions = data;
+        console.log(this.sidoOptions);
         if( data.result == 'login' ){
           this.$router.push("/login")
         }
@@ -126,11 +128,11 @@ export default {
     },
     updateGugun() {
       http
-      .get('/gugun')
+      .get('/area/gugun?sidoCode='+this.sidoSelected)
       .then(({data}) => {         
       let list = [];
       data.forEach((el) =>{
-        if(el['sido_code'] == this.sidoSelected){
+        if(el['sidoCode'] == this.sidoSelected){
           list.push(el);
         }
       })
@@ -145,13 +147,13 @@ export default {
     // 동코드 업데이트
     updateDong() {
       http
-      .get('/dong')
+      .get('/area/dong?gugunCode='+this.gugunSelected)
       .then(({data}) => {
                 
       let list = [];
       // 원래 디비에서 필터할 활동
       data.forEach((el) =>{
-        if(el['gugun_code'] == this.gugunSelected){
+        if(el['gugunCode'] == this.gugunSelected){
           list.push(el);
         }
       })
@@ -166,5 +168,7 @@ export default {
 </script>
 
 <style>
-
+.selectbox{
+  width: 200px;
+}
 </style>
