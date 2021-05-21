@@ -10,11 +10,11 @@
 	
 	<!-- 회원 가입 -->
 	<insert id="userInsert" parameterType="com.ssafy.house.dto.UserDto">
-		INSERT INTO USER ( USER_ID, USER_NAME, USER_PWD, EMAIL, ADDRESS, PROFILEIMAGEURL, JOINDATE )
-		VALUES (#{userId}, #{userName}, #{userPwd}, #{email}, #{address}, #{profileImageUrl}, now())
+		INSERT INTO USER ( USER_ID, USER_NAME, USER_PWD, EMAIL, ADDRESS, INTEREST_AREA, PROFILE_IMAGE_URL, JOINDATE )
+		VALUES (#{userId}, #{userName}, #{userPwd}, #{email}, #{address}, #{interestArea}, #{profileImageUrl}, now())
 	</insert>
 	
-	<insert id="profileFileInsert" parameterType="com.ssafy.house.dto.ProfileFileDto">
+<!-- 	<insert id="profileFileInsert" parameterType="com.ssafy.house.dto.ProfileFileDto">
 		INSERT INTO FROFILE_FILE ( USER_ID, FILE_NAME, FILE_SIZE, FILE_CONTENT_TYPE, FILE_URL )
 		            VALUES ( #{userId}, #{fileName}, #{fileSize}, #{fileContentType}, #{fileUrl} )
 	</insert>
@@ -25,7 +25,7 @@
 	
 	<select id="profileFileUrlDeleteList" parameterType="string" resultType="string">
 		SELECT FILE_URL FROM FROFILE_FILE WHERE USER_ID = #{userId}
-	</select>
+	</select> -->
 	
 	<!-- 회원 정보 수정 -->
 	<update id="userUpdate" parameterType="com.ssafy.house.dto.UserDto">

@@ -34,7 +34,7 @@ public class UserController {
 
 	// 회원 가입
 	@PostMapping("/users")
-	public ResponseEntity<Integer> userInsert(@RequestBody UserDto dto, MultipartHttpServletRequest request) {
+	public ResponseEntity<Integer> userInsert(UserDto dto, MultipartHttpServletRequest request) {
 		int res = userService.userInsert(dto, request);
 //		System.out.println(res);
 		if (res == SUCCESS) {
@@ -57,8 +57,8 @@ public class UserController {
 	}
 
 	// 회원 정보 수정
-	@PutMapping("/users/{userId}")
-	public ResponseEntity<UserDto> userUpdate(@PathVariable String userId, @RequestBody UserDto dto,
+	@PostMapping("/users/{userId}")
+	public ResponseEntity<UserDto> userUpdate(@PathVariable String userId, UserDto dto,
 			HttpSession session, MultipartHttpServletRequest request) {
 		int res = userService.userUpdate(dto, request);
 		if (res == SUCCESS) {

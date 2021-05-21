@@ -1,6 +1,7 @@
 package com.ssafy.house.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class UserDto {
 	private String userId;

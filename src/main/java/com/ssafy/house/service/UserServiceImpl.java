@@ -25,8 +25,7 @@ public class UserServiceImpl implements UserService {
 	/* for eclipse development code */
 	String uploadPath = "C:" + File.separator + "Users" + File.separator + "gv" 
 			+ File.separator + "Desktop" 
-			+ File.separator + "Git" 
-			+ File.separator + "HappyHouseFinal" 
+			+ File.separator + "SSAFY_SPRINGBOOT" 
 			+ File.separator + "HappyHouseFinal" 
 			+ File.separator + "src"
 			+ File.separator + "main"
@@ -38,10 +37,9 @@ public class UserServiceImpl implements UserService {
 	public int userInsert(UserDto dto, MultipartHttpServletRequest request) {
 		int res = -1;
 		try {
-			userDao.userInsert(dto);
 			
 			List<MultipartFile> fileList = request.getFiles("file");
-	
+			
 			File uploadDir = new File(uploadPath + File.separator + uploadFolder);
 			if (!uploadDir.exists()) uploadDir.mkdir();
 
@@ -62,19 +60,15 @@ public class UserServiceImpl implements UserService {
 				File destFile = new File(uploadPath + File.separator + uploadFolder + File.separator + savingFileName);
 				
 				System.out.println(uploadPath + File.separator + uploadFolder + File.separator + savingFileName);
-				part.transferTo(destFile);
-		    
-			    // Table Insert
-				ProfileFileDto profileFileDto = new ProfileFileDto();
-				profileFileDto.setUserId(userId);
-				profileFileDto.setFileName(fileName);
-			    profileFileDto.setFileSize(part.getSize());
-			    profileFileDto.setFileContentType(part.getContentType());
-				String boardFileUrl = uploadFolder + "/" + savingFileName;
-				profileFileDto.setFileUrl(boardFileUrl);
 				
-				res = userDao.profileFileInsert(profileFileDto);
+				part.transferTo(destFile);
+
+				String profileImageUrl = uploadFolder + "/" + savingFileName;
+
+				dto.setProfileImageUrl(profileImageUrl);
 			}
+			res = userDao.userInsert(dto);
+			
 			
 		}catch(IOException e) {
 			e.printStackTrace();
