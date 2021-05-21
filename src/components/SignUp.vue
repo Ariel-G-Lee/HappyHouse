@@ -35,10 +35,7 @@
                 <label for="address">주소</label>
                 <input type="text" class="form-control" name="address" id="address" placeholder="Your Address" required>
               </div>
-              <div class="form-group mt-3" align="left">
-                <label for="phone">전화번호</label>
-                <input type="text" class="form-control" name="phone" id="phone" placeholder="Your Phone Number" required>
-              </div>
+            
               <div class="text-center"><button type="submit" @click.prevent="test()">회원가입</button></div>
             </form>
           </div>
