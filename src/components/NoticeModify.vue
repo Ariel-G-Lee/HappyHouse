@@ -5,24 +5,24 @@
         <div class="section-title">
           <h2>글 수정</h2>
         </div>
-        <div align="center" class="mb-5">
+         <div align="center" class="mb-5">
 
           <div class="col-lg-8 mt-5 mt-lg-0">
               <div class="form-group mt-3" align="left">
-                <label for="subject">제목</label>
-                <input type="text" class="form-control" name="subject" id="subject" value="테스트입니다.">
+                <input type="text" class="form-control" name="title" id="title">
               </div>
               <div class="form-group mt-3" align="left">
-                <label for="contents">내용</label><br>
-                <textarea class="form-control col-sm-5" name="contents" id="contents" rows="10">테스트입니다.</textarea>
+                <!-- <textarea class="form-control col-sm-5" name="contents" id="contents" rows="10"></textarea> -->
+                <div class="mb-3">
+                  <div id=divEditorInsert></div>
+                </div>
               </div>
           </div>
 
         </div>
         
         <div align="center">
-          <button type="button" class="btn btn-secondary">수정하기</button>
-          <button type="button" class="btn btn-outline-secondary">삭제하기</button>
+          <button type="button" class="btn-green" @click="noticeModify()">수정완료</button>
         </div>
 
 
@@ -32,11 +32,33 @@
 </template>
 
 <script>
+import Vue from 'vue';
+import CKEditor from '@ckeditor/ckeditor5-vue2';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+Vue.use(CKEditor);
 export default {
   name: 'NoticeModify',
+  methods: {
+    noticeModify(){
+
+    }
+  },
+  mounted() {
+    ClassicEditor
+    .create(document.querySelector('#divEditorInsert'))
+    .then(editor => {
+        this.CKEditor = editor;
+    })
+    .catch(err => {
+        console.error(err.stack);
+    });
+  }
 }
 </script>
 
 <style>
-
+.ck-editor__editable {
+    min-height: 400px !important;
+}
 </style>

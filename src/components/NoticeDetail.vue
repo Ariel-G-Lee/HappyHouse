@@ -34,7 +34,7 @@
         </div>
 
         <div align="center">
-          <button class="btn btn-secondary" @click="moveToModify()">수정하기</button>
+          <button class="btn-green" @click="moveToModify()">수정하기</button>
         </div>
 
 
