@@ -16,7 +16,7 @@
               <div class="d-flex form-row float-right" >
                 <input class="form-control me-2">
               </div>
-              <button class="btn btn-outline-secondary">검색</button>
+              <button class="btn-green">검색</button>
             </div>
           
             <table class="table table-hover">

@@ -70,7 +70,9 @@
                 </div>
               </div>
             
-              <div class="text-center"><button type="submit" @click.prevent="userInsert()">회원가입</button></div>
+              <div class="text-center">
+                <button type="submit" @click.prevent="userInsert()">회원가입</button>
+              </div>
             </div>
           </div>
 

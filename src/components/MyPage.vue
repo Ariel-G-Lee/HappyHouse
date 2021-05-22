@@ -62,7 +62,7 @@
               </div>
 
               <div class="form-group mt-3 mb-3" id="imgFileUploadInsertWrapper" align="left">
-                <p>프로필 사진</p>
+                <p>프로필 사진 변경</p>
                 <input @change="changeFile" type="file" id="inputFileUploadInsert">
                 <div id="imgFileUploadInsertThumbnail" class="thumbnail-wrapper">
                   <img v-for="(file, index) in fileList" v-bind:src="file" v-bind:key="index">
