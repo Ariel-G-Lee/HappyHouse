@@ -35,6 +35,7 @@
 
 <script>
 import Vue from 'vue';
+import http from "@/common/axios.js";
 import CKEditor from '@ckeditor/ckeditor5-vue2';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
@@ -56,7 +57,6 @@ export default {
     noticeInsert(){
       http.post(
           '/notices',
-          formData,
           { headers: { 'Content-Type': 'multipart/form-data' } })
           .then(({ data }) => {
             console.log("InsertModalVue: data : ");
