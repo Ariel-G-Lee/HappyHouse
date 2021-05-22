@@ -10,6 +10,7 @@ import NoticeList from '@/components/NoticeList.vue';
 import NoticeWrite from '@/components/NoticeWrite.vue';
 import NoticeModify from '@/components/NoticeModify.vue';
 import NoticeDetail from '@/components/NoticeDetail.vue';
+import House from "@/components/House.vue"; 
 
 export default new VueRouter({
   routes: [
@@ -46,6 +47,11 @@ export default new VueRouter({
       name: 'NoticeDetail',
       path: '/noticedetail',
       component: NoticeDetail
-    }
+    },
+    {
+      name: "House",
+      path: "/house",
+      component: House
+    },
   ],
 });
