@@ -1,6 +1,6 @@
 <template>
   <!--로그인 모달-->
-  <div id="modalLogin" class="modal" tabindex="-1">
+  <div id="loginModal" class="modal" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -40,8 +40,8 @@ export default {
       http.post(
         "/login",
         {
-          userEmail: this.$store.state.login.userEmail,
-          userPassword: this.$store.state.login.userPassword
+          userId: this.$store.state.login.userId,
+          userPwd: this.$store.state.login.userPwd
         }
       )
       .then(({ data }) => {
@@ -58,8 +58,8 @@ export default {
           { isLogin: true, userName: data.userName, userProfileImageUrl: data.userProfileImageUrl}
         );
 
-        // board 로 이동
-        this.$router.push("/board")
+        //this.$router.push("/")
+        this.closeModal()
       })
       .catch( error => {
         console.log("LoginVue: error : ");
@@ -71,10 +71,12 @@ export default {
         }
 
       });
-    }
+    },
+    closeModal(){
+       this.$emit('call-parent-login'); // no parameter
+    },
   }
 }
 </script>
 <style>
-  
 </style>

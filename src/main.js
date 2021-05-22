@@ -7,7 +7,7 @@ import store from "./store/store.js";
 // 부트스트랩을 사용할 수 있도록
 // 다른 페이지에서 필요한 경우만 쓰면 됨
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap";
+import "bootstrap/dist/js/bootstrap.min.js";
 import "./assets/css/style.css";
 
 Vue.config.productionTip = false;
