@@ -13,8 +13,8 @@ export default new Vuex.Store({
       userId: "testid",
       userName: "testname",
       userPwd: "testpwd",
-      Email: "test@test.com",
-      Address: "testaddress",
+      email: "test@test.com",
+      address: "testaddress",
       profileImageUrl: ''
     },
   },
@@ -22,7 +22,7 @@ export default new Vuex.Store({
     SET_LOGIN(state, payload) {
       state.login.isLogin = payload.isLogin;
       state.login.userName = payload.userName;
-      state.login.userProfileImageUrl = payload.userProfileImageUrl;
+      state.login.profileImageUrl = payload.profileImageUrl;
     },
   },
   actions: {

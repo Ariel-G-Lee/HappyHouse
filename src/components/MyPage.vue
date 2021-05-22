@@ -88,10 +88,10 @@ export default {
   name: 'MyPage',
   computed: {
     requireImg : function(){
-      if( this.$store.state.login.userProfileImageUrl == '' ) {
+      if( this.$store.state.login.profileImageUrl == '' ) {
         return require('../assets/img/noProfile.png')
       }else{
-        return require('../assets' + this.$store.state.login.userProfileImageUrl);
+        return require('../assets' + this.$store.state.login.profileImageUrl);
       }
     }
   },
@@ -103,8 +103,8 @@ export default {
 
 <style>
 .profile-img{
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
 }
 </style>
