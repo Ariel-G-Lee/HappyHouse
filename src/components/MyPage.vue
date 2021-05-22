@@ -246,10 +246,25 @@ export default {
       .catch((error) => {
         console.log("UpdateUser: error ");
         console.log(error);
-        });
+      });
       },
       userDelete(){
-
+      http.delete(
+          '/users/' + this.$store.state.login.userId)
+          .then(({ data }) => {
+            console.log("UpdateUser: data : ");
+            console.log(data);
+            if( data.result == 'login' ){
+              this.$router.push("/login")
+            }else{
+              this.$store.state.login.isLogin = false;
+              this.$alertify.alert('회원 탈퇴 성공','회원 탈퇴되었습니다.');
+            }
+          })
+          .catch((error) => {
+            console.log("UpdateUser: error ");
+            console.log(error);
+          });
       }
     }
 
