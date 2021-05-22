@@ -15,7 +15,7 @@ export default new Vuex.Store({
       userPwd: "testpwd",
       email: "test@test.com",
       address: "testaddress",
-      profileImageUrl: ''
+      profileImageUrl: "",
     },
   },
   mutations: {

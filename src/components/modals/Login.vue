@@ -55,11 +55,14 @@ export default {
         // isLogin 포함 mutator 호출
         this.$store.commit(
           'SET_LOGIN',
-          { isLogin: true, userName: data.userName, userProfileImageUrl: data.userProfileImageUrl}
+          { isLogin: true, userName: data.userName, userProfileImageUrl: data.userProfileImageUrl},
         );
 
         //this.$router.push("/")
         this.closeModal()
+        this.$alertify.success("로그인에 성공했습니다")
+        console.log(this.$store.state.login.isLogin)
+
       })
       .catch( error => {
         console.log("LoginVue: error : ");

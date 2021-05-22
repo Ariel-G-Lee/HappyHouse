@@ -60,7 +60,7 @@ export default {
       this.logoutModal.show();
     },
     closeAfterLogout(){
-      this.logioutModal.hide();
+      this.logoutModal.hide();
     },
   },
   mounted(){
