@@ -17,11 +17,17 @@
           <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
 
-        <div class="header-social-links text-end">
-          <router-link to="/signup">SignUp</router-link>
-          <button @click="showLoginModal">Login</button>
-          <router-link to="/mypage">MyPage</router-link>
-          <button @click="showLogoutModal">Logout</button>
+        <div v-if="$store.state.login.isLogin">
+          <div class="header-social-links text-end">
+            <router-link to="/mypage">MyPage</router-link>
+            <a href="#" @click="showLogoutModal">Logout</a>
+          </div>
+        </div>
+        <div v-else>
+          <div class="header-social-links text-end">
+            <router-link to="/signup">SignUp</router-link>
+            <a href="#" @click="showLoginModal">Login</a>
+          </div>
         </div>
       </div>
     </header>

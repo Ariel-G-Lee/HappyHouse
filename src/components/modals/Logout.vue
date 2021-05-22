@@ -55,7 +55,7 @@ export default {
       });
     },
     closeModal(){
-     this.$emit('call-parent-logout');  
+      this.$emit('call-parent-logout');  
     },
   }
 }
