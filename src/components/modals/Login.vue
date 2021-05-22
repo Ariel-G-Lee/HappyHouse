@@ -55,7 +55,9 @@ export default {
         // isLogin 포함 mutator 호출
         this.$store.commit(
           'SET_LOGIN',
-          { isLogin: true, userName: data.userName, userProfileImageUrl: data.userProfileImageUrl},
+          { isLogin: true, userName: data.userName, email: data.email,
+            address: data.address, interestArea: data.interestArea,
+            profileImageUrl: data.profileImageUrl},
         );
 
         //this.$router.push("/")

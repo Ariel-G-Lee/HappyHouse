@@ -53,7 +53,7 @@
                         </select>
                       </div>
                       <div class="selectbox">
-                        <select v-model="interestArea" class="form-select py-2 btn btn-light">
+                        <select v-model="dongSelected" class="form-select py-2 btn btn-light">
                           <option selected>동</option>
                           <option v-for="(option, index) in dongOptions" :key="index" :value="option.dongCode">{{option.dongName}}</option>
                         </select>
@@ -100,7 +100,6 @@ export default {
       userPwd: '',
       email: '',
       address: '',
-      interestArea: '동',
 
       fileList: [],
 
@@ -110,13 +109,14 @@ export default {
 
       sidoSelected : '도/광역시',
       gugunSelected : '시/구/군',
+      dongSelected: '동',
 
     }
   },
   created: function(){
     this.sidoSelected = '도/광역시';
     this.gugunSelected = '시/구/군';
-    this.interestArea = '동';
+    this.dongSelected = '동';
     http
       .get('/area/sido')
       .then(({ data }) => {
@@ -133,8 +133,8 @@ export default {
   },
   methods: {
     changeFile(fileEvent) {
+      this.fileList = [];
       if( fileEvent.target.files && fileEvent.target.files.length > 0 ){
-
         for( var i=0; i<fileEvent.target.files.length; i++ ){
           const file = fileEvent.target.files[i];
           this.fileList.push(URL.createObjectURL(file));
@@ -148,7 +148,7 @@ export default {
         formData.append("userPwd", this.userPwd);
         formData.append("email", this.email);
         formData.append("address", this.address);
-        if(this.interestArea != "동") formData.append("interestArea", this.interestArea);
+        if(this.dongSelected != "동") formData.append("interestArea", this.dongSelected);
 
         // file upload
         var attachFiles = document.querySelector("#inputFileUploadInsert");
@@ -181,7 +181,7 @@ export default {
     },
     updateGugun() {
       this.gugunSelected = '시/구/군';
-      this.interestArea = '동';
+      this.dongSelected = '동';
       http
       .get('/area/gugun?sidoCode='+this.sidoSelected)
       .then(({data}) => {        
@@ -201,7 +201,7 @@ export default {
     },
     // 동코드 업데이트
     updateDong() {
-      this.interestArea = '동';
+      this.dongSelected = '동';
       http
       .get('/area/dong?gugunCode='+this.gugunSelected)
       .then(({data}) => {
