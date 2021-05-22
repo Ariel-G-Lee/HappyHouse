@@ -12,11 +12,12 @@ public class UserDto {
 	private String interestArea;
 	private String profileImageUrl;
 	private Date joindate;
+	private String userCode;
 	
 	public UserDto() {}
 
 	public UserDto(String userId, String userName, String userPwd, String email, String address, String interestArea,
-			String profileImageUrl, Date joindate) {
+			String profileImageUrl, Date joindate, String userCode) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -26,6 +27,7 @@ public class UserDto {
 		this.interestArea = interestArea;
 		this.profileImageUrl = profileImageUrl;
 		this.joindate = joindate;
+		this.userCode = userCode;
 	}
 
 	public String getUserId() {
@@ -95,11 +97,20 @@ public class UserDto {
 	public void setJoindate(Date joindate) {
 		this.joindate = joindate;
 	}
+	
+	public String getUserCode() {
+		return userCode;
+	}
+
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
+	}
 
 	@Override
 	public String toString() {
 		return "UserDto [userId=" + userId + ", userName=" + userName + ", userPwd=" + userPwd + ", email=" + email
 				+ ", address=" + address + ", interestArea=" + interestArea + ", profileImageUrl=" + profileImageUrl
-				+ ", joindate=" + joindate + "]";
+				+ ", joindate=" + joindate + ", userCode=" + userCode + "]";
 	}
+
 }
