@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import "./assets/vendor/swiper/swiper-bundle.min.js";
 
 import AppNav from './components/AppNav.vue'
 import AppFooter from './components/AppFooter.vue'
