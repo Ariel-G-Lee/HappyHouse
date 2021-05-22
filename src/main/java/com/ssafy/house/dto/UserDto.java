@@ -12,6 +12,7 @@ public class UserDto {
 	private String interestArea;
 	private String profileImageUrl;
 	private Date joindate;
+	// 유저 타입 추가
 	
 	public UserDto() {}
 
