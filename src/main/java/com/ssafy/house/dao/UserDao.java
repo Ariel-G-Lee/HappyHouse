@@ -16,14 +16,15 @@ public interface UserDao {
 	
 	public int userInsert(UserDto dto);
 
-	public int profileFileInsert(ProfileFileDto profileFileDto);
 
 	public void userUpdate(UserDto dto);
 
-	public List<String> profileFileUrlDeleteList(String userId);
-
-	public void profileFileDelete(String userId);
+//	public int profileFileInsert(ProfileFileDto profileFileDto);
+//	public List<String> profileFileUrlDeleteList(String userId);
+//	public void profileFileDelete(String userId);
 
 	public int userDelete(String userId);
+
+	public String profileFileUrlDelete(String userId);
 
 }

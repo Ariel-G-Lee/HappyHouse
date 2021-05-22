@@ -27,10 +27,17 @@
 		SELECT FILE_URL FROM FROFILE_FILE WHERE USER_ID = #{userId}
 	</select> -->
 	
+	<select id="profileFileUrlDelete" parameterType="string" resultType="string">
+		SELECT PROFILE_IMAGE_URL FROM USER WHERE USER_ID = #{userId}
+	</select>
+	
 	<!-- 회원 정보 수정 -->
-	<update id="userUpdate" parameterType="com.ssafy.house.dto.UserDto">
+	<update id="userUpdate" parameterType="com.ssafy.house.dto.UserDto">		
 		UPDATE USER SET USER_NAME = #{userName}, USER_PWD = #{userPwd}, EMAIL = #{email},
-		ADDRESS = #{address}, PROFILEIMAGEURL = #{profileImageUrl}
+		ADDRESS = #{address}, INTEREST_AREA = #{interestArea}
+		<if test="profileImageUrl != null">
+		, PROFILE_IMAGE_URL = #{profileImageUrl}
+		</if>
 		WHERE USER_ID = #{userId}
 	</update>
 	

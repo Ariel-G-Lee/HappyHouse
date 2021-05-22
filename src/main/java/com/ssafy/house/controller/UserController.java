@@ -60,12 +60,13 @@ public class UserController {
 	@PostMapping("/users/{userId}")
 	public ResponseEntity<UserDto> userUpdate(@PathVariable String userId, UserDto dto,
 			HttpSession session, MultipartHttpServletRequest request) {
-		int res = userService.userUpdate(dto, request);
-		if (res == SUCCESS) {
-			session.setAttribute("userDto", dto);
-			return new ResponseEntity<UserDto>(dto, HttpStatus.OK);
+		UserDto userDto = userService.userUpdate(dto, request);
+		if (userDto != null) {
+			session.setAttribute("userDto", userDto);
+			System.out.println(dto);
+			return new ResponseEntity<UserDto>(userDto, HttpStatus.OK);
 		} else {
-			return new ResponseEntity<UserDto>(dto, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<UserDto>(userDto, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	

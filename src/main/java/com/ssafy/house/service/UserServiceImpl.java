@@ -85,28 +85,26 @@ public class UserServiceImpl implements UserService {
 
 	// 회원 정보 수정
 	@Override
-	public int userUpdate(UserDto dto, MultipartHttpServletRequest request) {
-		int res = -1;
+	public UserDto userUpdate(UserDto dto, MultipartHttpServletRequest request) {
+		UserDto userDto = null;
 		try {
-			userDao.userUpdate(dto);
 
 			List<MultipartFile> fileList = request.getFiles("file");
-			if(fileList != null) {
-				File uploadDir = new File(uploadPath + File.separator + uploadFolder);
-				if (!uploadDir.exists()) uploadDir.mkdir();
-				
-		    	List<String> fileUrlList = userDao.profileFileUrlDeleteList(dto.getUserId());	
-				for(String fileUrl : fileUrlList) {	
-					File file = new File(uploadPath + File.separator, fileUrl);
+			System.out.println(fileList.size());
+			if(fileList.size() != 0) {			
+		    	String fileUrl = userDao.profileFileUrlDelete(dto.getUserId());
+		    	if(fileUrl != null) {
+		    		File file = new File(uploadPath + File.separator, fileUrl);
 					if(file.exists()) {
 						file.delete();
 					}
-				}
+		    	}
+		    	
+		    	File uploadDir = new File(uploadPath + File.separator + uploadFolder);
+				if (!uploadDir.exists()) uploadDir.mkdir();
 
-		    	userDao.profileFileDelete(dto.getUserId());
-		    	
-		    	
 				for (MultipartFile part : fileList) {
+					// userId 얻어오기
 					String userId = dto.getUserId();
 					
 					String fileName = part.getOriginalFilename();
@@ -115,50 +113,46 @@ public class UserServiceImpl implements UserService {
 					UUID uuid = UUID.randomUUID();
 					
 					//file extension
-					String extension = FilenameUtils.getExtension(fileName); // vs FilenameUtils.getBaseName()
+					String extension = FilenameUtils.getExtension(fileName);
 				
 					String savingFileName = uuid + "." + extension;
 				
 					File destFile = new File(uploadPath + File.separator + uploadFolder + File.separator + savingFileName);
 					
 					System.out.println(uploadPath + File.separator + uploadFolder + File.separator + savingFileName);
-					part.transferTo(destFile);
-			    
-				    // Table Insert
-					ProfileFileDto profileFileDto = new ProfileFileDto();
-					profileFileDto.setUserId(userId);
-					profileFileDto.setFileName(fileName);
-				    profileFileDto.setFileSize(part.getSize());
-				    profileFileDto.setFileContentType(part.getContentType());
-					String boardFileUrl = uploadFolder + "/" + savingFileName;
-					profileFileDto.setFileUrl(boardFileUrl);
 					
-					res = userDao.profileFileInsert(profileFileDto);
-				}
+					part.transferTo(destFile);
 
+					String profileImageUrl = uploadFolder + "/" + savingFileName;
+
+					dto.setProfileImageUrl(profileImageUrl);
+				}
+				
 			}
 			
+			userDao.userUpdate(dto);
+			userDto = dto;
+
 		}catch(IOException e) {
 			e.printStackTrace();
-			res = -1;
 		}
 		
-		return res;
+		return userDto;
 	}
 
+	// 회원 정보 삭제
 	@Override
 	public int userDelete(String userId) {
 		int res = -1;
 		try {
-			List<String> fileUrlList = userDao.profileFileUrlDeleteList(userId);
-			for(String fileUrl : fileUrlList) {
+			String fileUrl = userDao.profileFileUrlDelete(userId);
+			if(fileUrl != null) {
 				File file = new File(uploadPath + File.separator, fileUrl);				
 				if(file.exists()) {
 					file.delete();
 				}
 			}
 			
-			userDao.profileFileDelete(userId);
 			res = userDao.userDelete(userId);		
 			
 		}catch(Exception e) {
@@ -169,7 +163,6 @@ public class UserServiceImpl implements UserService {
 		return res;
 	}
 	
-	// 회원 정보 삭제
 
 
 }

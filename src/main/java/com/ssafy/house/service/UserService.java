@@ -11,7 +11,7 @@ public interface UserService {
 
 	public int userInsert(UserDto dto, MultipartHttpServletRequest request);
 
-	public int userUpdate(UserDto dto, MultipartHttpServletRequest request);
+	public UserDto userUpdate(UserDto dto, MultipartHttpServletRequest request);
 
 	public int userDelete(String userId);
 
