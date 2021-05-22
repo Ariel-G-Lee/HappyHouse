@@ -4,7 +4,7 @@
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
       <div class="container" data-aos="fade-up">
-
+        
         <div class="section-title">
           <h2>회원가입</h2>
         </div>
