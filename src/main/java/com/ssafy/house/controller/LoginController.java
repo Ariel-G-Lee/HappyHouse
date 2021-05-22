@@ -29,7 +29,6 @@ public class LoginController {
 	
 	@PostMapping(value="/login")
 	public ResponseEntity<UserDto> login(@RequestBody UserDto dto, HttpSession session){
-		
 		UserDto userDto = service.login(dto);
 		if( userDto != null ) {
 			session.setAttribute("userDto", userDto);

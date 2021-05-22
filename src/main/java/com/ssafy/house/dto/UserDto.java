@@ -13,11 +13,12 @@ public class UserDto {
 	private String profileImageUrl;
 	private Date joindate;
 	// 유저 타입 추가
+	private String userCode;
 	
 	public UserDto() {}
 
 	public UserDto(String userId, String userName, String userPwd, String email, String address, String interestArea,
-			String profileImageUrl, Date joindate) {
+			String profileImageUrl, Date joindate, String userCode) {
 		super();
 		this.userId = userId;
 		this.userName = userName;

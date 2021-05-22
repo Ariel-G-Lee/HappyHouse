@@ -11,6 +11,7 @@
     <mappers>
     	<mapper resource="mapper/user_query.xml"/>
     	<mapper resource="mapper/area_query.xml"/>
+    	<mapper resource="mapper/login_query.xml"/>
     </mappers>
    
 
