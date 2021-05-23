@@ -146,7 +146,7 @@ export default {
   },
   computed: {
     profileImg(){
-      if( this.$store.state.login.profileImageUrl == undefined ) {
+      if( this.$store.state.login.profileImageUrl == undefined) {
         return require('../assets/img/noProfile.png');
       }else{
         return require('../assets/' + this.$store.state.login.profileImageUrl);

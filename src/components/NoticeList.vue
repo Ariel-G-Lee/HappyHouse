@@ -43,7 +43,7 @@
             </table>
     
             <div align="right">
-              <router-link to="/noticewrite">글작성</router-link>
+              <router-link v-if="$store.state.login.userCode=='001'" to="/noticewrite">글작성</router-link>
             </div>
 
             <pagination v-on:call-parent="movePage"></pagination>
