@@ -136,12 +136,15 @@ export default {
       .catch((error) => {
         console.log(error);
       });
-    // console.log(this.$store.state.login.interestArea);
-    this.sidoSelected = this.$store.state.login.interestArea.substr(0,2);
-    this.updateGugun();
-    this.gugunSelected = this.$store.state.login.interestArea.substr(0,5);
-    this.updateDong();
-    this.dongSelected = this.$store.state.login.interestArea
+
+    if(this.$store.state.login.interestArea != undefined){
+      this.sidoSelected = this.$store.state.login.interestArea.substr(0,2);
+      this.updateGugun();
+      this.gugunSelected = this.$store.state.login.interestArea.substr(0,5);
+      this.updateDong();
+      this.dongSelected = this.$store.state.login.interestArea
+    }
+    
     // console.log(this.gugunSelected);
   },
   computed: {
