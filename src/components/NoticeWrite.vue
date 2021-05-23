@@ -9,7 +9,7 @@
 
           <div class="col-lg-8 mt-5 mt-lg-0">
               <div class="form-group mt-3" align="left">
-                <input type="text" class="form-control" name="title" id="subject" placeholder="제목">
+                <input type="text" class="form-control" name="title" v-model="title" placeholder="제목">
               </div>
               <div class="form-group mt-3" align="left">
                 <!-- <textarea class="form-control col-sm-5" name="contents" id="contents" rows="10"></textarea> -->
@@ -23,7 +23,6 @@
         
         <div align="center">
           <button type="submit"  class="btn-green me-2" @click.prevent="noticeInsert()">작성완료</button>
-          <button type="submit"  class="btn-white ms-2" @click.prevent="noticeDelete()">삭제하기</button>
         </div>
 
 
@@ -44,38 +43,38 @@ Vue.use(CKEditor);
 export default {
   name: 'NoticeWrite',
   data() {
-        return {
-          title: '',
-          CKEditor: '',
-        }
+    return {
+      title: '',
+      CKEditor: '',
+    }
+  },
+  created(){
+    
   },
   methods: {
-    initUI(){
-      this.title = '';
-      this.CKEditor.setData('');
-    },
     noticeInsert(){
       http.post(
           '/notices',
-          { headers: { 'Content-Type': 'multipart/form-data' } })
+          { 
+            title: this.title,
+            content: this.CKEditor.getData()
+           })
           .then(({ data }) => {
-            console.log("InsertModalVue: data : ");
+            console.log("InsertNotice: data : ");
             console.log(data);
             if( data.result == 'login' ){
               this.$router.push("/login")
             }else{
               this.$alertify.success('글이 등록되었습니다.');
-              this.closeModal();
+              this.$router.push("/noticelist")
             }
           })
           .catch((error) => {
-            console.log("InsertModalVue: error ");
+            console.log("InsertNotice: error ");
             console.log(error);
           });
     },
-    noticeDelete(){
 
-    }
   },
   mounted() {
     ClassicEditor

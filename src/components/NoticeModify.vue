@@ -23,6 +23,7 @@
         
         <div align="center">
           <button type="button" class="btn-green" @click="noticeModify()">수정완료</button>
+          <button type="submit"  class="btn-white ms-2" @click.prevent="noticeDelete()">삭제하기</button>
         </div>
 
 
@@ -42,6 +43,9 @@ export default {
   methods: {
     noticeModify(){
 
+    },
+    noticeDelete(){
+      
     }
   },
   mounted() {
@@ -53,7 +57,7 @@ export default {
     .catch(err => {
         console.error(err.stack);
     });
-  }
+  },
 }
 </script>
 

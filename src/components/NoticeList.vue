@@ -14,10 +14,10 @@
           
             <div class="justify-content-end input-group">
               <div class="d-flex form-row float-right" >
-                <input class="form-control me-2">
+                <input v-model="$store.state.notice.searchWord" @keydown.enter="noticeList" type="text" class="form-control me-2">
               </div>
               <div>
-                <button class="btn-green">검색</button>
+                <button class="btn-green" @click="noticeList">검색</button>
               </div>
             </div>
           
@@ -25,17 +25,19 @@
               <thead>
                 <tr>
                   <th style="width: 10%">번호</th>
-                  <th style="width: 55%">제목</th>
+                  <th style="width: 45%">제목</th>
                   <th style="width: 20%">작성자</th>
                   <th style="width: 15%">작성일시</th>
+                  <th style="width: 10%">조회수</th>
                 </tr>
               </thead>
               <tbody>
-                <tr @click="moveToDetail()">
-                  <td>1</td>
-                  <td>테스트입니다.</td>
-                  <td>김싸피</td>
-                  <td>2021-05-18</td>
+                <tr v-for="(notice, index) in listGetters" @click="noticeDetail(notice.noticeId)" v-bind:key="index">
+                  <td>{{ index+1 }}</td>
+                  <td>{{ notice.title }}</td>
+                  <td>{{ notice.userName }}</td>
+                  <td>{{ formatDate[index] }}</td>
+                  <td>{{ notice.readCount }}</td>
                 </tr>
               </tbody>
             </table>
@@ -43,20 +45,8 @@
             <div align="right">
               <router-link to="/noticewrite">글작성</router-link>
             </div>
-    
-            <nav aria-label="Page navigation example">
-              <ul class="pagination justify-content-center">
-                <li class="page-item">
-                  <a class="page-link text-dark" href="#">이전</a>
-                </li>
-                <li class="page-item"><a class="page-link text-dark" href="#">1</a></li>
-                <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
-                <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
-                <li class="page-item">
-                  <a class="page-link text-dark" href="#">다음</a>
-                </li>
-              </ul>
-            </nav>
+
+            <pagination v-on:call-parent="movePage"></pagination>
           </div>
           
         </div>
@@ -67,13 +57,83 @@
 </template>
 
 <script>
+import Pagination from './Pagination.vue';
+import util from "@/common/util.js";
+import http from "@/common/axios.js";
+
 export default {
   name: 'NoticeList',
-  methods: {
-    moveToDetail(){
-      this.$router.push("/noticedetail");
+  components: { Pagination },
+  computed: {
+    listGetters(){
+      return this.$store.getters.getNoticeList;
+    },
+    formatDate : function(){
+      let $this = this;
+      // store 사용
+      // list에 들어가 있는 하나하나를 가져와서 바꾼다.
+      return this.$store.state.notice.list.map( function( notice ){
+        return $this.makeDateStr(notice.regDt.date.year, notice.regDt.date.month, notice.regDt.date.day, '.')
+      });
     }
-  }
+  },
+  methods: {
+    noticeList(){
+      this.$store.dispatch('noticeList');
+    },
+
+    movePage(pageIndex){
+      console.log("NoticeMainVue : movePage : pageIndex : " + pageIndex );
+
+      // store commit 으로 변경
+      // this.offset = (pageIndex - 1) * this.listRowCount;
+      // this.currentPageIndex = pageIndex;
+      this.$store.commit( 'SET_NOTICE_MOVE_PAGE', pageIndex );
+      this.noticeList();
+    },
+
+    makeDateStr : util.makeDateStr,
+
+    noticeDetail(noticeId){
+      console.log(noticeId);
+      // store 변경
+      // this.boardId = boardId;
+      // this.$store.commit('mutateSetBoardBoardId', boardId);
+
+      http.get(
+      '/notices/'+noticeId,
+      )
+      .then(({ data }) => {
+        console.log("DetailNotice: data : ");
+        console.log(data);
+
+        if( data.result == 'login' ){
+          this.$router.push("/login")
+        }else{
+          this.$store.commit(
+            'SET_NOTICE_DETAIL',
+            {  
+              noticeId: data.dto.noticeId,
+              userName: data.dto.userName,
+              title: data.dto.title,
+              content: data.dto.content,
+              regDt: this.makeDateStr(data.dto.regDt.date.year, data.dto.regDt.date.month, data.dto.regDt.date.day, '.'),
+              isOwner: data.isOwner, // not data.dto.isOwner
+            }
+          );
+          this.$router.push("/noticedetail");
+        }
+      })
+      .catch((error) => {
+        console.log("DetailModalVue: error ");
+        console.log(error);
+      });
+    }
+    
+  },
+  created() {
+    this.noticeList();
+  },
 }
 </script>
 

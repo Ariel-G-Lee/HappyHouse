@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
-
+import http from "@/common/axios.js";
+import router from '@/routers/routers.js'
 Vue.use(Vuex);
 
 // import http from "@/common/axios.js";
@@ -28,7 +29,7 @@ export default new Vuex.Store({
 
       // pagination
       listRowCount: 10,
-      pageLinkCount: 10,
+      pageLinkCount: 5,
       currentPageIndex: 1,
 
       totalListItemCount: 0,
@@ -85,11 +86,35 @@ export default new Vuex.Store({
     },
   },
   actions: {
-
+    noticeList(context){
+      http.get(
+        "/notices",
+        {
+          // get query string
+          params: {
+            limit: this.state.notice.limit,
+            offset: this.state.notice.offset,
+            searchWord: this.state.notice.searchWord
+          }
+        })
+        .then(({ data }) => {
+          console.log("NoticeList: data : ");
+          console.log(data);
+          if( data.result == 'login' ){ 
+            router.push("/login")
+          }else{
+            context.commit( 'SET_NOTICE_LIST', data.list );
+            context.commit( 'SET_NOTICE_TOTAL_LIST_ITEM_COUNT', data.count );
+          }
+      });
+    }
   },
   getters: {
     isLogin: function(state) {
       return state.login.isLogin;
+    },
+    getNoticeList : function(state){
+      return state.notice.list;
     },
   },
 });
