@@ -55,7 +55,7 @@ export default {
       }
     },
     next: function(){
-      if( this.endPageIndex >  this.pageCount){
+      if( this.endPageIndex > this.pageCount || this.endPageIndex == this.pageCount){
         return false;
       }else{
         return true;
@@ -73,8 +73,5 @@ export default {
 </script>
 
 <style>
-.page-item.active .page-link {
-  background-color: #34b7a7;
-  border-color: #34b7a7;
-}
+
 </style>

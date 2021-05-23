@@ -57,7 +57,7 @@ export default {
           'SET_LOGIN',
           { isLogin: true, userName: data.userName, email: data.email,
             address: data.address, interestArea: data.interestArea,
-            profileImageUrl: data.profileImageUrl},
+            profileImageUrl: data.profileImageUrl, userCode: data.userCode},
         );
 
         //this.$router.push("/")

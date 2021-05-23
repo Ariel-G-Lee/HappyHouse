@@ -29,7 +29,7 @@ export default new Vuex.Store({
 
       // pagination
       listRowCount: 10,
-      pageLinkCount: 10,
+      pageLinkCount: 5,
       currentPageIndex: 1,
 
       totalListItemCount: 0,
@@ -79,6 +79,7 @@ export default new Vuex.Store({
       state.login.address = payload.address;
       state.login.interestArea = payload.interestArea;
       state.login.profileImageUrl = payload.profileImageUrl;
+      state.login.userCode = payload.userCode;
     },
     SET_USER_UPDATE(state, payload) {
       state.login.userPwd = payload.userPwd;
