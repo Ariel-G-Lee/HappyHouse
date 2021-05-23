@@ -9,11 +9,7 @@
       <li v-for="index in ( endPageIndex-startPageIndex + 1 )" :key="index"
           v-bind:class="{active: (startPageIndex + index - 1 == $store.state.notice.currentPageIndex)}" class="page-item">
         <a @click="paginationChanged(startPageIndex + index - 1)" 
-<<<<<<< HEAD
-          class="page-link" href="#">{{ startPageIndex + index - 1 }}</a> <!-- href 는 그대로, 커서 모양 유지-->
-=======
            class="page-link text-dark" href="#">{{ startPageIndex + index - 1 }}</a> <!-- href 는 그대로, 커서 모양 유지-->
->>>>>>> ef8fa1c4e20cef57e89e58ad0726ceaa128241cc
       </li>
       <li v-if="next" class="page-item">
         <a class="page-link text-dark" href="#" aria-label="Next" @click="paginationChanged(endPageIndex + 1)">
