@@ -11,6 +11,9 @@ import NoticeWrite from '@/components/NoticeWrite.vue';
 import NoticeModify from '@/components/NoticeModify.vue';
 import NoticeDetail from '@/components/NoticeDetail.vue';
 import House from "@/components/House.vue"; 
+import Animal from "@/components/Animal.vue"; 
+import AnimalList from "@/components/AnimalList.vue"; 
+import AnimalMap from "@/components/AnimalMap.vue"; 
 
 export default new VueRouter({
   routes: [
@@ -52,6 +55,21 @@ export default new VueRouter({
       name: "House",
       path: "/house",
       component: House
+    },
+    {
+      name: "Animal",
+      path: "/animal",
+      component: Animal
+    },
+    {
+      name: "AnimalList",
+      path: "/animallist",
+      component: AnimalList
+    },
+    {
+      name: "AnimalMap",
+      path: "/animalmap",
+      component: AnimalMap
     },
   ],
 });
