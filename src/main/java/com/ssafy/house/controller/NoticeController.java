@@ -49,14 +49,18 @@ public class NoticeController {
 	
 	// 공지 글 상세 조회
 	@GetMapping(value="/notices/{noticeId}")
-	private ResponseEntity<NoticeResultDto> noticeDetail(@PathVariable int noticeId, HttpSession session){
+	public ResponseEntity<NoticeResultDto> noticeDetail(@PathVariable int noticeId, HttpSession session){
 
+		System.out.println(noticeId);
 		NoticeParamDto noticeParamDto = new NoticeParamDto();
 		noticeParamDto.setNoticeId(noticeId);
+		if(((UserDto) session.getAttribute("userDto") != null)) {			
+			noticeParamDto.setUserId(((UserDto) session.getAttribute("userDto")).getUserId());
+		}
 		
-		NoticeResultDto noticeResultDto = noticeService.noticedDetail(noticeParamDto);
+		NoticeResultDto noticeResultDto = noticeService.noticeDetail(noticeParamDto);
 		// 게시글 작성자와 현 사용자가 동일
-		if( ((UserDto) session.getAttribute("userDto")).getUserId() == noticeResultDto.getDto().getUserId() ) {
+		if( noticeParamDto != null && noticeParamDto.getUserId() == noticeResultDto.getDto().getUserId() ) {
 			noticeResultDto.setOwner(true);
 		}
 		
@@ -74,7 +78,6 @@ public class NoticeController {
 		
 		NoticeResultDto noticeResultDto;
 		System.out.println(noticeParamDto.getSearchWord());
-		System.out.println(noticeService);
 		if( noticeParamDto.getSearchWord().isEmpty() ) {
 			noticeResultDto = noticeService.noticeList(noticeParamDto);
 		}else {

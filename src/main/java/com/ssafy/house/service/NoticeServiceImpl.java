@@ -10,6 +10,7 @@ import com.ssafy.house.dao.NoticeDao;
 import com.ssafy.house.dto.NoticeDto;
 import com.ssafy.house.dto.NoticeParamDto;
 import com.ssafy.house.dto.NoticeResultDto;
+import com.ssafy.house.dto.UserDto;
 
 @Service
 public class NoticeServiceImpl implements NoticeService {
@@ -20,6 +21,7 @@ public class NoticeServiceImpl implements NoticeService {
 	private static final int SUCCESS = 1;
 	private static final int FAIL = -1;
 
+	// 공지 글 등록
 	@Override
 	public NoticeResultDto noticeInsert(NoticeDto dto) {
 		NoticeResultDto noticeResultDto = new NoticeResultDto();
@@ -35,19 +37,22 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeResultDto;
 	}
 
+	// 공지 글 상세 조회
 	@Override
-	public NoticeResultDto noticedDetail(NoticeParamDto noticeParamDto) {
+	public NoticeResultDto noticeDetail(NoticeParamDto noticeParamDto) {
 		NoticeResultDto noticeResultDto = new NoticeResultDto();
 		
 		try {
 			// 현재 user가 해당 공지글을 읽었는지 값을 받아온다.
-			int userReadCnt = dao.noticeUserReadCount(noticeParamDto);
-			// 읽은 적이 없다면
-			if( userReadCnt == 0 ) {
-				// 읽은 흔적을 넘겨주고
-				dao.noticeUserReadInsert(noticeParamDto.getNoticeId(), noticeParamDto.getUserId());
-				// 해당 공지글의 readCount를 올려준다.
-				dao.noticeReadCountUpdate(noticeParamDto.getNoticeId());
+			if((noticeParamDto.getUserId()) != null ) {
+				int userReadCnt = dao.noticeUserReadCount(noticeParamDto);
+				// 읽은 적이 없다면
+				if( userReadCnt == 0 ) {
+					// 읽은 흔적을 넘겨주고
+					dao.noticeUserReadInsert(noticeParamDto.getNoticeId(), noticeParamDto.getUserId());
+					// 해당 공지글의 readCount를 올려준다.
+					dao.noticeReadCountUpdate(noticeParamDto.getNoticeId());
+				}
 			}
 			
 			// 해당 공지글 상세를 업어온다.
@@ -65,6 +70,7 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeResultDto;
 	}
 
+	// 공지 글 전체 리스트
 	@Override
 	public NoticeResultDto noticeList(NoticeParamDto noticeParamDto) {
 		NoticeResultDto noticeResultDto = new NoticeResultDto();
@@ -84,6 +90,7 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeResultDto;
 	}
 
+	// 공지글 검색 리스트
 	@Override
 	public NoticeResultDto noticeListSearchWord(NoticeParamDto noticeParamDto) {
 		NoticeResultDto noticeResultDto = new NoticeResultDto();

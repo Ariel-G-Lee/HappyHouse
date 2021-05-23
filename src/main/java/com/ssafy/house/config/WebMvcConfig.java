@@ -25,6 +25,7 @@ public class WebMvcConfig implements WebMvcConfigurer{
 				"/js/**",
 				"/login/**",
 				"/area/**",
+				"/notices/**",
 				"/signup/**"); // static folder
 	}
 	

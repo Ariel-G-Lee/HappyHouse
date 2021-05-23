@@ -8,7 +8,7 @@ public interface NoticeService {
 
 	NoticeResultDto noticeInsert(NoticeDto noticeDto);
 
-	NoticeResultDto noticedDetail(NoticeParamDto noticeParamDto);
+	NoticeResultDto noticeDetail(NoticeParamDto noticeParamDto);
 
 	NoticeResultDto noticeList(NoticeParamDto noticeParamDto);
 
