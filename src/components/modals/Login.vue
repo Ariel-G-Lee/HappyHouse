@@ -35,7 +35,7 @@ import http from "@/common/axios.js";
 
 export default {
   name: 'Login',
-    methods: {
+  methods: {
     login(){
       http.post(
         "/login",
@@ -60,11 +60,14 @@ export default {
             profileImageUrl: data.profileImageUrl, userCode: data.userCode},
         );
 
-        //this.$router.push("/")
+        
         this.closeModal()
         this.$alertify.success("로그인에 성공했습니다")
-        console.log(this.$store.state.login.isLogin)
-
+        console.log(this.$store.state.login.isLogin) 
+        if(this.$route.path=='/signup'){
+          this.$router.push("/")
+        }
+        
       })
       .catch( error => {
         console.log("LoginVue: error : ");

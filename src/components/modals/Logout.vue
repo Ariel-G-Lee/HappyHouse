@@ -42,6 +42,12 @@ export default {
         this.closeModal();
         this.$alertify.success("로그아웃에 성공했습니다")
         console.log(this.$store.state.login.isLogin)
+
+        console.log(this.$route.path);
+        if(this.$route.path=='/noticewrite' || this.$route.path=='/noticemodify' || this.$route.path=='/mypage' ){
+          this.$router.push("/")
+        }
+
       })
       .catch( error => {
         console.log("LogoutVue: error : ");
