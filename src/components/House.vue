@@ -12,17 +12,17 @@
               <div class="form-group mt-3">
                 <div class="d-flex justify-content-center mt-2"> 
                   <div class="selectbox me-2">
-                    <select v-model="searchOption" class="form-select py-2 btn btn-light" name="key" id="key">
-                      <option selected>동/아파트명</option>
-                      <option value="dong">동 </option>
+                    <select v-model="$store.state.house.searchOption" class="form-select py-2 btn btn-light" name="key" id="key">
+                      <option value="all" >전체</option>
+                      <option value="dong" selected>동 </option>
                       <option value="aptName">아파트명 </option> 
                     </select>
                   </div>
                   <div>
-                    <input v-model="searchKeyword" id="searchKeyword" type="text" class="form-control me-2" placeholder="검색어 입력" name="word">
+                    <input v-model="$store.state.house.searchKeyword" @keydown.enter="houseList" id="searchKeyword" type="text" class="form-control me-2" placeholder="검색어 입력" name="word">
                   </div> 
                   <div> 
-                    <button @click.prevent="apartSearch" class="btn btn-green">검색</button>
+                    <button @click.prevent="houseList" class="btn btn-green">검색</button>
                   </div>
                 </div>
               </div>
@@ -56,28 +56,23 @@ export default {
   components: { HouseList, HouseMap, HouseDetail},
   data(){
     return{
-      searchOption:'동/아파트명',
+      searchOption:'',
       searchKeyword:'',
     }
   }, 
   created() {
-    this.searchOption = '동/아파트명'
+    this.apartSearch();
+    this.houseList();
   },
   methods:{
-    apartSearch(){
-      if(this.searchKeyword == '')
-        alert("전체 검색되게") 
-      console.log(this.searchOption);
-      console.log(this.searchKeyword);
-      this.dongSearch();
-    }, 
-    dongSearch(){
+    houseList(){
+      this.$store.dispatch('houseList');
       http.get(
           '/houses',
           {
             params : {
-              key : this.searchOption,
-              word : this.searchKeyword
+              key : this.$store.state.house.searchOption,
+              word : this.$store.state.house.searchKeyword
             }
           }
           )
@@ -85,7 +80,7 @@ export default {
             console.log("success");
             console.log("현재 데이터 리스트 : ", data);
             console.log("총 갯수 : ", Object.keys(data).length);	
-            this.list = data.list;
+            this.$store.state.house.list = data;
           })
           .catch((error) => {
             console.log("search houses : error ");

@@ -7,7 +7,7 @@
         </a>
       </li>
       <li v-for="index in ( endPageIndex-startPageIndex + 1 )" :key="index"
-          v-bind:class="{active: (startPageIndex + index - 1 == $store.state.notice.currentPageIndex)}" class="page-item">
+          v-bind:class="{active: (startPageIndex + index - 1 == $store.state.house.currentPageIndex)}" class="page-item">
         <a @click="paginationChanged(startPageIndex + index - 1)" 
           class="page-link" href="#">{{ startPageIndex + index - 1 }}</a> <!-- href 는 그대로, 커서 모양 유지-->
       </li>
@@ -22,16 +22,16 @@
 
 <script>
 export default {
-  name: "Pagination",
+  name: "PaginationHouse",
   computed: {
     pageCount: function(){
-      return Math.ceil(this.$store.state.notice.totalListItemCount/this.$store.state.notice.listRowCount);
+      return Math.ceil(this.$store.state.house.totalListItemCount/this.$store.state.house.listRowCount);
     },
     startPageIndex: function(){
-      if( (this.$store.state.notice.currentPageIndex % this.$store.state.notice.pageLinkCount) == 0 ){ //10, 20...맨마지막
-        return ((this.$store.state.notice.currentPageIndex / this.$store.state.notice.pageLinkCount)-1)*this.$store.state.notice.pageLinkCount + 1
+      if( (this.$store.state.house.currentPageIndex % this.$store.state.house.pageLinkCount) == 0 ){ //10, 20...맨마지막
+        return ((this.$store.state.house.currentPageIndex / this.$store.state.house.pageLinkCount)-1)*this.$store.state.house.pageLinkCount + 1
       }else{
-        return  Math.floor(this.$store.state.notice.currentPageIndex / this.$store.state.notice.pageLinkCount)*this.$store.state.notice.pageLinkCount + 1
+        return  Math.floor(this.$store.state.house.currentPageIndex / this.$store.state.house.pageLinkCount)*this.$store.state.house.pageLinkCount + 1
       }
     },
     endPageIndex: function(){
@@ -39,16 +39,16 @@ export default {
       // if( this.endPageIndex < this.pageCount ) return this.pageCount;
 
       let ret = 0;
-      if( (this.$store.state.notice.currentPageIndex % this.$store.state.notice.pageLinkCount) == 0 ){ //10, 20...맨마지막
-        ret = ((this.$store.state.notice.currentPageIndex / this.$store.state.notice.pageLinkCount)-1)*this.$store.state.notice.pageLinkCount + this.$store.state.notice.pageLinkCount;
+      if( (this.$store.state.house.currentPageIndex % this.$store.state.house.pageLinkCount) == 0 ){ //10, 20...맨마지막
+        ret = ((this.$store.state.house.currentPageIndex / this.$store.state.house.pageLinkCount)-1)*this.$store.state.house.pageLinkCount + this.$store.state.house.pageLinkCount;
       }else{
-        ret = Math.floor(this.$store.state.notice.currentPageIndex / this.$store.state.notice.pageLinkCount)*this.$store.state.notice.pageLinkCount + this.$store.state.notice.pageLinkCount;
+        ret = Math.floor(this.$store.state.house.currentPageIndex / this.$store.state.house.pageLinkCount)*this.$store.state.house.pageLinkCount + this.$store.state.house.pageLinkCount;
       }
       // 위 오류나는 코드를 아래와 같이 비교해서 처리
       return ( ret > this.pageCount ) ? this.pageCount : ret;
     },
     prev: function(){
-      if( this.$store.state.notice.currentPageIndex <= this.$store.state.notice.pageLinkCount ){
+      if( this.$store.state.house.currentPageIndex <= this.$store.state.house.pageLinkCount ){
         return false;
       }else{
         return true;
