@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.ssafy.house.dao.HouseDao">
+
+	<select id="searchByDong" parameterType="String" resultType="com.ssafy.house.dto.HouseDto">
+		SELECT housedeal.no, housedeal.dong_name, housedeal.apt_name, housedeal.deal_amount, housedeal.area, 
+				housedeal.deal_year, housedeal.deal_month, housedeal.deal_day, houseinfo.lat, houseinfo.lng
+		  FROM housedeal JOIN houseinfo
+		WHERE housedeal.apt_name = houseinfo.apt_name AND housedeal.dong_name = houseinfo.dong_name And housedeal.dong_name = #{dong_name}
+	</select>
+	
+	<select id="searchByName" parameterType="String" resultType="com.ssafy.house.dto.HouseDto">
+		SELECT housedeal.no, housedeal.dong_name, housedeal.apt_name, housedeal.deal_amount, housedeal.area, 
+				housedeal.deal_year, housedeal.deal_month, housedeal.deal_day, houseinfo.lat, houseinfo.lng
+		  FROM housedeal JOIN houseinfo
+		WHERE housedeal.apt_name = houseinfo.apt_name AND housedeal.dong_name = houseinfo.dong_name AND housedeal.apt_name LIKE CONCAT('%',#{apt_name},'%')
+	</select>
+
+</mapper>
