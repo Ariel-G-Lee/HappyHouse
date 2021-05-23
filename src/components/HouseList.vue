@@ -8,6 +8,7 @@
           <th>동명</th>
           <th>아파트명</th>
           <th>가격</th>
+          <th>매매 등록일</th>
         </tr>
       </thead>
       <tbody>
@@ -16,6 +17,7 @@
           <td>{{ house.dongName }}</td>
           <td>{{ house.aptName }}</td>
           <td>{{ house.dealAmount }}</td>
+          <td>{{ house.dealYear }}.{{ house.dealMonth }}.{{ house.dealDay }}</td>
         </tr>
       </tbody>
     </table>
@@ -68,15 +70,15 @@ export default {
         }else{
           this.$store.commit(
             'SET_HOUSE_DETAIL',
-            { no:data.no, dongName:data.dongName, aptName: data.aptName,dealAmount:data.dealAmount,
-              area: data.area, buildYear:data.buildYear, dealMonth:data.dealMonth,dealDay:data.dealDay,
-              lat:data.lat,lng:data.lng, jibun:data.jibun, floor:data.floor
+            { no:data.dto.no, dongName:data.dto.dongName, aptName: data.dto.aptName,dealAmount:data.dto.dealAmount,
+              area: data.dto.area, buildYear:data.dto.buildYear, dealMonth:data.dto.dealMonth,dealDay:data.dto.dealDay,
+              lat:data.dto.lat,lng:data.dto.lng, jibun:data.dto.jibun, floor:data.dto.floor
             }
           );
           // this.$router.push("/housedetail");
           //house detail 컴포넌트 리프레쉬 !!!!
-          console.log(this.$store.state.house.list)
-          console.log(this.$store.house.aptName);
+          // console.log(this.$store.state.house.list)
+          console.log(this.$store.state.house.no);
         }
       })
       .catch((error) => {
