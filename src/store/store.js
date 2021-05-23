@@ -11,11 +11,11 @@ export default new Vuex.Store({
   state: {
     login: {
       isLogin: false,
-      userId: "testid",
-      userName: "testname",
-      userPwd: "testpwd",
-      email: "test@test.com",
-      address: "testaddress",
+      userId: "admin",
+      userName: "",
+      userPwd: "admin",
+      email: "",
+      address: "",
       interestArea: "",
       profileImageUrl: "",
       userCode: ""
@@ -29,7 +29,7 @@ export default new Vuex.Store({
 
       // pagination
       listRowCount: 10,
-      pageLinkCount: 5,
+      pageLinkCount: 10,
       currentPageIndex: 1,
 
       totalListItemCount: 0,

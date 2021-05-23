@@ -9,12 +9,12 @@
 
           <div class="col-lg-8 mt-5 mt-lg-0">
               <div class="form-group mt-3" align="left">
-                <input type="text" class="form-control" name="title" id="title">
+                <input type="text" class="form-control" name="title" id="title" v-model="title">
               </div>
               <div class="form-group mt-3" align="left">
                 <!-- <textarea class="form-control col-sm-5" name="contents" id="contents" rows="10"></textarea> -->
                 <div class="mb-3">
-                  <div id=divEditorInsert></div>
+                  <div id=divEditorModify></div>
                 </div>
               </div>
           </div>
@@ -35,28 +35,58 @@
 <script>
 import Vue from 'vue';
 import CKEditor from '@ckeditor/ckeditor5-vue2';
+import http from "@/common/axios.js";
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 Vue.use(CKEditor);
 export default {
   name: 'NoticeModify',
+  data(){
+    return{
+      title: '',
+      CKEditor: ''
+    }
+  },
+  created: function(){
+
+
+  },
   methods: {
     noticeModify(){
 
     },
     noticeDelete(){
-      
-    }
+      console.log("modify"+this.$store.state.notice.noticeId);
+      http.delete(
+        "/notices/" + this.$store.state.notice.noticeId
+        )
+        .then(({ data }) => {
+          console.log("DeleteNotice: data : ");
+          console.log(data);
+          if( data.result == 'login' ){
+            this.$router.push("/login")
+          }else{
+            this.$router.push("/noticelist");
+          }
+        })
+        .catch( error => {
+            console.log(error)
+        });
+      }
   },
   mounted() {
+    let $this = this;
+    this.title = this.$store.state.notice.title;
     ClassicEditor
-    .create(document.querySelector('#divEditorInsert'))
+    .create(document.querySelector('#divEditorModify'))
     .then(editor => {
-        this.CKEditor = editor;
+      this.CKEditor = editor;
+      this.CKEditor.setData( $this.$store.state.notice.content );
     })
     .catch(err => {
-        console.error(err.stack);
+      console.error(err.stack);
     });
+
   },
 }
 </script>

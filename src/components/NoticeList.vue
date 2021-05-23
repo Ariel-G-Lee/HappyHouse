@@ -33,7 +33,7 @@
               </thead>
               <tbody>
                 <tr v-for="(notice, index) in listGetters" @click="noticeDetail(notice.noticeId)" v-bind:key="index">
-                  <td>{{ index+1 }}</td>
+                  <td>{{ ($store.state.notice.currentPageIndex-1)*10+index+1 }}</td>
                   <td>{{ notice.title }}</td>
                   <td>{{ notice.userName }}</td>
                   <td>{{ formatDate[index] }}</td>
@@ -73,7 +73,7 @@ export default {
       // store 사용
       // list에 들어가 있는 하나하나를 가져와서 바꾼다.
       return this.$store.state.notice.list.map( function( notice ){
-        return $this.makeDateStr(notice.regDt.date.year, notice.regDt.date.month, notice.regDt.date.day, '.')
+      return $this.makeDateStr(notice.regDt.date.year, notice.regDt.date.month, notice.regDt.date.day, '.')
       });
     }
   },
@@ -133,6 +133,14 @@ export default {
   },
   created() {
     this.noticeList();
+    // 초기화
+    this.$store.state.notice.noticeId = 0;
+    this.$store.state.notice.title = '';
+    this.$store.state.notice.content = '';
+    this.$store.state.notice.userName = '';
+    this.$store.state.notice.regDt = '';
+    this.$store.state.notice.readCount = '';
+    this.$store.state.notice.isOwner = false;
   },
 }
 </script>
