@@ -8,7 +8,6 @@
           <th>동명</th>
           <th>아파트명</th>
           <th>가격</th>
-          <th>매매 등록일</th>
         </tr>
       </thead>
       <tbody>
@@ -17,7 +16,6 @@
           <td>{{ house.dongName }}</td>
           <td>{{ house.aptName }}</td>
           <td>{{ house.dealAmount }}</td>
-          <td>{{ house.dealYear }}.{{ house.dealMonth }}.{{ house.dealDay }}</td>
         </tr>
       </tbody>
     </table>

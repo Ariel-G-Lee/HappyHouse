@@ -28,6 +28,10 @@
           <td>면적</td>
           <td>{{ $store.state.house.area }}</td>
         </tr>
+        <tr>
+          <td>매매 등록일</td>
+          <td>{{ $store.state.house.dealYear }}.{{ $store.state.house.dealMonth }}.{{ $store.state.house.dealDay }}</td>
+        </tr>
       </tbody>
     </table>
   </div>
