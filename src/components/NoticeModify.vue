@@ -53,7 +53,30 @@ export default {
   },
   methods: {
     noticeModify(){
-
+      console.log(this.title);
+      console.log(this.CKEditor.getData());
+      http.put(
+        '/notices/' + this.$store.state.notice.noticeId,
+        { 
+            title: this.title,
+            content: this.CKEditor.getData()
+           })
+        .then(({ data }) => {
+        console.log("UpdateNotice: data : ");
+        console.log(data);
+        if( data.result == 'login' ){
+          this.$router.push("/login")
+        }else{
+          this.$store.state.notice.title = this.title;
+          this.$store.state.notice.content = this.CKEditor.getData();
+          this.$alertify.success('글이 수정되었습니다.');
+          
+        }
+        })
+        .catch((error) => {
+          console.log("UpdateModalVue: error ");
+          console.log(error);
+        });
     },
     noticeDelete(){
       console.log("modify"+this.$store.state.notice.noticeId);
