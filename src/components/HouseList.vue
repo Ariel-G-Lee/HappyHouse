@@ -1,7 +1,7 @@
 <template> 
   <div>
     <h4>매물 목록</h4>
-    <table class="table">
+    <table class="table table-hover">
       <thead>
         <tr>
           <th>번호</th>
@@ -70,7 +70,7 @@ export default {
             'SET_HOUSE_DETAIL',
             { no:data.no, dongName:data.dongName, aptName: data.aptName,dealAmount:data.dealAmount,
               area: data.area, buildYear:data.buildYear, dealMonth:data.dealMonth,dealDay:data.dealDay,
-              lat:data.lat,lng:data.lng
+              lat:data.lat,lng:data.lng, jibun:data.jibun, floor:data.floor
             }
           );
           // this.$router.push("/housedetail");

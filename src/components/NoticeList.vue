@@ -14,7 +14,7 @@
           
             <div class="justify-content-end input-group">
               <div class="d-flex form-row float-right" >
-                <input v-model="$store.state.notice.searchWord" @keydown.enter="noticeList" type="text" class="form-control me-2">
+                <input v-model="searchWord" @keydown.enter="noticeList" type="text" class="form-control me-2">
               </div>
               <div>
                 <button class="btn-green" @click="noticeList">검색</button>
@@ -64,6 +64,11 @@ import http from "@/common/axios.js";
 export default {
   name: 'NoticeList',
   components: { Pagination },
+  data(){
+    return {
+      searchWord: ''
+    }
+  },
   computed: {
     listGetters(){
       return this.$store.getters.getNoticeList;
@@ -79,6 +84,7 @@ export default {
   },
   methods: {
     noticeList(){
+      this.$store.state.notice.searchWord = this.searchWord;
       this.$store.dispatch('noticeList');
     },
 

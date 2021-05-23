@@ -46,14 +46,14 @@ export default new Vuex.Store({
     house:{
       // list
       list: [],
-      limit: 10,
+      limit: 15,
       offset: 0,
-      searchOption: '',
+      searchOption: 'dongName',
       searchKeyword: '',
 
       // pagination
-      listRowCount: 10,
-      pageLinkCount: 5,
+      listRowCount: 15,
+      pageLinkCount: 10,
       currentPageIndex: 1,
 
       totalListItemCount: 0,
@@ -66,7 +66,9 @@ export default new Vuex.Store({
       area:'',
       buildYear:'',
       dealMonth:'',
-      dealDay:'',
+      dealDay: '',
+      jibun: '',
+      floor: '',
       lat:'',
       lng:'',
     }
@@ -136,6 +138,8 @@ export default new Vuex.Store({
       state.house.dealDay= payload.dealDay;
       state.house.lat= payload.lat;
       state.house.lng= payload.lng;
+      state.house.jibun= payload.jibun;
+      state.house.floor= payload.floor;
 
     },
   },
