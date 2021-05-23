@@ -4,16 +4,23 @@
 
 	<select id="searchByDong" parameterType="String" resultType="com.ssafy.house.dto.HouseDto">
 		SELECT housedeal.no, housedeal.dong_name, housedeal.apt_name, housedeal.deal_amount, housedeal.area, 
-				housedeal.deal_year, housedeal.deal_month, housedeal.deal_day, houseinfo.lat, houseinfo.lng
+				housedeal.build_year, housedeal.deal_month, housedeal.deal_day, houseinfo.lat, houseinfo.lng
 		  FROM housedeal JOIN houseinfo
 		WHERE housedeal.apt_name = houseinfo.apt_name AND housedeal.dong_name = houseinfo.dong_name And housedeal.dong_name = #{dong_name}
 	</select>
 	
 	<select id="searchByName" parameterType="String" resultType="com.ssafy.house.dto.HouseDto">
 		SELECT housedeal.no, housedeal.dong_name, housedeal.apt_name, housedeal.deal_amount, housedeal.area, 
-				housedeal.deal_year, housedeal.deal_month, housedeal.deal_day, houseinfo.lat, houseinfo.lng
+				housedeal.build_year, housedeal.deal_month, housedeal.deal_day, houseinfo.lat, houseinfo.lng
 		  FROM housedeal JOIN houseinfo
 		WHERE housedeal.apt_name = houseinfo.apt_name AND housedeal.dong_name = houseinfo.dong_name AND housedeal.apt_name LIKE CONCAT('%',#{apt_name},'%')
+	</select>
+	
+	<select id="searchAll" resultType="com.ssafy.house.dto.HouseDto">
+		SELECT housedeal.no, housedeal.dong_name, housedeal.apt_name, housedeal.deal_amount, housedeal.area, 
+				housedeal.build_year, housedeal.deal_month, housedeal.deal_day, houseinfo.lat, houseinfo.lng
+		  FROM housedeal JOIN houseinfo
+		WHERE housedeal.apt_name = houseinfo.apt_name AND housedeal.dong_name = houseinfo.dong_name
 	</select>
 
 </mapper>

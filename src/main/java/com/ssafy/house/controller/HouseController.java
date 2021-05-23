@@ -35,8 +35,10 @@ public class HouseController {
 		//select box에서 dong인지 aptName인지 
 		if (params.get("key").equals("dong")) {
 			list = houseService.searchByDong(params.get("word"));
-		} else if (params.get("key").equals("AptName")) {
+		} else if (params.get("key").equals("aptName")) {
 			list = houseService.searchByName(params.get("word"));
+		} else if(params.get("key").equals("all")) {
+			list = houseService.searchAll();
 		}
 		
 		//for (HouseDto houseDto : list)

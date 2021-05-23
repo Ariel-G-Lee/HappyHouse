@@ -25,4 +25,9 @@ public class HouseServiceImpl implements HouseService {
 		return houseDao.searchByName(aptName);
 	}
 
+	@Override
+	public List<HouseDto> searchAll() { 
+		return houseDao.searchAll();
+	}
+
 }
