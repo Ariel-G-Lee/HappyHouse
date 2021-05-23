@@ -24,7 +24,7 @@ export default new VueRouter({
       component: MyPage
     },
     {
-      name: 'SingUp',
+      name: 'SignUp',
       path: '/signup',
       component: SignUp
     },
