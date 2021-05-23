@@ -42,6 +42,33 @@ export default new Vuex.Store({
       regDt: {},
       readCount: 0,
       isOwner: false
+    },
+    house:{
+      // list
+      list: [],
+      limit: 10,
+      offset: 0,
+      searchOption: '',
+      searchKeyword: '',
+
+      // pagination
+      listRowCount: 10,
+      pageLinkCount: 5,
+      currentPageIndex: 1,
+
+      totalListItemCount: 0,
+
+      // detail
+      no: 0,
+      dongName:'',
+      aptName:'',
+      dealAmount:'',
+      area:'',
+      buildYear:'',
+      dealMonth:'',
+      dealDay:'',
+      lat:'',
+      lng:'',
     }
   },
   mutations: {
@@ -85,6 +112,32 @@ export default new Vuex.Store({
       state.notice.regDt = payload.regDt;
       state.notice.isOwner = payload.isOwner;
     },
+
+    SET_HOUSE_LIST(state, list) {
+      state.house.list = list;
+    },
+    SET_HOUSE_TOTAL_LIST_ITEM_COUNT(state, count) {
+      state.house.totalListItemCount = count;
+    },
+
+    SET_HOUSE_MOVE_PAGE(state, pageIndex) {
+      state.house.offset = (pageIndex - 1) * state.house.listRowCount;
+      state.house.currentPageIndex = pageIndex;
+    },
+
+    SET_HOUSE_DETAIL(state, payload) {
+      state.house.no= payload.no;
+      state.house.dongName= payload.dongName;
+      state.house.aptName= payload.aptName;
+      state.house.dealAmount= payload.dealAmount;
+      state.house.area= payload.area;
+      state.house.buildYear= payload.buildYear;
+      state.house.dealMonth= payload.dealMonth;
+      state.house.dealDay= payload.dealDay;
+      state.house.lat= payload.lat;
+      state.house.lng= payload.lng;
+
+    },
   },
   actions: {
     noticeList(context){
@@ -108,6 +161,29 @@ export default new Vuex.Store({
             context.commit( 'SET_NOTICE_TOTAL_LIST_ITEM_COUNT', data.count );
           }
       });
+    },
+    houseList(context){
+      http.get(
+        "/houses",
+        {
+          // get query string
+          params: {
+            limit: this.state.house.limit,
+            offset: this.state.house.offset,
+            searchOption: this.state.house.searchOption,
+            searchKeyword: this.state.house.searchKeyword
+          }
+        })
+        .then(({ data }) => {
+          console.log("HouseList: data : ");
+          console.log(data);
+          if( data.result == 'login' ){ 
+            router.push("/login")
+          }else{
+            context.commit( 'SET_HOUSE_LIST', data.list );
+            context.commit( 'SET_HOUSE_TOTAL_LIST_ITEM_COUNT', data.count );
+          }
+      });
     }
   },
   getters: {
@@ -116,6 +192,9 @@ export default new Vuex.Store({
     },
     getNoticeList : function(state){
       return state.notice.list;
+    },
+    getHouseList : function(state){
+      return state.house.list;
     },
   },
 });
