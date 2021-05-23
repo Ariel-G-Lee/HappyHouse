@@ -130,6 +130,7 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeResultDto;
 	}
 
+	// 공지 글 삭제
 	@Override
 	public NoticeResultDto noticeDelete(int noticeId) {
 		NoticeResultDto noticeResultDto = new NoticeResultDto();

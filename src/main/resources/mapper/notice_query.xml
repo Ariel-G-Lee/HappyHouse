@@ -24,7 +24,7 @@
 	
 	<insert id="noticeUserReadInsert" parameterType="map">
 		INSERT INTO NOTICE_USER_READ ( NOTICE_ID, USER_ID )
-		VALUES ( #{noticeId}, #{userId} )
+		            VALUES ( #{noticeId}, #{userId} )
 	</insert>
 
 	<update id="noticeReadCountUpdate" parameterType="int">
@@ -68,5 +68,12 @@
 		 WHERE TITLE LIKE CONCAT('%', #{searchWord} ,'%')
 	</select>
 
+	<update id="noticeReadCountDelete" parameterType="int">
+		DELETE FROM NOTICE_USER_READ WHERE NOTICE_ID = #{noticeId}
+	</update>
+	
+	<delete id="noticeDelete" parameterType="int">
+		DELETE FROM NOTICE WHERE NOTICE_ID = #{noticeId}
+	</delete>
 
 </mapper> 

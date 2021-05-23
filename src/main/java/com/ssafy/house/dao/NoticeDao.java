@@ -3,6 +3,7 @@ package com.ssafy.house.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.ssafy.house.dto.NoticeDto;
 import com.ssafy.house.dto.NoticeParamDto;
@@ -15,7 +16,7 @@ public interface NoticeDao {
 
 	int noticeUserReadCount(NoticeParamDto noticeParamDto);
 
-	void noticeUserReadInsert(int noticeId, String userId);
+	void noticeUserReadInsert(@Param("noticeId") int noticeId, @Param("userId") String userId);
 
 	void noticeReadCountUpdate(int noticeId);
 

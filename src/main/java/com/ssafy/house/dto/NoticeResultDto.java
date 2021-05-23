@@ -55,11 +55,11 @@ public class NoticeResultDto {
 		this.count = count;
 	}
 
-	public boolean isOwner() {
+	public boolean getIsOwner() {
 		return isOwner;
 	}
 
-	public void setOwner(boolean isOwner) {
+	public void setIsOwner(boolean isOwner) {
 		this.isOwner = isOwner;
 	}
 

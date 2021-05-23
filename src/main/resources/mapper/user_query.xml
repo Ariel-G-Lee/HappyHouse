@@ -10,8 +10,8 @@
 	
 	<!-- 회원 가입 -->
 	<insert id="userInsert" parameterType="com.ssafy.house.dto.UserDto">
-		INSERT INTO USER ( USER_ID, USER_NAME, USER_PWD, EMAIL, ADDRESS, INTEREST_AREA, PROFILE_IMAGE_URL, JOINDATE )
-		VALUES (#{userId}, #{userName}, #{userPwd}, #{email}, #{address}, #{interestArea}, #{profileImageUrl}, now())
+		INSERT INTO USER ( USER_ID, USER_NAME, USER_PWD, EMAIL, ADDRESS, INTEREST_AREA, PROFILE_IMAGE_URL, JOINDATE, USER_CODE )
+		VALUES (#{userId}, #{userName}, #{userPwd}, #{email}, #{address}, #{interestArea}, #{profileImageUrl}, now(), '002')
 	</insert>
 	
 <!-- 	<insert id="profileFileInsert" parameterType="com.ssafy.house.dto.ProfileFileDto">
