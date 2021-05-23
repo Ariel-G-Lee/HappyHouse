@@ -11,17 +11,17 @@
               <tbody>
                   <tr class="d-flex">
                       <th class="col-2">제목</th>
-                      <td class="col-10">테스트입니다.</td>
+                      <td class="col-10">{{ $store.state.notice.title }}</td>
                   </tr>
                   <tr class="d-flex">
                       <th class="col-2">작성자</th>
-                      <td class="col-4">김싸피</td>
+                      <td class="col-4">{{ $store.state.notice.userName }}</td>
                       <th class="col-2">작성일</th>
-                      <td class="col-4">2021-05-18</td>
+                      <td class="col-4">{{ $store.state.notice.regDt }}</td>
                   </tr>
                   <tr class="d-flex">
-                      <td class="col-12 d-flex align-items-center" style="min-height: 300px;">
-                          글 내용
+                      <td class="col-12 d-flex align-items-center" style="min-height: 300px;"
+                      v-html="$store.state.notice.content">
                       </td>
                   </tr>
               </tbody>
