@@ -2,25 +2,55 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="com.ssafy.house.dao.HouseDao">
 
-	<select id="searchByDong" parameterType="String" resultType="com.ssafy.house.dto.HouseDto">
-		SELECT housedeal.no, housedeal.dong_name, housedeal.apt_name, housedeal.deal_amount, housedeal.area, 
-				housedeal.build_year, housedeal.deal_month, housedeal.deal_day, houseinfo.lat, houseinfo.lng
-		  FROM housedeal JOIN houseinfo
-		WHERE housedeal.apt_name = houseinfo.apt_name AND housedeal.dong_name = houseinfo.dong_name And housedeal.dong_name = #{dong_name}
+	<select id="searchByDongName" parameterType="map" resultType="com.ssafy.house.dto.HouseDto">
+		SELECT D.no, D.dong_name, D.apt_name, D.deal_amount, D.area, 
+		D.build_year, D.deal_month, D.deal_day, D.floor, D.jibun, I.lat, I.lng
+		FROM HOUSEDEAL D JOIN HOUSEINFO I
+		WHERE D.apt_name = I.apt_name AND D.dong_name = I.dong_name And D.dong_name = #{searchKeyword}
+		LIMIT #{limit} OFFSET #{offset}
 	</select>
 	
-	<select id="searchByName" parameterType="String" resultType="com.ssafy.house.dto.HouseDto">
-		SELECT housedeal.no, housedeal.dong_name, housedeal.apt_name, housedeal.deal_amount, housedeal.area, 
-				housedeal.build_year, housedeal.deal_month, housedeal.deal_day, houseinfo.lat, houseinfo.lng
-		  FROM housedeal JOIN houseinfo
-		WHERE housedeal.apt_name = houseinfo.apt_name AND housedeal.dong_name = houseinfo.dong_name AND housedeal.apt_name LIKE CONCAT('%',#{apt_name},'%')
+	<select id="searchByDongNameTotalCount" parameterType="map" resultType="int">
+		SELECT COUNT(*)
+		FROM HOUSEDEAL D JOIN HOUSEINFO I
+		WHERE D.apt_name = I.apt_name AND D.dong_name = I.dong_name And D.dong_name = #{searchKeyword}
 	</select>
 	
-	<select id="searchAll" resultType="com.ssafy.house.dto.HouseDto">
-		SELECT housedeal.no, housedeal.dong_name, housedeal.apt_name, housedeal.deal_amount, housedeal.area, 
-				housedeal.build_year, housedeal.deal_month, housedeal.deal_day, houseinfo.lat, houseinfo.lng
-		  FROM housedeal JOIN houseinfo
-		WHERE housedeal.apt_name = houseinfo.apt_name AND housedeal.dong_name = houseinfo.dong_name
+	<select id="searchByAptName" parameterType="map" resultType="com.ssafy.house.dto.HouseDto">
+		SELECT D.no, D.dong_name, D.apt_name, D.deal_amount, D.area, 
+		D.build_year, D.deal_month, D.deal_day, D.floor, D.jibun, I.lat, I.lng
+		FROM HOUSEDEAL D JOIN HOUSEINFO I
+		WHERE D.apt_name = I.apt_name AND D.dong_name = I.dong_name AND D.apt_name LIKE CONCAT('%',#{searchKeyword},'%')
+		LIMIT #{limit} OFFSET #{offset}
 	</select>
+	
+	<select id="searchByAptNameTotalCount" parameterType="map" resultType="int">
+		SELECT COUNT(*)
+		FROM HOUSEDEAL D JOIN HOUSEINFO I
+		WHERE D.apt_name = I.apt_name AND D.dong_name = I.dong_name AND D.apt_name LIKE CONCAT('%',#{searchKeyword},'%')
+	</select>
+	
+	<select id="searchAll" parameterType="map" resultType="com.ssafy.house.dto.HouseDto">
+		SELECT D.no, D.dong_name, D.apt_name, D.deal_amount, D.area, 
+		D.build_year, D.deal_month, D.deal_day, D.floor, D.jibun, I.lat, I.lng
+		FROM HOUSEDEAL D JOIN HOUSEINFO I
+		WHERE D.apt_name = I.apt_name AND D.dong_name = I.dong_name
+		LIMIT #{limit} OFFSET #{offset}
+	</select>
+	
+	<select id="searchAllTotalCount" resultType="int">
+		SELECT COUNT(*)
+		FROM HOUSEDEAL D JOIN HOUSEINFO I
+		WHERE D.apt_name = I.apt_name AND D.dong_name = I.dong_name
+	</select>
+	
+	<!-- 수정해야함 -->
+	<select id="houseDetail" parameterType="int" resultType="com.ssafy.house.dto.HouseDto">
+		SELECT D.no, D.dong_name, D.apt_name, D.deal_amount, D.area, 
+		D.build_year, D.deal_month, D.deal_day, D.floor, D.jibun, I.lat, I.lng
+		FROM HOUSEDEAL D JOIN HOUSEINFO I
+		WHERE D.apt_name = I.apt_name AND D.dong_name = I.dong_name And D.no = #{no}
+	</select>
+	
 
 </mapper>

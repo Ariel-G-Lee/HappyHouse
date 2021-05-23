@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 
 import com.ssafy.house.dto.NoticeDto;
 import com.ssafy.house.dto.NoticeParamDto;
@@ -97,10 +97,14 @@ public class NoticeController {
 	
 	// 공지 글 수정
 	@PutMapping(value="/notices/{noticeId}") 
-	public ResponseEntity<NoticeResultDto> noticeUpdate(NoticeDto noticeDto, HttpSession session){
+	public ResponseEntity<NoticeResultDto> noticeUpdate(@PathVariable int noticeId, @RequestBody NoticeDto noticeDto, HttpSession session){
 
+		noticeDto.setNoticeId(noticeId);
 		NoticeResultDto noticeResultDto = noticeService.noticeUpdate(noticeDto);
+		
 		noticeDto.setUserId( ((UserDto) session.getAttribute("userDto")).getUserId());
+		
+		System.out.println(noticeDto);
 		
 		if( noticeResultDto.getResult() == SUCCESS ) {
 			return new ResponseEntity<NoticeResultDto>(noticeResultDto, HttpStatus.OK);

@@ -84,7 +84,7 @@ public class UserDto {
 
 	public void setProfileImageUrl(String profileImageUrl) {
 		if( profileImageUrl == null || "null".equals(profileImageUrl) || "".equals(profileImageUrl)) {
-			this.profileImageUrl = "/img/noProfile.png";
+			this.profileImageUrl = "img/noProfile.png";
 		}else {
 			this.profileImageUrl = profileImageUrl;
 		}

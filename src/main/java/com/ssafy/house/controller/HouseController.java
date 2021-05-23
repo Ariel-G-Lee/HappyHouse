@@ -1,18 +1,16 @@
 package com.ssafy.house.controller;
 
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.house.dto.HouseDto;
+import com.ssafy.house.dto.HouseParamDto;
+import com.ssafy.house.dto.HouseResultDto;
 import com.ssafy.house.service.HouseService;
 
 @CrossOrigin(
@@ -26,25 +24,53 @@ public class HouseController {
 
 	@Autowired
 	HouseService houseService;
-
+	
+	private static final int SUCCESS = 1;
+	
+	// 매물 리스트
 	@GetMapping(value = "/houses")
-	public ResponseEntity<List<HouseDto>> searchByDong(@RequestParam Map<String, String> params) {
-		System.out.println("houses dongCode mapping OK : " + params.get("key") + "검색 - " + params.get("word"));
-		List<HouseDto> list = null;
-
-		//select box에서 dong인지 aptName인지 
-		if (params.get("key").equals("dong")) {
-			list = houseService.searchByDong(params.get("word"));
-		} else if (params.get("key").equals("aptName")) {
-			list = houseService.searchByName(params.get("word"));
-		} else if(params.get("key").equals("all")) {
-			list = houseService.searchAll();
-		}
+	public ResponseEntity<HouseResultDto> searchByDong(HouseParamDto houseParamDto) {
+		System.out.println("houses dongCode mapping OK : " + houseParamDto.getSearchKeyword() + "검색 - " + houseParamDto.getSearchOption());
+		
+		HouseResultDto houseResultDto = null;
+		
+		// 검색 옵션 (select box에서)
+		if(houseParamDto.getSearchKeyword().equals("")) { // 키워드가 비었을 경우에는 전체 검색
+			
+			houseResultDto = houseService.searchAll(houseParamDto);
+			
+		} else if (houseParamDto.getSearchOption().equals("dongName")) {
+			// 동 이름으로 검색
+			houseResultDto = houseService.searchByDongName(houseParamDto);
+			
+		} else if (houseParamDto.getSearchOption().equals("aptName")) {
+			// 아파트 이름으로 검색
+			houseResultDto = houseService.searchByAptName(houseParamDto);
+			
+		} 
 		
 		//for (HouseDto houseDto : list)
 		//	System.out.println(houseDto);
 		
-		return new ResponseEntity<List<HouseDto>>(list, HttpStatus.OK);
+		if( houseResultDto.getResult() == SUCCESS ) {
+			return new ResponseEntity<HouseResultDto>(houseResultDto, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<HouseResultDto>(houseResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+	
+	// 매물 상세
+	@GetMapping(value = "/houses/{no}")
+	public ResponseEntity<HouseResultDto> houseDetail(@PathVariable int no) {
+		
+		HouseResultDto houseResultDto = houseService.houseDetail(no);
+		
+		if( houseResultDto.getResult() == SUCCESS ) {
+			return new ResponseEntity<HouseResultDto>(houseResultDto, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<HouseResultDto>(houseResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 }

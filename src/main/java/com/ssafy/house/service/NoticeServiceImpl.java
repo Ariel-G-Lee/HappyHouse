@@ -112,6 +112,7 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeResultDto;
 	}
 
+	// 공지 글 수정
 	@Override
 	public NoticeResultDto noticeUpdate(NoticeDto noticeDto) {
 		NoticeResultDto noticeResultDto = new NoticeResultDto();
