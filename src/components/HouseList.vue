@@ -11,11 +11,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(house, index) in listGetters" @click="HouseDetail(house.no)" v-bind:key="index">
-            <td>{{ house.no }}</td>
-            <td>{{ house.dongName }}</td>
-            <td>{{ house.aptName }}</td>
-            <td>{{ house.dealAmount }}</td>
+        <tr v-for="(house, index) in listGetters" @click="houseDetail(house.no)" v-bind:key="index">
+          <td>{{ house.no }}</td>
+          <td>{{ house.dongName }}</td>
+          <td>{{ house.aptName }}</td>
+          <td>{{ house.dealAmount }}</td>
         </tr>
       </tbody>
     </table>
@@ -51,6 +51,7 @@ export default {
 
     houseDetail(no){
       console.log(no);
+      
       // store 변경
       // this.boardId = boardId;
       // this.$store.commit('mutateSetBoardBoardId', boardId);
@@ -75,6 +76,7 @@ export default {
           // this.$router.push("/housedetail");
           //house detail 컴포넌트 리프레쉬 !!!!
           console.log(this.$store.state.house.list)
+          console.log(this.$store.house.aptName);
         }
       })
       .catch((error) => {
