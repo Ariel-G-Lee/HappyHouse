@@ -17,23 +17,36 @@
             <div action="forms/contact.php" method="post" role="form" class="php-email-form">
               <div class="form-group mt-3" align="left">
                 <label for="user-id">아이디</label>
-                <input type="text" class="form-control" name="user-id" v-model="userId" placeholder="Your ID" required>
+                <input type="text" class="form-control" name="user-id" v-model="userId" placeholder="Your ID" 
+                :class="{ 'is-valid': isUserIdFocusAndValid , 'is-invalid': isUserIdFocusAndInvalid  }" 
+                @input="validateUserId" @focus="isUserIdFocus = true">
+                <div class="valid-feedback">사용 가능한 아이디입니다.</div>
+                <div class="invalid-feedback">이미 존재하는 아이디입니다.</div>
               </div>
               <div class="form-group mt-3" align="left">
                 <label for="password">비밀번호</label>
-                <input type="password" class="form-control" name="user-pwd" v-model="userPwd" placeholder="Your Password" required>
+                <input type="password" class="form-control" name="user-pwd" v-model="userPwd" placeholder="Your Password"
+                :class="{ 'is-valid': isUserPwdFocusAndValid , 'is-invalid': isUserPwdFocusAndInvalid  }" 
+                @input="validateUserPwd" @focus="isUserPwdFocus = true">
               </div>
               <div class="form-group mt-3" align="left">
                 <label for="user-name">이름</label>
-                <input type="text" name="user-name" class="form-control" v-model="userName" placeholder="Your Name" required>
+                <input type="text" name="user-name" class="form-control" v-model="userName" placeholder="Your Name"
+                :class="{ 'is-valid': isUserNameFocusAndValid , 'is-invalid': isUserNameFocusAndInvalid  }" 
+                @input="validateUserName" @focus="isUserNameFocus = true">
+                <div class="invalid-feedback">이름을 입력해주세요.</div>
               </div>
               <div class="form-group mt-3" align="left">
                 <label for="email">이메일</label>
-                <input type="email" class="form-control" name="email" v-model="email" placeholder="Your Email" required>
+                <input type="email" class="form-control" name="email" v-model="email" placeholder="Your Email"
+                :class="{ 'is-valid': isEamilFocusAndValid , 'is-invalid': isEamilFocusAndInvalid  }" 
+                @input="validateEamil" @focus="isEamilFocus = true">
               </div>
               <div class="form-group mt-3" align="left">
                 <label for="address">주소</label>
-                <input type="text" class="form-control" name="address" v-model="address" placeholder="Your Address" required>
+                <input type="text" class="form-control" name="address" v-model="address" placeholder="Your Address"
+                :class="{ 'is-valid': isAddressFocusAndValid , 'is-invalid': isAddressFocusAndInvalid  }" 
+                @input="validateAddress" @focus="isAddressFocus = true">
               </div>
 
 
@@ -111,6 +124,54 @@ export default {
       gugunSelected : '시/구/군',
       dongSelected: '동',
 
+       // focus
+      isUserIdFocus: false,
+      isUserNameFocus: false,
+      isUserEmailFocus: false,
+      isUserPasswordFocus: false,
+      isAddressFocus: false,
+
+      // validation
+      isUserIdValid: false,
+      isUserNameValid: false,
+      isUserEmailValid: false,
+      isUserPasswordValid: false,
+      isAddressValid: false,
+
+      dupIdCheck: false
+
+    }
+  },
+  computed: {
+    isUserIdFocusAndValid(){
+      return this.isUserIdFocus && this.isUserIdValid;
+    },
+    isUserIdFocusAndInvalid(){
+      return this.isUserIdFocus && ! this.isUserIdValid;
+    },
+    isUserNameFocusAndValid(){
+      return this.isUserNameFocus && this.isUserNameValid;
+    },
+    isUserNameFocusAndInvalid(){
+      return this.isUserNameFocus && ! this.isUserNameValid;
+    },
+    isEmailFocusAndValid(){
+      return this.isUserEmailFocus && this.isUserEmailValid;
+    },
+    isEmailFocusAndInValid(){
+      return this.isEmailFocus && ! this.isEmailValid;
+    },
+    isUserPwdFocusAndValid(){
+      return this.isUserPwdFocus && this.isUserPwdValid;
+    },
+    isUserPwdFocusAndInvalid(){
+      return this.isUserPwdFocus && ! this.isUserPwdValid;
+    },
+    isAddressFocusAndValid(){
+      return this.isAddressFocus && this.isAddressValid;
+    },
+    isAddressFocusAndInvalid(){
+      return this.isAddressFocus && ! this.isAddressValid;
     }
   },
   created: function(){
@@ -132,6 +193,52 @@ export default {
       });
   },
   methods: {
+    validateUserId() {
+      this.userIdDupCheck();
+      this.isUserNameId = (this.userId.length > 0 ? true : false) && this.dupIdCheck;
+    },
+    userIdDupCheck(){
+      http.get(
+        "/users/"+this.userId)
+      .then(({ data }) => {
+        if(data != null){
+          this.userIdDupCehck = false;
+        }
+        if(this.$route.path=='/signup'){
+          this.$router.push("/")
+        }
+        
+      })
+      .catch( error => {
+        console.log("LoginVue: error : ");
+        console.log(error);
+        if( error.response.status == '404'){
+          this.$alertify.error('이메일 또는 비밀번호를 확인하세요.');
+        }else{
+          this.$alertify.error('Opps!! 서버에 문제가 발생했습니다.');
+        }
+
+      });
+    },
+    validateUserName() {
+      this.isUserNameValid = this.userName.length > 0 ? true : false;
+      console.log(this.isUserNameValid)
+    },
+    validateEmail() {
+      let regexp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+      this.isUserEmailValid = (regexp.test(this.userEmail)) ? true : false;
+    },
+    validatePwd() {
+
+      let patternEngAtListOne = new RegExp(/[a-zA-Z]+/);// + for at least one
+      let patternNumAtListOne = new RegExp(/[0-9]+/);// + for at least one
+      
+      this.isUserPwdValid = 
+        ( patternEngAtListOne.test( this.userPwd ) 
+          && patternNumAtListOne.test( this.userPwd )
+          && this.userPassword.length >= 8
+        ) ? true : false;
+    },
     changeFile(fileEvent) {
       this.fileList = [];
       if( fileEvent.target.files && fileEvent.target.files.length > 0 ){
@@ -170,7 +277,7 @@ export default {
             if( data.result == 'login' ){
               this.$router.push("/login")
             }else{
-              this.$alertify.alert('회원 가입 성공', '회원 가입이 완료되었습니다.');
+              this.$alertify.alert('회원 가입 성공', '회원 가입이 완료되었습니다.\n메인 페이지로 이동합니다.');
               this.$router.push("/");
             }
           })
