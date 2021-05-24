@@ -46,6 +46,8 @@ public class AnimalHptController {
 	@GetMapping(value ="/animalhpt/{dongCode}")
 	public ResponseEntity<AnimalResultDto> searchByDongName(@PathVariable String dongCode){
 		
+		System.out.println("여기");
+		System.out.println(dongCode);
 		AnimalResultDto animalResultDto = animalHptService.searchByDongName(dongCode);
 		
 		if( animalResultDto.getHptList() != null ) {
