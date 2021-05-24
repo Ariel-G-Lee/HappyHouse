@@ -1,6 +1,6 @@
 <template>
   <div>  
-    <bar-chart></bar-chart>
+    <bar-chart :chart-data="datacollection" :options="options"></bar-chart>
   </div>
 </template>
 <script>
@@ -14,17 +14,41 @@ export default {
     return{
       hospitalList : [],
       pharmacyList : [],
+      guguns : [],
+      hospitalCounts : [],
+      pharmacyCounts : [],
       datacollection: null,
+      options:[
+        { 
+        responsive: true, 
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+              position: 'top',
+            },
+            title: {
+              display: true,
+              text: 'Chart.js Bar Chart'
+            }
+          } 
+        }
+      ]
     }
   },
   components: { BarChart },
   created(){
     http.get('/animalhpt')
       .then(({ data }) => {
-        this.hospitalList = data; 
+        this.hospitalList = data.stsList; 
         if( data.result == 'login' ){
           this.$router.push("/login")
         }
+
+        this.hospitalList.forEach((el) =>{
+          this.guguns.push(el.name);
+          this.hospitalCounts.push(el.count); 
+        })
+      
       })
       .catch((error) => {
         console.log(error);
@@ -32,35 +56,42 @@ export default {
 
     http.get('/animalpmc')
     .then(({ data }) => {
-      this.pharmacyList = data; 
+      this.pharmacyList = data.stsList; 
       if( data.result == 'login' ){
         this.$router.push("/login")
       }
+
+      this.pharmacyList.forEach((el) =>{
+          this.pharmacyCounts.push(el.count); 
+        })
     })
     .catch((error) => {
       console.log(error);
-    });
+    }); 
+
   },
-  mounted(){
+  
+  mounted(){ 
     this.fillData()
   },
-  methods:{
+  methods:{ 
     fillData () {
         this.datacollection = {
-          labels: [this.hospitalList.name],
+          labels: this.guguns,
           datasets: [
             {
               label: 'Data One',
-              backgroundColor: '#f87979',
-              data: [this.hospitalList.count]
+              backgroundColor: '#ffce56',
+              data: this.hospitalCounts,
             }, {
-              label: 'Data One',
-              backgroundColor: '#f87979',
-              data: [this.pharmacyList.count]
+              label: 'Data two',
+              backgroundColor: '#5fb5ee',
+              data: this.pharmacyCounts,
             }
           ]
         }
       },
+
   }
 }
 
