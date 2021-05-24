@@ -11,65 +11,50 @@ import NoticeWrite from '@/components/NoticeWrite.vue';
 import NoticeModify from '@/components/NoticeModify.vue';
 import NoticeDetail from '@/components/NoticeDetail.vue';
 import House from "@/components/House.vue"; 
-import Animal from "@/components/Animal.vue"; 
-import AnimalList from "@/components/AnimalList.vue"; 
-import AnimalMap from "@/components/AnimalMap.vue"; 
+import Animal from "@/components/Animal.vue";  
+import AnimalChart from "@/components/AnimalChart.vue"; 
+import AnimalHospital from "@/components/AnimalHospital.vue"; 
+import AnimalPharmacy from "@/components/AnimalPharmacy.vue"; 
 
 export default new VueRouter({
   routes: [
     {
-      path: '/',
-      component: Main
+      path: '/',component: Main
     },
     {
-      name: 'MyPage',
-      path: '/mypage',
-      component: MyPage
+      name: 'MyPage',path: '/mypage',component: MyPage
     },
     {
-      name: 'SignUp',
-      path: '/signup',
-      component: SignUp
+      name: 'SignUp',path: '/signup',component: SignUp
     },
     {
-      name: 'NoticeList',
-      path: '/noticelist',
-      component: NoticeList
+      name: 'NoticeList',path: '/noticelist',component: NoticeList
     },
     {
-      name: 'NoticeWrite',
-      path: '/noticewrite',
-      component: NoticeWrite
+      name: 'NoticeWrite',path: '/noticewrite',component: NoticeWrite
     },
     {
-      name: 'NoticeModify',
-      path: '/noticemodify',
-      component: NoticeModify
+      name: 'NoticeModify',path: '/noticemodify',component: NoticeModify
     },
     {
-      name: 'NoticeDetail',
-      path: '/noticedetail',
-      component: NoticeDetail
+      name: 'NoticeDetail',path: '/noticedetail',component: NoticeDetail
     },
     {
-      name: "House",
-      path: "/house",
-      component: House
+      name: "House",path: "/house",component: House
     },
     {
-      name: "Animal",
-      path: "/animal",
-      component: Animal
-    },
-    {
-      name: "AnimalList",
-      path: "/animallist",
-      component: AnimalList
-    },
-    {
-      name: "AnimalMap",
-      path: "/animalmap",
-      component: AnimalMap
+      name: "Animal",path: "/animal",component: Animal,
+      children: [
+        { 
+          name: "AnimalChart",path: "",component: AnimalChart
+        },
+        {
+          name: "AnimalHospital",path: "/animalhospital",component: AnimalHospital
+        },
+        {
+          name: "AnimalPharmacy",path: "/animalpharmacy",component: AnimalPharmacy
+        }
+      ]
     },
   ],
 });
