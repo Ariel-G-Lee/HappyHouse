@@ -35,6 +35,7 @@
 
         <div align="center">
           <button class="btn-green" v-if="$store.state.notice.isOwner" @click="moveToModify()">수정하기</button>
+          <button type="submit"  v-if="$store.state.notice.isOwner" class="btn-white ms-2" @click.prevent="noticeDelete()">삭제하기</button>
         </div>
 
 
@@ -44,12 +45,32 @@
 </template>
 
 <script>
+import http from "@/common/axios.js";
 export default {
   name: 'NoticeDetail',
   methods: {
     moveToModify(){
       this.$router.push("/noticemodify");
-    }
+    },
+    noticeDelete(){
+      console.log("modify"+this.$store.state.notice.noticeId);
+      http.delete(
+        "/notices/" + this.$store.state.notice.noticeId
+        )
+        .then(({ data }) => {
+          console.log("DeleteNotice: data : ");
+          console.log(data);
+          if( data.result == 'login' ){
+            this.$router.push("/login")
+          }else{
+            this.$alertify.success('글이 삭제되었습니다.');
+            this.$router.push("/noticelist");
+          }
+        })
+        .catch( error => {
+            console.log(error)
+        });
+      }
   }
 }
 </script>

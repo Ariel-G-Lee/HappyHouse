@@ -34,6 +34,9 @@ export default {
       return this.$store.getters.getHouseList;
     },
   },
+  created() {
+    this.houseList();
+  },
   methods: {
     houseList(){
       this.$store.dispatch('houseList');
@@ -41,21 +44,12 @@ export default {
 
     movePage(pageIndex){
       console.log("houseListVue : movePage : pageIndex : " + pageIndex );
-
-      // store commit 으로 변경
-      // this.offset = (pageIndex - 1) * this.listRowCount;
-      // this.currentPageIndex = pageIndex;
       this.$store.commit( 'SET_HOUSE_MOVE_PAGE', pageIndex );
       this.houseList();
     },
 
     houseDetail(no){
-      console.log(no);
-      
-      // store 변경
-      // this.boardId = boardId;
-      // this.$store.commit('mutateSetBoardBoardId', boardId);
-
+      // console.log(no);
       http.get(
       '/houses/'+no,
       )
@@ -73,10 +67,6 @@ export default {
               lat:data.dto.lat,lng:data.dto.lng, jibun:data.dto.jibun, floor:data.dto.floor
             }
           );
-          // this.$router.push("/housedetail");
-          //house detail 컴포넌트 리프레쉬 !!!!
-          // console.log(this.$store.state.house.list)
-          console.log(this.$store.state.house.no);
         }
       })
       .catch((error) => {
@@ -85,10 +75,7 @@ export default {
       });
     }
     
-  },
-  created() {
-    this.houseList();
-  },
+  }
 }
 </script>
 <style>

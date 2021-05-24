@@ -1,6 +1,5 @@
 <template>
   <main id="main">
-    <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
       <div class="container" data-aos="fade-up">
 
@@ -14,10 +13,10 @@
           
             <div class="justify-content-end input-group">
               <div class="d-flex form-row float-right" >
-                <input v-model="searchWord" @keydown.enter="noticeList" type="text" class="form-control me-2">
+                <input v-model="searchWord" @keydown.enter="noticeSearch" type="text" class="form-control me-2">
               </div>
               <div>
-                <button class="btn-green" @click="noticeList">검색</button>
+                <button class="btn-green" @click="noticeSearch">검색</button>
               </div>
             </div>
           
@@ -52,8 +51,8 @@
         </div>
 
       </div>
-    </section><!-- End Contact Section -->
-  </main><!-- End #main -->
+    </section>
+  </main>
 </template>
 
 <script>
@@ -75,25 +74,26 @@ export default {
     },
     formatDate : function(){
       let $this = this;
-      // store 사용
-      // list에 들어가 있는 하나하나를 가져와서 바꾼다.
       return this.$store.state.notice.list.map( function( notice ){
       return $this.makeDateStr(notice.regDt.date.year, notice.regDt.date.month, notice.regDt.date.day, '.')
       });
     }
   },
   methods: {
-    noticeList(){
+    noticeSearch(){
+      // 페이지 초기화
+      this.$store.state.notice.offset = 0;
+      this.$store.state.notice.currentPageIndex = 1;
       this.$store.state.notice.searchWord = this.searchWord;
+      this.noticeList();
+    },
+    noticeList(){
       this.$store.dispatch('noticeList');
     },
 
+    // 페이지 이동
     movePage(pageIndex){
       console.log("NoticeMainVue : movePage : pageIndex : " + pageIndex );
-
-      // store commit 으로 변경
-      // this.offset = (pageIndex - 1) * this.listRowCount;
-      // this.currentPageIndex = pageIndex;
       this.$store.commit( 'SET_NOTICE_MOVE_PAGE', pageIndex );
       this.noticeList();
     },
@@ -101,11 +101,6 @@ export default {
     makeDateStr : util.makeDateStr,
 
     noticeDetail(noticeId){
-      console.log(noticeId);
-      // store 변경
-      // this.boardId = boardId;
-      // this.$store.commit('mutateSetBoardBoardId', boardId);
-
       http.get(
       '/notices/'+noticeId,
       )
@@ -138,8 +133,12 @@ export default {
     
   },
   created() {
+    // 페이지 초기화
+    this.$store.state.notice.offset = 0;
+    this.$store.state.notice.currentPageIndex = 1;
+    this.$store.state.notice.searchWord = '';
     this.noticeList();
-    // 초기화
+    // 상세 초기화
     this.$store.state.notice.noticeId = 0;
     this.$store.state.notice.title = '';
     this.$store.state.notice.content = '';

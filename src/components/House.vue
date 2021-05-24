@@ -18,10 +18,10 @@
                     </select>
                   </div>
                   <div>
-                    <input v-model="searchKeyword" @keydown.enter="houseList" id="searchKeyword" type="text" class="form-control me-2" placeholder="검색어 입력" name="word">
+                    <input v-model="searchKeyword" @keydown.enter="houseSearch" id="searchKeyword" type="text" class="form-control me-2" placeholder="검색어 입력" name="word">
                   </div> 
                   <div> 
-                    <button @click.prevent="houseList" class="btn btn-green">검색</button>
+                    <button @click.prevent="houseSearch" class="btn btn-green">검색</button>
                   </div>
                 </div>
               </div>
@@ -57,11 +57,20 @@ export default {
       searchOption: 'dongName',
       searchKeyword: ''
     }
-  }, 
-  created() {
-    this.houseList();
+  },
+  created(){
+    // 초기화 페이지 1로 보내기
+    this.$store.state.house.offset = 0;
+    this.$store.state.house.currentPageIndex = 1;
+    this.$store.state.house.searchKeyword = '';
   },
   methods:{
+    houseSearch(){
+      // 초기화 페이지 1로 보내기
+      this.$store.state.house.offset = 0;
+      this.$store.state.house.currentPageIndex = 1;
+      this.houseList();
+    },
     houseList(){
       this.$store.state.house.searchOption = this.searchOption;
       this.$store.state.house.searchKeyword = this.searchKeyword;

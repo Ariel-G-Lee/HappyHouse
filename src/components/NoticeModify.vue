@@ -23,7 +23,6 @@
         
         <div align="center">
           <button type="button" class="btn-green" @click="noticeModify()">수정완료</button>
-          <button type="submit"  class="btn-white ms-2" @click.prevent="noticeDelete()">삭제하기</button>
         </div>
 
 
@@ -70,7 +69,7 @@ export default {
           this.$store.state.notice.title = this.title;
           this.$store.state.notice.content = this.CKEditor.getData();
           this.$alertify.success('글이 수정되었습니다.');
-          
+          this.$router.push("/noticelist");    
         }
         })
         .catch((error) => {
@@ -78,24 +77,6 @@ export default {
           console.log(error);
         });
     },
-    noticeDelete(){
-      console.log("modify"+this.$store.state.notice.noticeId);
-      http.delete(
-        "/notices/" + this.$store.state.notice.noticeId
-        )
-        .then(({ data }) => {
-          console.log("DeleteNotice: data : ");
-          console.log(data);
-          if( data.result == 'login' ){
-            this.$router.push("/login")
-          }else{
-            this.$router.push("/noticelist");
-          }
-        })
-        .catch( error => {
-            console.log(error)
-        });
-      }
   },
   mounted() {
     let $this = this;
