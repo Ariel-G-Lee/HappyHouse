@@ -81,11 +81,11 @@ export default {
           datasets: [
             {
               label: 'Data One',
-              backgroundColor: '#ffce56',
+              backgroundColor: '#FFC738',
               data: this.hospitalCounts,
             }, {
               label: 'Data two',
-              backgroundColor: '#5fb5ee',
+              backgroundColor: '#6FBBED',
               data: this.pharmacyCounts,
             }
           ]
