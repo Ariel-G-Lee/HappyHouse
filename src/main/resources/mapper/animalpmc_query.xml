@@ -6,7 +6,7 @@
  	<select id="selectStats" resultType="com.ssafy.house.dto.AnimalStatsDto">
  		SELECT PMC_GUGUN as NAME, COUNT(PMC_ID) as COUNT
 		FROM ANIMAL_PHARMACY
-		GROUP BY PMC_DONG;
+		GROUP BY PMC_GUGUN;
  	</select>
  	
  	 <select id="searchByDongName" parameterType="string" resultType="com.ssafy.house.dto.AnimalPmcDto">

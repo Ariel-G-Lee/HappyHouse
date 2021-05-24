@@ -39,7 +39,7 @@ public class AnimalHptController {
 		if( animalResultDto.getStsList() != null ) {
 			return new ResponseEntity<AnimalResultDto>(animalResultDto, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<AnimalResultDto>(animalResultDto, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<AnimalResultDto>(animalResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	

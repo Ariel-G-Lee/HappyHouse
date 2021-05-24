@@ -6,7 +6,7 @@
 	 <select id="selectStats" resultType="com.ssafy.house.dto.AnimalStatsDto">
  		SELECT HPT_GUGUN as NAME, COUNT(HPT_ID) as COUNT
 		FROM ANIMAL_HOSPITAL
-		GROUP BY HPT_DONG;
+		GROUP BY HPT_GUGUN;
  	</select>
  	
  	<select id="searchByDongName" parameterType="string" resultType="com.ssafy.house.dto.AnimalHptDto">

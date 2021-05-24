@@ -36,7 +36,7 @@ public class AnimalPmcController {
 		
 		AnimalResultDto animalResultDto = animalPmcService.selectStats();
 		
-		if( animalResultDto.getPmcList() != null ) {
+		if( animalResultDto.getStsList() != null ) {
 			return new ResponseEntity<AnimalResultDto>(animalResultDto, HttpStatus.OK);
 		}else {
 			return new ResponseEntity<AnimalResultDto>(animalResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
