@@ -21,13 +21,16 @@ public class WebMvcConfig implements WebMvcConfigurer{
 				"/index.html", 
 				"/favicon.ico", 
 				"/css/**", 
-				"/users/**",
 				"/js/**",
-				"/houses/**",
+				"/users/**",
 				"/login/**",
-				"/area/**",
+				"/signup/**",
 				"/notices/**",
-				"/signup/**"); // static folder
+				"/area/**",
+				"/houses/**",
+				"/animalhpt/**",
+				"/animalpmc/**"
+				); // static folder
 	}
 	
 //	@Override
