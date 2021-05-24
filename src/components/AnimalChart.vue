@@ -1,6 +1,8 @@
 <template>
-  <div> 
-    차트
+  <div>  
+        <div class="row">
+          차트
+        </div>
   </div>
 </template>
 <script>
