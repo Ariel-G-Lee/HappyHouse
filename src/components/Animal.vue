@@ -4,7 +4,8 @@
     <section id="animal-header" class="animal-header">
       <div class="container" data-aos="fade-up">
         <div class="section-title">
-          <h2>멋쟁이 고양이처럼</h2>
+          <h2>관심지역 동행</h2>
+          <p>나와 함께 사는 반려동물을 위한</p>
         </div>
       </div>
     </section>
