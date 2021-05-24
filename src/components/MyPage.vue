@@ -114,7 +114,7 @@ export default {
     }
   },
   created: function(){
-    console.log(this.$store.state.login.profileImageUrl);
+    // console.log(this.$store.state.login.profileImageUrl);
     this.userId = this.$store.state.login.userId;
     this.userName = this.$store.state.login.userName;
     this.userPwd = this.$store.state.login.userPwd;
