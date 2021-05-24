@@ -35,13 +35,15 @@ export default {
 
         this.$store.commit(
           'SET_LOGIN',
-          { isLogin: false, userName: '', userProfileImageUrl: ''}
+          { isLogin: false, userName: "", userProfileImageUrl: "",
+            userId: "admin", userPwd: "admin",
+            email: "", address: "", interestArea: "", userCode: ""}
         );
         
         // this.$router.push("/")
         this.closeModal();
-        this.$alertify.success("로그아웃에 성공했습니다")
-        console.log(this.$store.state.login.isLogin)
+        this.$alertify.success("로그아웃에 성공했습니다");
+        console.log(this.$store.state.login.isLogin);
 
         console.log(this.$route.path);
         if(this.$route.path=='/noticewrite' || this.$route.path=='/noticemodify' || this.$route.path=='/mypage' ){
