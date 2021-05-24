@@ -4,7 +4,7 @@
 <mapper namespace="com.ssafy.house.dao.AnimalPmcDao">
 
  	<select id="selectStats" resultType="com.ssafy.house.dto.AnimalStatsDto">
- 		SELECT PMC_DONG as DONG, COUNT(PMC_ID) as COUNT
+ 		SELECT PMC_GUGUN as NAME, COUNT(PMC_ID) as COUNT
 		FROM ANIMAL_PHARMACY
 		GROUP BY PMC_DONG;
  	</select>
