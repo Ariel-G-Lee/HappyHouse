@@ -60,7 +60,6 @@ export default {
             profileImageUrl: data.profileImageUrl, userCode: data.userCode},
         );
 
-        
         this.closeModal()
         this.$alertify.success("로그인에 성공했습니다")
         console.log(this.$store.state.login.isLogin) 
