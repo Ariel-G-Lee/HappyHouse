@@ -1,4 +1,5 @@
 <template>
+  <div class="mb-5">
   <nav aria-label="Page navigation">
     <ul class="pagination justify-content-center">
       <li v-if="prev" class="page-item">
@@ -18,6 +19,7 @@
       </li>
     </ul>
   </nav>
+  </div>
 </template>
 
 <script>

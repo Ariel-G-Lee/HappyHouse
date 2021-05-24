@@ -1,13 +1,14 @@
 <template> 
   <div>
-    <h4>매물 목록</h4>
+    <h5><strong>매물 목록</strong></h5>
+    <div class="list-table">
     <table class="table table-hover">
       <thead>
         <tr>
-          <th>번호</th>
-          <th>동명</th>
-          <th>아파트명</th>
-          <th>가격</th>
+          <th class="col-2">번호</th>
+          <th class="col-2">동명</th>
+          <th class="col-6">아파트명</th>
+          <th class="col-2">가격</th>
         </tr>
       </thead>
       <tbody>
@@ -19,6 +20,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
     <pagination-house v-on:call-parent="movePage"></pagination-house>
   </div> 
 </template>
@@ -79,5 +81,7 @@ export default {
 }
 </script>
 <style>
-  
+.list-table{
+  height: 700px;
+}
 </style>
