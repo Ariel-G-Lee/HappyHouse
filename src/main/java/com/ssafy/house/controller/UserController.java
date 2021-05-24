@@ -46,13 +46,15 @@ public class UserController {
 
 	// 회원 정보 조회
 	@GetMapping("/users/{userId}")
-	public ResponseEntity<UserDto> userDetail(@PathVariable String userId) {
+	public ResponseEntity<Integer> userDetail(@PathVariable String userId) {
 		UserDto userDto = userService.userDetail(userId);
-//		System.out.println(userDto);
+		System.out.println(userDto);
 		if (userDto != null) {
-			return new ResponseEntity<UserDto>(userDto, HttpStatus.OK);
+			System.out.println(1);
+			return new ResponseEntity<Integer>(1, HttpStatus.OK);
 		} else {
-			return new ResponseEntity<UserDto>(userDto, HttpStatus.NOT_FOUND);
+			System.out.println(-1);
+			return new ResponseEntity<Integer>(-1, HttpStatus.NOT_FOUND);
 		}
 	}
 

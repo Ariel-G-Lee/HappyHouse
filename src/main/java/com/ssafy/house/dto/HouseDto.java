@@ -7,6 +7,7 @@ public class HouseDto {
 	private String dealAmount;
 	private String area;
 	private String buildYear;
+	private String dealYear;
 	private String dealMonth;
 	private String dealDay;
 	private String floor;
@@ -19,7 +20,7 @@ public class HouseDto {
 	}
 
 	public HouseDto(int no, String dongName, String aptName, String dealAmount, String area, String buildYear,
-			String dealMonth, String dealDay, String floor, String jibun, String lat, String lng) {
+			String dealYear, String dealMonth, String dealDay, String floor, String jibun, String lat, String lng) {
 		super();
 		this.no = no;
 		this.dongName = dongName;
@@ -27,6 +28,7 @@ public class HouseDto {
 		this.dealAmount = dealAmount;
 		this.area = area;
 		this.buildYear = buildYear;
+		this.dealYear = dealYear;
 		this.dealMonth = dealMonth;
 		this.dealDay = dealDay;
 		this.floor = floor;
@@ -83,6 +85,14 @@ public class HouseDto {
 		this.buildYear = buildYear;
 	}
 
+	public String getDealYear() {
+		return dealYear;
+	}
+
+	public void setDealYear(String dealYear) {
+		this.dealYear = dealYear;
+	}
+
 	public String getDealMonth() {
 		return dealMonth;
 	}
@@ -134,8 +144,9 @@ public class HouseDto {
 	@Override
 	public String toString() {
 		return "HouseDto [no=" + no + ", dongName=" + dongName + ", aptName=" + aptName + ", dealAmount=" + dealAmount
-				+ ", area=" + area + ", buildYear=" + buildYear + ", dealMonth=" + dealMonth + ", dealDay=" + dealDay
-				+ ", floor=" + floor + ", jibun=" + jibun + ", lat=" + lat + ", lng=" + lng + "]";
+				+ ", area=" + area + ", buildYear=" + buildYear + ", dealYear=" + dealYear + ", dealMonth=" + dealMonth
+				+ ", dealDay=" + dealDay + ", floor=" + floor + ", jibun=" + jibun + ", lat=" + lat + ", lng=" + lng
+				+ "]";
 	}
 
 }

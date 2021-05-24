@@ -4,7 +4,7 @@
 
 	<select id="searchByDongName" parameterType="map" resultType="com.ssafy.house.dto.HouseDto">
 		SELECT D.no, D.dong_name, D.apt_name, D.deal_amount, D.area, 
-		D.build_year, D.deal_month, D.deal_day, D.floor, D.jibun, I.lat, I.lng
+		D.build_year, D.deal_year, D.deal_month, D.deal_day, D.floor, D.jibun, I.lat, I.lng
 		FROM HOUSEDEAL D JOIN HOUSEINFO I
 		WHERE D.apt_name = I.apt_name AND D.dong_name = I.dong_name And D.dong_name = #{searchKeyword}
 		LIMIT #{limit} OFFSET #{offset}
@@ -18,7 +18,7 @@
 	
 	<select id="searchByAptName" parameterType="map" resultType="com.ssafy.house.dto.HouseDto">
 		SELECT D.no, D.dong_name, D.apt_name, D.deal_amount, D.area, 
-		D.build_year, D.deal_month, D.deal_day, D.floor, D.jibun, I.lat, I.lng
+		D.build_year, D.deal_year, D.deal_month, D.deal_day, D.floor, D.jibun, I.lat, I.lng
 		FROM HOUSEDEAL D JOIN HOUSEINFO I
 		WHERE D.apt_name = I.apt_name AND D.dong_name = I.dong_name AND D.apt_name LIKE CONCAT('%',#{searchKeyword},'%')
 		LIMIT #{limit} OFFSET #{offset}
@@ -32,7 +32,7 @@
 	
 	<select id="searchAll" parameterType="map" resultType="com.ssafy.house.dto.HouseDto">
 		SELECT D.no, D.dong_name, D.apt_name, D.deal_amount, D.area, 
-		D.build_year, D.deal_month, D.deal_day, D.floor, D.jibun, I.lat, I.lng
+		D.build_year, D.deal_year, D.deal_month, D.deal_day, D.floor, D.jibun, I.lat, I.lng
 		FROM HOUSEDEAL D JOIN HOUSEINFO I
 		WHERE D.apt_name = I.apt_name AND D.dong_name = I.dong_name
 		LIMIT #{limit} OFFSET #{offset}
@@ -47,7 +47,7 @@
 	<!-- 수정해야함 -->
 	<select id="houseDetail" parameterType="int" resultType="com.ssafy.house.dto.HouseDto">
 		SELECT D.no, D.dong_name, D.apt_name, D.deal_amount, D.area, 
-		D.build_year, D.deal_month, D.deal_day, D.floor, D.jibun, I.lat, I.lng
+		D.build_year, D.deal_year, D.deal_month, D.deal_day, D.floor, D.jibun, I.lat, I.lng
 		FROM HOUSEDEAL D JOIN HOUSEINFO I
 		WHERE D.apt_name = I.apt_name AND D.dong_name = I.dong_name And D.no = #{no}
 	</select>

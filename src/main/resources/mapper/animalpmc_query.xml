@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.ssafy.house.dao.AnimalPmcDao">
+
+ 	<select id="selectStats" resultType="com.ssafy.house.dto.AnimalStatsDto">
+ 		SELECT PMC_DONG as DONG, COUNT(PMC_ID) as COUNT
+		FROM ANIMAL_PHARMACY
+		GROUP BY PMC_DONG;
+ 	</select>
+ 	
+ 	 <select id="searchByDongName" parameterType="string" resultType="com.ssafy.house.dto.AnimalPmcDto">
+ 		SELECT a.PMC_ID, a.PMC_NAME, a.PMC_GUGUN, a.PMC_DONG, a.PMC_CALL,
+ 		a.PMC_ADDRESS, a.PMC_ZIPCODE, a.PMC_X, a.PMC_Y, a.PMC_JIBUN
+ 		FROM ANIMAL_PHARMACY a, DONG_CODE d
+ 		WHERE a.PMC_DONG = d.DONG_NAME AND d.DONG_CODE = #{dongCode}
+ 	</select>
+ 	
+ 	<select id="searchByDongNameCount" parameterType="string" resultType="int">
+ 		SELECT COUNT(*) as COUNT
+ 		FROM ANIMAL_PHARMACY a, DONG_CODE d
+ 		WHERE a.PMC_DONG = d.DONG_NAME AND d.DONG_CODE = #{dongCode}
+ 	</select>
+</mapper> 

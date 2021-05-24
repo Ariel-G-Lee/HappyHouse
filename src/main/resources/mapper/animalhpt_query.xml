@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.ssafy.house.dao.AnimalHtpDao">
+	 
+	 <select id="selectStats" resultType="com.ssafy.house.dto.AnimalStatsDto">
+ 		SELECT HPT_DONG as DONG, COUNT(HPT_ID) as COUNT
+		FROM ANIMAL_HOSPITAL
+		GROUP BY HPT_DONG;
+ 	</select>
+ 	
+ 	<select id="searchByDongName" parameterType="string" resultType="com.ssafy.house.dto.AnimalHptDto">
+ 		SELECT a.HPT_ID, a.HPT_NAME, a.HPT_GUGUN, a.HPT_DONG, a.HPT_CALL,
+ 		a.HPT_ADDRESS, a.HPT_ZIPCODE, a.HPT_X, a.HPT_Y, a.HPT_JIBUN
+ 		FROM ANIMAL_HOSPITAL a, DONG_CODE d
+ 		WHERE a.HPT_DONG = d.DONG_NAME AND d.DONG_CODE = #{dongCode}
+ 	</select>
+
+	 <select id="searchByDongNameCount" parameterType="string" resultType="int">
+ 		SELECT COUNT(*) as COUNT
+ 		FROM ANIMAL_HOSPITAL a, DONG_CODE d
+ 		WHERE a.HPT_DONG = d.DONG_NAME AND d.DONG_CODE = #{dongCode}
+ 	</select>
+</mapper> 
