@@ -63,7 +63,7 @@ export default {
           this.$store.commit(
             'SET_HOUSE_DETAIL',
             { no:data.dto.no, dongName:data.dto.dongName, aptName: data.dto.aptName,dealAmount:data.dto.dealAmount,
-              area: data.dto.area, buildYear:data.dto.buildYear, dealMonth:data.dto.dealMonth,dealDay:data.dto.dealDay,
+              area: data.dto.area, buildYear:data.dto.buildYear, dealYear:data.dto.dealYear, dealMonth:data.dto.dealMonth,dealDay:data.dto.dealDay,
               lat:data.dto.lat,lng:data.dto.lng, jibun:data.dto.jibun, floor:data.dto.floor
             }
           );

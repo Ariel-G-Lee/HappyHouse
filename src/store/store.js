@@ -133,7 +133,8 @@ export default new Vuex.Store({
       state.house.aptName= payload.aptName;
       state.house.dealAmount= payload.dealAmount;
       state.house.area= payload.area;
-      state.house.buildYear= payload.buildYear;
+      state.house.buildYear = payload.buildYear;
+      state.house.dealYear= payload.dealYear;
       state.house.dealMonth= payload.dealMonth;
       state.house.dealDay= payload.dealDay;
       state.house.lat= payload.lat;

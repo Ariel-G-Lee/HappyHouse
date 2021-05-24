@@ -48,6 +48,7 @@
                   @input="validateEmail" 
                   @focus="isEmailFocus = true"
                 />
+                <div class="invalid-feedback">이메일 형식에 맞춰 입력해주세요.</div>
               </div>
               
               <div class="form-group mt-3" align="left">
