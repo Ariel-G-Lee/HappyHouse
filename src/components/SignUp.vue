@@ -194,31 +194,7 @@ export default {
   },
   methods: {
     validateUserId() {
-      this.userIdDupCheck();
       this.isUserNameId = (this.userId.length > 0 ? true : false) && this.dupIdCheck;
-    },
-    userIdDupCheck(){
-      http.get(
-        "/users/"+this.userId)
-      .then(({ data }) => {
-        if(data != null){
-          this.userIdDupCehck = false;
-        }
-        if(this.$route.path=='/signup'){
-          this.$router.push("/")
-        }
-        
-      })
-      .catch( error => {
-        console.log("LoginVue: error : ");
-        console.log(error);
-        if( error.response.status == '404'){
-          this.$alertify.error('이메일 또는 비밀번호를 확인하세요.');
-        }else{
-          this.$alertify.error('Opps!! 서버에 문제가 발생했습니다.');
-        }
-
-      });
     },
     validateUserName() {
       this.isUserNameValid = this.userName.length > 0 ? true : false;
