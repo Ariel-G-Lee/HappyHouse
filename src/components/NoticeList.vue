@@ -40,12 +40,10 @@
                 </tr>
               </tbody>
             </table>
-            </div>
-    
             <div align="right">
               <router-link v-if="$store.state.login.userCode=='001'" to="/noticewrite">글작성</router-link>
             </div>
-
+            </div>
             <pagination v-on:call-parent="movePage"></pagination>
           </div>
           
@@ -153,6 +151,6 @@ export default {
 
 <style>
 .notice-list{
-  height: 460px;
+  height: 480px;
 }
 </style>
