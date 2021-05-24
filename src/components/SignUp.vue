@@ -15,38 +15,44 @@
             <p class="mb-5">가입 정보를 입력하세요.</p>
 
             <div action="forms/contact.php" method="post" role="form" class="php-email-form">
+              
               <div class="form-group mt-3" align="left">
                 <label for="user-id">아이디</label>
-                <input type="text" class="form-control" name="user-id" v-model="userId" placeholder="Your ID" 
-                :class="{ 'is-valid': isUserIdFocusAndValid , 'is-invalid': isUserIdFocusAndInvalid  }" 
-                @input="validateUserId" @focus="isUserIdFocus = true">
-                <div class="valid-feedback">사용 가능한 아이디입니다.</div>
-                <div class="invalid-feedback">이미 존재하는 아이디입니다.</div>
+                <input type="text" class="form-control" name="user-id" v-model="userId" placeholder="Your ID">
               </div>
+              
               <div class="form-group mt-3" align="left">
-                <label for="password">비밀번호</label>
+                <label for="user-pwd">비밀번호</label>
                 <input type="password" class="form-control" name="user-pwd" v-model="userPwd" placeholder="Your Password"
-                :class="{ 'is-valid': isUserPwdFocusAndValid , 'is-invalid': isUserPwdFocusAndInvalid  }" 
-                @input="validateUserPwd" @focus="isUserPwdFocus = true">
+                  :class="{ 'is-valid': isUserPwdFocusAndValid , 'is-invalid': isUserPwdFocusAndInvalid  }"         
+                  @input="validatePwd"
+                  @focus="isUserPwdFocus = true"
+                />
+                <div class="invalid-feedback">1개 이상의 대소문자 및 숫자를 포함하고 8자리 이상이여야 합니다.</div>
               </div>
+              
               <div class="form-group mt-3" align="left">
                 <label for="user-name">이름</label>
                 <input type="text" name="user-name" class="form-control" v-model="userName" placeholder="Your Name"
-                :class="{ 'is-valid': isUserNameFocusAndValid , 'is-invalid': isUserNameFocusAndInvalid  }" 
-                @input="validateUserName" @focus="isUserNameFocus = true">
+                  :class="{ 'is-valid': isUserNameFocusAndValid , 'is-invalid': isUserNameFocusAndInvalid  }" 
+                  @input="validateUserName" 
+                  @focus="isUserNameFocus = true"
+                />
                 <div class="invalid-feedback">이름을 입력해주세요.</div>
               </div>
+              
               <div class="form-group mt-3" align="left">
                 <label for="email">이메일</label>
                 <input type="email" class="form-control" name="email" v-model="email" placeholder="Your Email"
-                :class="{ 'is-valid': isEamilFocusAndValid , 'is-invalid': isEamilFocusAndInvalid  }" 
-                @input="validateEamil" @focus="isEamilFocus = true">
+                  :class="{ 'is-valid': isEmailFocusAndValid , 'is-invalid': isEmailFocusAndInValid  }" 
+                  @input="validateEmail" 
+                  @focus="isEmailFocus = true"
+                />
               </div>
+              
               <div class="form-group mt-3" align="left">
                 <label for="address">주소</label>
-                <input type="text" class="form-control" name="address" v-model="address" placeholder="Your Address"
-                :class="{ 'is-valid': isAddressFocusAndValid , 'is-invalid': isAddressFocusAndInvalid  }" 
-                @input="validateAddress" @focus="isAddressFocus = true">
+                <input type="text" class="form-control" name="address" v-model="address" placeholder="Your Address">
               </div>
 
 
@@ -124,55 +130,40 @@ export default {
       gugunSelected : '시/구/군',
       dongSelected: '동',
 
-       // focus
-      isUserIdFocus: false,
+      isUserPwdFocus: false,
       isUserNameFocus: false,
-      isUserEmailFocus: false,
-      isUserPasswordFocus: false,
-      isAddressFocus: false,
+      isEmailFocus: false,
 
-      // validation
-      isUserIdValid: false,
+      isUserPwdValid: false,
       isUserNameValid: false,
-      isUserEmailValid: false,
-      isUserPasswordValid: false,
-      isAddressValid: false,
+      isEmailValid: false,
 
-      dupIdCheck: false
 
     }
   },
   computed: {
-    isUserIdFocusAndValid(){
-      return this.isUserIdFocus && this.isUserIdValid;
-    },
-    isUserIdFocusAndInvalid(){
-      return this.isUserIdFocus && ! this.isUserIdValid;
-    },
-    isUserNameFocusAndValid(){
-      return this.isUserNameFocus && this.isUserNameValid;
-    },
-    isUserNameFocusAndInvalid(){
-      return this.isUserNameFocus && ! this.isUserNameValid;
-    },
-    isEmailFocusAndValid(){
-      return this.isUserEmailFocus && this.isUserEmailValid;
-    },
-    isEmailFocusAndInValid(){
-      return this.isEmailFocus && ! this.isEmailValid;
-    },
+
     isUserPwdFocusAndValid(){
       return this.isUserPwdFocus && this.isUserPwdValid;
     },
     isUserPwdFocusAndInvalid(){
       return this.isUserPwdFocus && ! this.isUserPwdValid;
     },
-    isAddressFocusAndValid(){
-      return this.isAddressFocus && this.isAddressValid;
+
+    isUserNameFocusAndValid(){
+      return this.isUserNameFocus && this.isUserNameValid;
     },
-    isAddressFocusAndInvalid(){
-      return this.isAddressFocus && ! this.isAddressValid;
-    }
+    isUserNameFocusAndInvalid(){
+      return this.isUserNameFocus && ! this.isUserNameValid;
+    },
+
+    isEmailFocusAndValid(){
+      return this.isEmailFocus && this.isEmailValid;
+    },
+    isEmailFocusAndInValid(){
+      return this.isEmailFocus && ! this.isEmailValid;
+    },
+
   },
   created: function(){
     this.sidoSelected = '도/광역시';
@@ -183,7 +174,7 @@ export default {
       .then(({ data }) => {
         // console.log("sido data : ");
         this.sidoOptions = data;
-        console.log(this.sidoOptions);
+        // console.log(this.sidoOptions);
         if( data.result == 'login' ){
           this.$router.push("/login")
         }
@@ -193,17 +184,11 @@ export default {
       });
   },
   methods: {
+
     validateUserId() {
-      this.isUserNameId = (this.userId.length > 0 ? true : false) && this.dupIdCheck;
+      this.isUserIdValid = this.userId.length > 0 ? true : false;
     },
-    validateUserName() {
-      this.isUserNameValid = this.userName.length > 0 ? true : false;
-      console.log(this.isUserNameValid)
-    },
-    validateEmail() {
-      let regexp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-      this.isUserEmailValid = (regexp.test(this.userEmail)) ? true : false;
-    },
+
     validatePwd() {
 
       let patternEngAtListOne = new RegExp(/[a-zA-Z]+/);// + for at least one
@@ -212,9 +197,19 @@ export default {
       this.isUserPwdValid = 
         ( patternEngAtListOne.test( this.userPwd ) 
           && patternNumAtListOne.test( this.userPwd )
-          && this.userPassword.length >= 8
+          && this.userPwd.length >= 8
         ) ? true : false;
     },
+
+    validateUserName() {
+      this.isUserNameValid = this.userName.length > 0 ? true : false;
+    },
+
+    validateEmail() {
+      let regexp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+      this.isEmailValid = (regexp.test(this.email)) ? true : false;
+    },
+
     changeFile(fileEvent) {
       this.fileList = [];
       if( fileEvent.target.files && fileEvent.target.files.length > 0 ){
@@ -258,6 +253,7 @@ export default {
             }
           })
           .catch((error) => {
+            this.$alertify.alert('회원 가입 오류', '회원 가입에 오류가 생겼습니다.')
             console.log("InsertUser: error ");
             console.log(error);
           });
