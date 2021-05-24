@@ -11,15 +11,15 @@
 
           <div class="col-lg-10 mt-5 mt-lg-0">
           
-            <div class="justify-content-end input-group">
-              <div class="d-flex form-row float-right" >
-                <input v-model="searchWord" @keydown.enter="noticeSearch" type="text" class="form-control me-2">
+            <div class="justify-content-end input-group mb-3 d-flex">
+              <div class=" form-row float-right me-2 mt-1" >
+                <input v-model="searchWord" @keydown.enter="noticeSearch" type="text" placeholder="검색어 입력" class="form-control me-2">
               </div>
               <div>
                 <button class="btn-green" @click="noticeSearch">검색</button>
               </div>
             </div>
-          
+            <div class="notice-list">
             <table class="table table-hover">
               <thead>
                 <tr>
@@ -40,6 +40,7 @@
                 </tr>
               </tbody>
             </table>
+            </div>
     
             <div align="right">
               <router-link v-if="$store.state.login.userCode=='001'" to="/noticewrite">글작성</router-link>
@@ -151,5 +152,7 @@ export default {
 </script>
 
 <style>
-
+.notice-list{
+  height: 460px;
+}
 </style>

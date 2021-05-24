@@ -1,36 +1,31 @@
 <template>
-  <div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>제목</th>
-          <th>내용</th>
-        </tr>
-      </thead>
+  <div class="housedetail-table mt-5">
+    <div class="house-name ps-2">
+       <h5><strong>{{ $store.state.house.aptName }}</strong></h5>
+    </div>
+    <table class="table ps-2 mt-2">
       <tbody>
         <tr>
-          <td>No.</td>
-          <td>{{ $store.state.house.no }}</td>
-        </tr> 
-        <tr>
-          <td>동이름</td>
-          <td>{{ $store.state.house.dongName }}</td>
+          <th class="col-2">지역</th>
+          <td class="col-4">{{ $store.state.house.dongName }}</td>
+          <th class="col-2">가격</th>
+          <td class="col-4">{{ $store.state.house.dealAmount}}</td>
         </tr>
         <tr>
-          <td>아파트명</td>
-          <td>{{ $store.state.house.aptName }}</td>
+          <th>면적</th>
+          <td>{{ area }}</td>
+          <th>층</th>
+          <td>{{ $store.state.house.floor }}</td>
         </tr>
         <tr>
-          <td>가격</td>
-          <td>{{ $store.state.house.dealAmount}}</td>
+          <th>건축년도</th>
+          <td>{{ $store.state.house.buildYear }}</td>
+          <th>매매 등록일</th>
+          <td>{{ dealdate }}</td>
         </tr>
+
         <tr>
-          <td>면적</td>
-          <td>{{ $store.state.house.area }}</td>
-        </tr>
-        <tr>
-          <td>매매 등록일</td>
-          <td>{{ $store.state.house.dealYear }}.{{ $store.state.house.dealMonth }}.{{ $store.state.house.dealDay }}</td>
+          
         </tr>
       </tbody>
     </table>
@@ -39,8 +34,20 @@
 <script>
 export default {
   name:'HouseDetail',
+  computed: {
+    dealdate(){
+      if(this.$store.state.house.dealDay == '') return '';
+      return this.$store.state.house.dealYear+"."+this.$store.state.house.dealMonth+"."+this.$store.state.house.dealDay;
+    },
+    area(){
+      if(this.$store.state.house.area == '') return '';
+      else return this.$store.state.house.area+" m2";
+    }
+  }
 }
 </script>
 <style>
-  
+.house-name{
+  height: 30px;
+}
 </style>
