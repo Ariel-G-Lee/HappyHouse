@@ -1,8 +1,7 @@
 <template>
   <div> 
-    <h4>지도</h4>
-    <div id="map" style="width:500px;height:400px;"></div>
-    <hr>
+    <h5><strong>지도</strong></h5>
+    <div id="map" class="mt-4 map-size"></div>
   </div>
 </template> 
 <script> 
@@ -94,6 +93,11 @@ export default{
   }
 }
 </script> 
-<style> 
+<style>
+.map-size{
+  width:100%;
+  height:400px;
+  border: 2px solid rgb(235, 235, 235);
+}
 </style>
 

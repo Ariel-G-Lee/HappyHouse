@@ -11,17 +11,17 @@
             <p class="mb-5">원하시는 매물을 검색해보세요.</p>
               <div class="form-group mt-3">
                 <div class="d-flex justify-content-center mt-2"> 
-                  <div class="selectbox me-2">
+                  <div class="selectbox me-2 mt-1">
                     <select v-model="searchOption" class="form-select py-2 btn btn-light" name="key" id="key">
                       <option value="dongName" selected>동</option>
                       <option value="aptName">아파트명 </option> 
                     </select>
                   </div>
                   <div>
-                    <input v-model="searchKeyword" @keydown.enter="houseSearch" id="searchKeyword" type="text" class="form-control me-2" placeholder="검색어 입력" name="word">
+                    <input v-model="searchKeyword" @keydown.enter="houseSearch" id="searchKeyword" type="text" class="form-control me-2 mt-1" placeholder="검색어 입력" name="word">
                   </div> 
                   <div> 
-                    <button @click.prevent="houseSearch" class="btn btn-green">검색</button>
+                    <button @click.prevent="houseSearch" class="btn btn-green ms-2">검색</button>
                   </div>
                 </div>
               </div>
@@ -80,5 +80,7 @@ export default {
 }
 </script>
 <style>
-  
+.container{
+  grid-template-columns: 20px;
+}
 </style>
