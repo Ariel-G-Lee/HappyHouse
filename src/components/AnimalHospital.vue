@@ -30,21 +30,50 @@
     </div>
     
 
-    <div v-if="$store.state.login.interestArea == '' && interestArea == ''">
+    <div v-if="!showCheck">
       <div align="center" class="mt-5 mb-5">
         설정하신 관심 지역이 없습니다!
-        <h5><strong>관심 지역을 설정해주세요.</strong></h5>
+        <h5><strong>관심 지역을 선택해주세요.</strong></h5>
         <img src="@/assets/img/interest.png" class="interest-img">
       </div>
     </div>
 
 
-    <div v-if="$store.state.login.interestArea != '' || interestArea != ''">
+    <div v-if="showCheck">
       <div class="container-fluid container"> 
-        <h4>지도</h4>
-        <p>병원</p>
-        <div id="map" style="width:500px;height:400px;"></div>
-      </div>
+        <div v-if="!isList">
+          <div align="center" class="mt-5 mb-5">
+          <h5><strong>해당 지역 동물 병원 정보가 없습니다.</strong></h5>
+          <img src="@/assets/img/no_hospital.jpg" class="interest-img">
+          </div>
+        </div>
+        
+        <div v-if="isList">
+          <h5><strong>지도</strong></h5>
+          <div id="map" style="width:500px;height:400px;"></div>
+
+          <h5><strong>병원 목록</strong></h5>
+          <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th style="width: 30%">병원</th>
+                  <th style="width: 50%">주소</th>
+                  <th style="width: 20%">전화번호</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(item, index) in hospitalList" v-bind:key="index">
+                  <td>{{ item.hptName }}</td>
+                  <td>{{ item.hptAddress == null ? item.hptJibun : item.hptAddress }}</td>
+                  <td>{{ item.hptCall }}</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+        
+
+    </div>
+
     </div>
   </div>
 </template>
@@ -61,6 +90,8 @@ export default {
 
       hospitalList: [],
 
+      isList : false,
+
       interestArea: '',
 
       sidoSelected : '도/광역시',
@@ -68,7 +99,25 @@ export default {
       dongSelected: '동',
     }
   },
+  watch: {
+    loginAreaCheck(){
+      this.init();
+    }
+  },
+  computed:{
+    loginAreaCheck(){
+      return this.$store.state.login.interestArea;
+    },
+    showCheck(){
+      if(this.interestArea == '' || this.interestArea == undefined) return false;
+      else return true; 
+    },
+  },
   created(){
+    this.sidoSelected = '도/광역시',
+    this.gugunSelected = '시/구/군',
+    this.dongSelected = '동',
+    this.interestArea = '';
     http
       .get('/area/sido')
       .then(({ data }) => {
@@ -84,26 +133,71 @@ export default {
       // console.log(this.sidoSelected);
 
     if(this.$store.state.login.interestArea != undefined && this.$store.state.login.interestArea != ''){
+      // 로그인 되었을 경우에는 생성하면서 interestArea 에 넣어준다.
+      this.interestArea = this.$store.state.login.interestArea;
+      
       this.sidoSelected = this.$store.state.login.interestArea.substr(0,2);
       this.updateGugun();
       this.gugunSelected = this.$store.state.login.interestArea.substr(0,5);
       this.updateDong();
       this.dongSelected = this.$store.state.login.interestArea
-
+      // console.log(this.interestArea);
       http
-      .get('/animalhpt/'+this.$store.state.login.interestArea)
+      .get('/animalhpt/'+this.interestArea)
       .then(({data}) => {
         this.hospitalList = data.hptList;
+        if(this.hospitalList.length == 0) this.isList = false;
+        else this.isList = true;
+
       })
       .catch((error) =>{
         console.log(error);
       })
     }
-
-    
-
   },
   methods:{
+    init(){
+      this.sidoSelected = '도/광역시',
+      this.gugunSelected = '시/구/군',
+      this.dongSelected = '동',
+      this.interestArea = '';
+      http
+      .get('/area/sido')
+      .then(({ data }) => {
+        this.sidoOptions = data;
+        if( data.result == 'login' ){
+          this.$router.push("/login")
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+      // console.log(this.sidoSelected);
+
+    if(this.$store.state.login.interestArea != undefined && this.$store.state.login.interestArea != ''){
+      // 로그인 되었을 경우에는 생성하면서 interestArea 에 넣어준다.
+      this.interestArea = this.$store.state.login.interestArea;
+      
+      this.sidoSelected = this.$store.state.login.interestArea.substr(0,2);
+      this.updateGugun();
+      this.gugunSelected = this.$store.state.login.interestArea.substr(0,5);
+      this.updateDong();
+      this.dongSelected = this.$store.state.login.interestArea
+      // console.log(this.interestArea);
+      http
+      .get('/animalhpt/'+this.interestArea)
+      .then(({data}) => {
+        this.hospitalList = data.hptList;
+        if(this.hospitalList.length == 0) this.isList = false;
+        else this.isList = true;
+
+      })
+      .catch((error) =>{
+        console.log(error);
+      })
+    }
+    },
     updateGugun() {
       this.gugunSelected = '시/구/군';
       this.dongSelected = '동';
@@ -144,11 +238,14 @@ export default {
       })
     },
     hospitalSearch(){
+      // 선택된 동으로 검색!
       this.interestArea = this.dongSelected;
       http
       .get('/animalhpt/'+this.interestArea)
       .then(({data}) => {
         this.hospitalList = data.hptList;
+        if(this.hospitalList.length == 0) this.isList = false;
+        else this.isList = true;
         console.log(this.hospitalList);
       })
       .catch((error) =>{
