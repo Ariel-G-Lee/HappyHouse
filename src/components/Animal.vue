@@ -22,9 +22,8 @@
 </div>
 </template>
 <script>
-
 export default {
-  name:'Animal',
+  name:'Animal', 
 }
 </script>
 
