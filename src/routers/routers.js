@@ -11,8 +11,7 @@ import NoticeWrite from '@/components/NoticeWrite.vue';
 import NoticeModify from '@/components/NoticeModify.vue';
 import NoticeDetail from '@/components/NoticeDetail.vue';
 import House from "@/components/House.vue"; 
-import Animal from "@/components/Animal.vue";  
-import AnimalChart from "@/components/AnimalChart.vue"; 
+import Animal from "@/components/Animal.vue";   
 import AnimalHospital from "@/components/AnimalHospital.vue"; 
 import AnimalPharmacy from "@/components/AnimalPharmacy.vue"; 
 
@@ -45,9 +44,6 @@ export default new VueRouter({
     {
       name: "Animal",path: "/animal",component: Animal,
       children: [
-        { 
-          name: "AnimalChart",path: "",component: AnimalChart
-        },
         {
           name: "AnimalHospital",path: "/animalhospital",component: AnimalHospital
         },
