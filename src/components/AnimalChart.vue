@@ -1,17 +1,18 @@
 <template>
   <div>  
-    <bar-chart :chart-data="datacollection" :options="options"></bar-chart>
+    <bar-chart v-if = "loaded" :chart-data="datacollection" :options="options"></bar-chart>
   </div>
 </template>
 <script>
 
 import http from "@/common/axios.js";
-import BarChart from './BarChart.vue'
+import BarChart from './BarChart.vue';
 
 export default {
   name:'AnimalChart', 
   data(){
     return{
+      loaded: false,
       hospitalList : [],
       pharmacyList : [],
       guguns : [],
@@ -42,7 +43,7 @@ export default {
           }, 
           title: {
               display: true,
-              text: 'Chart.js Bar Chart'
+              text: '서울시 동물 병원 및 동물 약국 통계'
           }
         }
       
@@ -50,9 +51,10 @@ export default {
   },
   components: { BarChart },
   created(){
-    http.get('/animalhpt')
+    http.get('/animalstats')
       .then(({ data }) => {
-        this.hospitalList = data.stsList; 
+        this.hospitalList = data.stsHptList; 
+        this.pharmacyList = data.stsPmcList;  
         if( data.result == 'login' ){
           this.$router.push("/login")
         }
@@ -64,28 +66,18 @@ export default {
 
         this.datacollection.labels = this.guguns
         this.datacollection.datasets[0].data = this.hospitalCounts
+        
+        this.pharmacyList.forEach((el) =>{
+          this.pharmacyCounts.push(el.count); 
+        })
+
+        this.datacollection.datasets[1].data = this.pharmacyCounts
+        this.loaded = true;
+
       })
       .catch((error) => {
         console.log(error);
       });
-
-    http.get('/animalpmc')
-    .then(({ data }) => {
-      this.pharmacyList = data.stsList; 
-      if( data.result == 'login' ){
-        this.$router.push("/login")
-      }
-
-      this.pharmacyList.forEach((el) =>{
-          this.pharmacyCounts.push(el.count); 
-        })
-
-      this.datacollection.datasets[1].data = this.pharmacyCounts
-    })
-    .catch((error) => {
-      console.log(error);
-    }); 
-
   },
 }
 
