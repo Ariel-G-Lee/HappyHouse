@@ -71,8 +71,8 @@ export default {
 }
 </script>
 <style>
-  .pmc-map-size{
-  width:100%;
+.pmc-map-size{
+  width: 80%;
   height:400px;
   border: 2px solid rgb(235, 235, 235);
 }
