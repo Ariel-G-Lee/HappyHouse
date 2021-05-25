@@ -52,16 +52,16 @@ export default {
   },
   methods: {
     noticeModify(){
-      console.log(this.title);
-      console.log(this.CKEditor.getData());
+      //console.log(this.title);
+      //console.log(this.CKEditor.getData());
       http.put(
         '/notices/' + this.$store.state.notice.noticeId,
         { 
             title: this.title,
             content: this.CKEditor.getData()
-           })
+        })
         .then(({ data }) => {
-        console.log("UpdateNotice: data : ");
+        //console.log("UpdateNotice: data : ");
         console.log(data);
         if( data.result == 'login' ){
           this.$router.push("/login")
@@ -73,7 +73,7 @@ export default {
         }
         })
         .catch((error) => {
-          console.log("UpdateModalVue: error ");
+          //console.log("UpdateModalVue: error ");
           console.log(error);
         });
     },

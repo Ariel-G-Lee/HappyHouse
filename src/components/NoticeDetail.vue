@@ -53,13 +53,13 @@ export default {
       this.$router.push("/noticemodify");
     },
     noticeDelete(){
-      console.log("modify"+this.$store.state.notice.noticeId);
+      //console.log("modify"+this.$store.state.notice.noticeId);
       http.delete(
         "/notices/" + this.$store.state.notice.noticeId
         )
         .then(({ data }) => {
-          console.log("DeleteNotice: data : ");
-          console.log(data);
+          //console.log("DeleteNotice: data : ");
+          //console.log(data);
           if( data.result == 'login' ){
             this.$router.push("/login")
           }else{

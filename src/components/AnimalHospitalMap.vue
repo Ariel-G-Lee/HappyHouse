@@ -14,7 +14,7 @@ export default {
       const script = document.createElement('script');
       script.onload = () => kakao.maps.load(this.initMap);
       script.src =
-        'http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=127668908d2cbfb39da9f78e92b308fa&libraries=services'; 
+        'http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=127668908d2cbfb39da9f78e92b308fa&libraries=clusterer,services'; 
       document.head.appendChild(script);
     }
   },
@@ -53,7 +53,7 @@ export default {
         var imageSize = new kakao.maps.Size(24, 35);
         var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
         var latlng = new kakao.maps.LatLng(result[0].y, result[0].x);
-        console.log(latlng)
+        //console.log(latlng)
           // 마커를 변환된 위치에 표시합니다
           var marker = new kakao.maps.Marker({
             position: latlng, // 마커를 표시할 위치입니다

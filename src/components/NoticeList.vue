@@ -92,7 +92,7 @@ export default {
 
     // 페이지 이동
     movePage(pageIndex){
-      console.log("NoticeMainVue : movePage : pageIndex : " + pageIndex );
+      //console.log("NoticeMainVue : movePage : pageIndex : " + pageIndex );
       this.$store.commit( 'SET_NOTICE_MOVE_PAGE', pageIndex );
       this.noticeList();
     },
@@ -104,8 +104,8 @@ export default {
       '/notices/'+noticeId,
       )
       .then(({ data }) => {
-        console.log("DetailNotice: data : ");
-        console.log(data);
+        //console.log("DetailNotice: data : ");
+        //console.log(data);
 
         if( data.result == 'login' ){
           this.$router.push("/login")
@@ -125,7 +125,7 @@ export default {
         }
       })
       .catch((error) => {
-        console.log("DetailModalVue: error ");
+        //console.log("DetailModalVue: error ");
         console.log(error);
       });
     }

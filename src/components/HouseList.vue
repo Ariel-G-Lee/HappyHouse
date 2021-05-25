@@ -46,7 +46,7 @@ export default {
     },
 
     movePage(pageIndex){
-      console.log("houseListVue : movePage : pageIndex : " + pageIndex );
+      //console.log("houseListVue : movePage : pageIndex : " + pageIndex );
       this.$store.commit( 'SET_HOUSE_MOVE_PAGE', pageIndex );
       this.houseList();
     },
@@ -57,8 +57,8 @@ export default {
       '/houses/'+no,
       )
       .then(({ data }) => { 
-        console.log("HouseDetail: data : ");
-        console.log(data);
+        //console.log("HouseDetail: data : ");
+        //console.log(data);
 
         if( data.result == 'login' ){
           this.$router.push("/login")
@@ -73,7 +73,7 @@ export default {
         }
       })
       .catch((error) => {
-        console.log("HouseListVue: error ");
+        //console.log("HouseListVue: error ");
         console.log(error);
       });
     }

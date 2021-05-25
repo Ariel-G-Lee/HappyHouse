@@ -12,7 +12,7 @@ export default{
       const script = document.createElement('script');
       script.onload = () => kakao.maps.load(this.initMap);
       script.src =
-        'http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=127668908d2cbfb39da9f78e92b308fa&libraries=clusterer'; 
+        'http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=127668908d2cbfb39da9f78e92b308fa&libraries=clusterer,services'; 
       document.head.appendChild(script);
     }
   },
@@ -69,7 +69,7 @@ export default{
 
         marker.setMap(map)  //좌표하나를 마커에 추가
         bounds.extend(positions[i].latlng); //좌표하나를 범위에 추가
-        console.log(positions[i].latlng)
+        //console.log(positions[i].latlng)
         
       } //position for문 끝
       map.setBounds(bounds) //추가된 좌표에 따른 범위 재설정
