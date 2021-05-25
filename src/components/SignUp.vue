@@ -18,14 +18,18 @@
               
               <div class="form-group mt-3" align="left">
                 <label for="user-id">아이디</label>
-                <input type="text" class="form-control" name="user-id" v-model="userId" placeholder="Your ID">
+                <input type="text" class="form-control" name="user-id" v-model="userId" placeholder="Your ID"
+                :class="{ 'is-valid': isUserIdFocusAndValid , 'is-invalid': isUserIdFocusAndInvalid  }"         
+                  @focusout="validateUserId"
+                  @focus="isUserIdFocus = true"
+                />
               </div>
               
               <div class="form-group mt-3" align="left">
                 <label for="user-pwd">비밀번호</label>
                 <input type="password" class="form-control" name="user-pwd" v-model="userPwd" placeholder="Your Password"
                   :class="{ 'is-valid': isUserPwdFocusAndValid , 'is-invalid': isUserPwdFocusAndInvalid  }"         
-                  @input="validatePwd"
+                  @input="validateUserPwd"
                   @focus="isUserPwdFocus = true"
                 />
                 <div class="invalid-feedback">1개 이상의 대소문자 및 숫자를 포함하고 8자리 이상이여야 합니다.</div>
@@ -131,10 +135,12 @@ export default {
       gugunSelected : '시/구/군',
       dongSelected: '동',
 
+      isUserIdFocus: false,
       isUserPwdFocus: false,
       isUserNameFocus: false,
       isEmailFocus: false,
 
+      isUserIdValid: false,
       isUserPwdValid: false,
       isUserNameValid: false,
       isEmailValid: false,
@@ -143,6 +149,13 @@ export default {
     }
   },
   computed: {
+
+    isUserIdFocusAndValid(){
+      return this.isUserIdFocus && this.isUserIdValid;
+    },
+    isUserIdFocusAndInvalid(){
+      return this.isUserIdFocus && ! this.isUserIdValid;
+    },
 
     isUserPwdFocusAndValid(){
       return this.isUserPwdFocus && this.isUserPwdValid;
@@ -187,11 +200,20 @@ export default {
   methods: {
 
     validateUserId() {
-      this.isUserIdValid = this.userId.length > 0 ? true : false;
+      var self = this;
+      http
+      .get('/users/'+this.userId)
+      .then(() => {        
+        self.isUserNameValid = false;
+        // console.log(this.isUserNameValid)
+      })
+      .catch(() =>{
+        self.isUserNameValid = true;
+        // console.log(this.isUserNameValid)
+      })
     },
 
-    validatePwd() {
-
+    validateUserPwd() {
       let patternEngAtListOne = new RegExp(/[a-zA-Z]+/);// + for at least one
       let patternNumAtListOne = new RegExp(/[0-9]+/);// + for at least one
       
@@ -203,7 +225,7 @@ export default {
     },
 
     validateUserName() {
-      this.isUserNameValid = this.userName.length > 0 ? true : false;
+      this.isUserNamealid = this.userName.length > 0 ? true : false;
     },
 
     validateEmail() {
