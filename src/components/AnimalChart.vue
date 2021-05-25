@@ -17,8 +17,21 @@ export default {
       guguns : [],
       hospitalCounts : [],
       pharmacyCounts : [],
-      datacollection: null,
-      options:[
+      datacollection: {
+          labels: '',
+          datasets: [
+            {
+              label: '병원',
+              backgroundColor: '#FFC738',
+              data: '',
+            }, {
+              label: '약국',
+              backgroundColor: '#6FBBED',
+              data: '',
+            }
+          ]
+        },
+      options:
         { 
         responsive: true, 
         maintainAspectRatio: false,
@@ -26,13 +39,13 @@ export default {
             legend: {
               position: 'top',
             },
-            title: {
+          }, 
+          title: {
               display: true,
               text: 'Chart.js Bar Chart'
-            }
-          } 
+          }
         }
-      ]
+      
     }
   },
   components: { BarChart },
@@ -48,7 +61,9 @@ export default {
           this.guguns.push(el.name);
           this.hospitalCounts.push(el.count); 
         })
-      
+
+        this.datacollection.labels = this.guguns
+        this.datacollection.datasets[0].data = this.hospitalCounts
       })
       .catch((error) => {
         console.log(error);
@@ -64,35 +79,14 @@ export default {
       this.pharmacyList.forEach((el) =>{
           this.pharmacyCounts.push(el.count); 
         })
+
+      this.datacollection.datasets[1].data = this.pharmacyCounts
     })
     .catch((error) => {
       console.log(error);
     }); 
 
   },
-  
-  mounted(){ 
-    this.fillData()
-  },
-  methods:{ 
-    fillData () {
-        this.datacollection = {
-          labels: this.guguns,
-          datasets: [
-            {
-              label: 'Data One',
-              backgroundColor: '#FFC738',
-              data: this.hospitalCounts,
-            }, {
-              label: 'Data two',
-              backgroundColor: '#6FBBED',
-              data: this.pharmacyCounts,
-            }
-          ]
-        }
-      },
-
-  }
 }
 
 
