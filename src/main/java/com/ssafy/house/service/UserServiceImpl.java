@@ -152,7 +152,7 @@ public class UserServiceImpl implements UserService {
 					file.delete();
 				}
 			}
-			
+			userDao.noticeUserReadDelete(userId);
 			res = userDao.userDelete(userId);		
 			
 		}catch(Exception e) {

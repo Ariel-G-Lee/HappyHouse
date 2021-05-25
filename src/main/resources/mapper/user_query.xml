@@ -14,19 +14,6 @@
 		VALUES (#{userId}, #{userName}, #{userPwd}, #{email}, #{address}, #{interestArea}, #{profileImageUrl}, now(), '002')
 	</insert>
 	
-<!-- 	<insert id="profileFileInsert" parameterType="com.ssafy.house.dto.ProfileFileDto">
-		INSERT INTO FROFILE_FILE ( USER_ID, FILE_NAME, FILE_SIZE, FILE_CONTENT_TYPE, FILE_URL )
-		            VALUES ( #{userId}, #{fileName}, #{fileSize}, #{fileContentType}, #{fileUrl} )
-	</insert>
-	
-	<delete id="profileFileDelete" parameterType="string">
-		DELETE FROM FROFILE_FILE WHERE USER_ID = #{userId}
-	</delete>
-	
-	<select id="profileFileUrlDeleteList" parameterType="string" resultType="string">
-		SELECT FILE_URL FROM FROFILE_FILE WHERE USER_ID = #{userId}
-	</select> -->
-	
 	<select id="profileFileUrlDelete" parameterType="string" resultType="string">
 		SELECT PROFILE_IMAGE_URL FROM USER WHERE USER_ID = #{userId}
 	</select>
@@ -43,6 +30,10 @@
 	
 	<delete id="userDelete" parameterType="string">
 		DELETE FROM USER WHERE USER_ID = #{userId}
+	</delete>
+	
+	<delete id="noticeUserReadDelete" parameterType="string">
+		DELETE FROM NOTICE_USER_READ WHERE USER_ID = #{userId}
 	</delete>
 
 </mapper> 

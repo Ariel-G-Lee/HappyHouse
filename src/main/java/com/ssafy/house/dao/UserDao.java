@@ -27,4 +27,6 @@ public interface UserDao {
 
 	public String profileFileUrlDelete(String userId);
 
+	public void noticeUserReadDelete(String userId);
+
 }
