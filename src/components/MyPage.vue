@@ -218,7 +218,7 @@ export default {
 
     // file upload
     var attachFiles = document.querySelector("#inputFileUploadInsert");
-    console.log("InsertUser: data 1 : ");
+    //console.log("InsertUser: data 1 : ");
     console.log(attachFiles);
 
     var cnt = attachFiles.files.length;
@@ -231,7 +231,7 @@ export default {
       formData,
       { headers: { 'Content-Type': 'multipart/form-data' } })
       .then(({ data }) => {
-        console.log("UpdateUser: data : ");
+        //console.log("UpdateUser: data : ");
         console.log(data);
         if( data.result == 'login' ){
           this.$router.push("/login")
@@ -242,12 +242,12 @@ export default {
             address: data.address, interestArea: data.interestArea,
             profileImageUrl: data.profileImageUrl},
           );
-          console.log(this.$store.state.login.profileImageUrl);
+          //console.log(this.$store.state.login.profileImageUrl);
           this.$alertify.alert('회원 정보 수정 성공','회원 정보가 수정 되었습니다.');
         }
       })
       .catch((error) => {
-        console.log("UpdateUser: error ");
+        //console.log("UpdateUser: error ");
         console.log(error);
       });
       },
@@ -255,7 +255,7 @@ export default {
       http.delete(
           '/users/' + this.$store.state.login.userId)
           .then(({ data }) => {
-            console.log("UpdateUser: data : ");
+            //console.log("UpdateUser: data : ");
             console.log(data);
             if( data.result == 'login' ){
               this.$router.push("/login")
@@ -265,7 +265,7 @@ export default {
             }
           })
           .catch((error) => {
-            console.log("UpdateUser: error ");
+            //console.log("UpdateUser: error ");
             console.log(error);
           });
       }

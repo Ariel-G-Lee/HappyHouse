@@ -205,7 +205,7 @@ export default {
       http
       .get('/animalpmc/'+this.interestArea)
       .then(({data}) => {
-        console.log(data.pmcList);
+        //console.log(data.pmcList);
         this.count = data.count;
         this.pharmacyList = data.pmcList;
         if(this.pharmacyList.length == 0) this.isList = false;
