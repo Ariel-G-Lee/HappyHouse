@@ -6,7 +6,6 @@
 </template> 
 <script> 
 export default{  
-  
   mounted() {
     if (window.kakao && window.kakao.maps) {
       this.initMap();
@@ -40,9 +39,9 @@ export default{
       var positions = []; //좌표를 저장할 배열
       var bounds = new kakao.maps.LatLngBounds();   //범위 저장할 변수  
       var clusterer = new kakao.maps.MarkerClusterer({ //마커 클러스터러
-          map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
-          averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-          minLevel: 10 // 클러스터 할 최소 지도 레벨 
+        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+        minLevel: 10 // 클러스터 할 최소 지도 레벨 
       });
 
       var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
