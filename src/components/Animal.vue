@@ -16,7 +16,7 @@
     </section>
   </main>
   <div id="animal-body" class="animal-body">
-    <div class="container-fluid container" >
+    <div class="container-fluid container" data-aos="fade-up">
       <router-view></router-view>
       <!-- default : AnimalChart, 동물병원 클릭시 AnimalDetail-hospital, 동물약국 클릭시 AnimalDetail-hospital-->
     </div>
