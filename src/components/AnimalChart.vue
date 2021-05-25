@@ -17,7 +17,20 @@ export default {
       guguns : [],
       hospitalCounts : [],
       pharmacyCounts : [],
-      datacollection: null,
+      datacollection: {
+          labels: '',
+          datasets: [
+            {
+              label: '병원',
+              backgroundColor: '#FFC738',
+              data: '',
+            }, {
+              label: '약국',
+              backgroundColor: '#6FBBED',
+              data: '',
+            }
+          ]
+        },
       options:
         { 
         responsive: true, 
@@ -48,7 +61,9 @@ export default {
           this.guguns.push(el.name);
           this.hospitalCounts.push(el.count); 
         })
-      
+
+        this.datacollection.labels = this.guguns
+        this.datacollection.datasets[0].data = this.hospitalCounts
       })
       .catch((error) => {
         console.log(error);
@@ -64,35 +79,14 @@ export default {
       this.pharmacyList.forEach((el) =>{
           this.pharmacyCounts.push(el.count); 
         })
+
+      this.datacollection.datasets[1].data = this.pharmacyCounts
     })
     .catch((error) => {
       console.log(error);
     }); 
 
   },
-  
-  mounted(){ 
-    this.fillData()
-  },
-  methods:{ 
-    fillData () {
-        this.datacollection = {
-          labels: this.guguns,
-          datasets: [
-            {
-              label: '병원',
-              backgroundColor: '#FFC738',
-              data: this.hospitalCounts,
-            }, {
-              label: '약국',
-              backgroundColor: '#6FBBED',
-              data: this.pharmacyCounts,
-            }
-          ]
-        }
-      },
-
-  }
 }
 
 
