@@ -18,7 +18,7 @@ export default {
       hospitalCounts : [],
       pharmacyCounts : [],
       datacollection: null,
-      options:[
+      options:
         { 
         responsive: true, 
         maintainAspectRatio: false,
@@ -26,13 +26,13 @@ export default {
             legend: {
               position: 'top',
             },
-            title: {
+          }, 
+          title: {
               display: true,
               text: 'Chart.js Bar Chart'
-            }
-          } 
+          }
         }
-      ]
+      
     }
   },
   components: { BarChart },
@@ -80,11 +80,11 @@ export default {
           labels: this.guguns,
           datasets: [
             {
-              label: 'Data One',
+              label: '병원',
               backgroundColor: '#FFC738',
               data: this.hospitalCounts,
             }, {
-              label: 'Data two',
+              label: '약국',
               backgroundColor: '#6FBBED',
               data: this.pharmacyCounts,
             }
