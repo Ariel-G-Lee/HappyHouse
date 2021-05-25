@@ -47,7 +47,7 @@ public class AnimalPmcController {
 	public ResponseEntity<AnimalResultDto> searchByDongName(@PathVariable String dongCode){
 		
 		AnimalResultDto animalResultDto = animalPmcService.searchByDongName(dongCode);
-		
+		System.out.println(animalResultDto.getPmcList());
 		if( animalResultDto.getPmcList() != null ) {
 			return new ResponseEntity<AnimalResultDto>(animalResultDto, HttpStatus.OK);
 		}else {
