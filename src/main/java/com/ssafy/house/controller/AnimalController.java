@@ -1,7 +1,5 @@
 package com.ssafy.house.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.house.dto.AnimalHptDto;
 import com.ssafy.house.dto.AnimalResultDto;
-import com.ssafy.house.dto.AnimalStatsDto;
-import com.ssafy.house.service.AnimalHptService;
+import com.ssafy.house.service.AnimalService;
 
 @CrossOrigin(
 		origins = "http://localhost:5500", 
@@ -23,20 +19,17 @@ import com.ssafy.house.service.AnimalHptService;
 		methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT,RequestMethod.OPTIONS}
 )
 @RestController
-public class AnimalHptController {
-
+public class AnimalController {
+	
 	@Autowired
-	AnimalHptService animalHptService;
+	AnimalService animalService;
 	
-	private static final int SUCCESS = 1;
-	
-	// 그룹으로 묶은 리스트
-	@GetMapping(value = "/animalhpt")
+	@GetMapping(value = "/animalstats")
 	public ResponseEntity<AnimalResultDto> searchByGroupGuGun() {
 		
-		AnimalResultDto animalResultDto = animalHptService.selectStats();
+		AnimalResultDto animalResultDto = animalService.selectStats();
 		
-		if( animalResultDto.getStsList() != null ) {
+		if( animalResultDto.getStsPmcList() != null && animalResultDto.getStsHptList() != null) {
 			return new ResponseEntity<AnimalResultDto>(animalResultDto, HttpStatus.OK);
 		}else {
 			return new ResponseEntity<AnimalResultDto>(animalResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -44,11 +37,11 @@ public class AnimalHptController {
 	}
 	
 	@GetMapping(value ="/animalhpt/{dongCode}")
-	public ResponseEntity<AnimalResultDto> searchByDongName(@PathVariable String dongCode){
+	public ResponseEntity<AnimalResultDto> searchByDongNameHpt(@PathVariable String dongCode){
 		
 		System.out.println("여기");
 		System.out.println(dongCode);
-		AnimalResultDto animalResultDto = animalHptService.searchByDongName(dongCode);
+		AnimalResultDto animalResultDto = animalService.searchByDongNameHpt(dongCode);
 		
 		if( animalResultDto.getHptList() != null ) {
 			return new ResponseEntity<AnimalResultDto>(animalResultDto, HttpStatus.OK);
@@ -56,4 +49,17 @@ public class AnimalHptController {
 			return new ResponseEntity<AnimalResultDto>(animalResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@GetMapping(value ="/animalpmc/{dongCode}")
+	public ResponseEntity<AnimalResultDto> searchByDongNamePmc(@PathVariable String dongCode){
+		
+		AnimalResultDto animalResultDto = animalService.searchByDongNamePmc(dongCode);
+		System.out.println(animalResultDto.getPmcList());
+		if( animalResultDto.getPmcList() != null ) {
+			return new ResponseEntity<AnimalResultDto>(animalResultDto, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<AnimalResultDto>(animalResultDto, HttpStatus.NOT_FOUND);
+		}
+	}
+
 }

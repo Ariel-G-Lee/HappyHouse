@@ -4,17 +4,19 @@ import java.util.List;
 
 public class AnimalResultDto {
 	private int count;
-	private List<AnimalStatsDto> stsList;
+	private List<AnimalStatsDto> stsHptList;
+	private List<AnimalStatsDto> stsPmcList;
 	private List<AnimalPmcDto> pmcList;
 	private List<AnimalHptDto> hptList;
 	
 	public AnimalResultDto() {}
 
-	public AnimalResultDto(int count, List<AnimalStatsDto> stsList, List<AnimalPmcDto> pmcList,
-			List<AnimalHptDto> hptList) {
+	public AnimalResultDto(int count, List<AnimalStatsDto> stsHptList, List<AnimalStatsDto> stsPmcList,
+			List<AnimalPmcDto> pmcList, List<AnimalHptDto> hptList) {
 		super();
 		this.count = count;
-		this.stsList = stsList;
+		this.stsHptList = stsHptList;
+		this.stsPmcList = stsPmcList;
 		this.pmcList = pmcList;
 		this.hptList = hptList;
 	}
@@ -27,12 +29,20 @@ public class AnimalResultDto {
 		this.count = count;
 	}
 
-	public List<AnimalStatsDto> getStsList() {
-		return stsList;
+	public List<AnimalStatsDto> getStsHptList() {
+		return stsHptList;
 	}
 
-	public void setStsList(List<AnimalStatsDto> stsList) {
-		this.stsList = stsList;
+	public void setStsHptList(List<AnimalStatsDto> stsHptList) {
+		this.stsHptList = stsHptList;
+	}
+
+	public List<AnimalStatsDto> getStsPmcList() {
+		return stsPmcList;
+	}
+
+	public void setStsPmcList(List<AnimalStatsDto> stsPmcList) {
+		this.stsPmcList = stsPmcList;
 	}
 
 	public List<AnimalPmcDto> getPmcList() {
@@ -53,7 +63,9 @@ public class AnimalResultDto {
 
 	@Override
 	public String toString() {
-		return "AnimalResultDto [count=" + count + ", stsList=" + stsList + ", pmcList=" + pmcList + ", hptList="
-				+ hptList + "]";
+		return "AnimalResultDto [count=" + count + ", stsHptList=" + stsHptList + ", stsPmcList=" + stsPmcList
+				+ ", pmcList=" + pmcList + ", hptList=" + hptList + "]";
 	}
+
+	
 }

@@ -29,7 +29,8 @@ public class WebMvcConfig implements WebMvcConfigurer{
 				"/area/**",
 				"/houses/**",
 				"/animalhpt/**",
-				"/animalpmc/**"
+				"/animalpmc/**",
+				"/animalstats/**"
 				); // static folder
 	}
 	

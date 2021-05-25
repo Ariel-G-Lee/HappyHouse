@@ -14,8 +14,7 @@
     	<mapper resource="mapper/login_query.xml"/>
     	<mapper resource="mapper/notice_query.xml"/>
     	<mapper resource="mapper/house_query.xml"/>
-    	<mapper resource="mapper/animalpmc_query.xml"/>
-    	<mapper resource="mapper/animalhpt_query.xml"/>
+    	<mapper resource="mapper/animal_query.xml"/>
     </mappers>
    
 

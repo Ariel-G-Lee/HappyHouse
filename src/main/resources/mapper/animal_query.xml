@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.ssafy.house.dao.AnimalDao">
+	 
+	 <select id="selectHptStats" resultType="com.ssafy.house.dto.AnimalStatsDto">
+ 		SELECT HPT_GUGUN as NAME, COUNT(HPT_ID) as COUNT
+		FROM ANIMAL_HOSPITAL
+		GROUP BY HPT_GUGUN;
+ 	</select>
+ 	
+ 	<select id="selectPmcStats" resultType="com.ssafy.house.dto.AnimalStatsDto">
+ 		SELECT PMC_GUGUN as NAME, COUNT(PMC_ID) as COUNT
+		FROM ANIMAL_PHARMACY
+		GROUP BY PMC_GUGUN;
+ 	</select>
+ 	
+ 	<select id="searchByDongNameHpt" parameterType="string" resultType="com.ssafy.house.dto.AnimalHptDto">
+ 		SELECT a.HPT_ID, a.HPT_NAME, a.HPT_GUGUN, a.HPT_DONG, a.HPT_CALL,
+ 		a.HPT_ADDRESS, a.HPT_ZIPCODE, a.HPT_X, a.HPT_Y, a.HPT_JIBUN
+ 		FROM ANIMAL_HOSPITAL a, DONG_CODE d
+ 		WHERE a.HPT_DONG = d.DONG_NAME AND d.DONG_CODE = #{dongCode}
+ 	</select>
+
+	 <select id="searchByDongNameHptCount" parameterType="string" resultType="int">
+ 		SELECT COUNT(*) as COUNT
+ 		FROM ANIMAL_HOSPITAL a, DONG_CODE d
+ 		WHERE a.HPT_DONG = d.DONG_NAME AND d.DONG_CODE = #{dongCode}
+ 	</select>
+ 	
+ 	 	 <select id="searchByDongNamePmc" parameterType="string" resultType="com.ssafy.house.dto.AnimalPmcDto">
+ 		SELECT a.PMC_ID, a.PMC_NAME, a.PMC_GUGUN, a.PMC_DONG, a.PMC_CALL,
+ 		a.PMC_ADDRESS, a.PMC_ZIPCODE, a.PMC_X, a.PMC_Y, a.PMC_JIBUN
+ 		FROM ANIMAL_PHARMACY a, DONG_CODE d
+ 		WHERE a.PMC_DONG = d.DONG_NAME AND d.DONG_CODE = #{dongCode}
+ 	</select>
+ 	
+ 	<select id="searchByDongNamePmcCount" parameterType="string" resultType="int">
+ 		SELECT COUNT(*) as COUNT
+ 		FROM ANIMAL_PHARMACY a, DONG_CODE d
+ 		WHERE a.PMC_DONG = d.DONG_NAME AND d.DONG_CODE = #{dongCode}
+ 	</select>
+</mapper> 
