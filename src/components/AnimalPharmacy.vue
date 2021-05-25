@@ -49,17 +49,18 @@
           </div>
         </div>
         
-        <div v-if="isList">
-          <div align="center">
-            <h6 class="mt-3"><strong>{{ pharmacyList[0].pmcDong }}</strong>에는 <strong>{{ count }}</strong>개의 약국이 있습니다.</h6>
+        <div v-if="isList" align="center">
+          <div>
+            <h5 class="mt-3"><strong>{{ pharmacyList[0].pmcDong }}</strong>에는 <strong>{{ count }}</strong>개의 약국이 있습니다.</h5>
           </div>
           <animal-pharmacy-map :pharmacyList="pharmacyList"></animal-pharmacy-map>
           <br>
-          <table class="table table-hover" align="center" style="width: 1200px">
+          <div class="pmc-table">
+          <table class="table table-hover">
               <thead>
                 <tr>
-                  <th style="width: 30%">약국</th>
-                  <th style="width: 50%">주소</th>
+                  <th style="width: 15%">약국</th>
+                  <th style="width: 65%">주소</th>
                   <th style="width: 20%">전화번호</th>
                 </tr>
               </thead>
@@ -71,6 +72,7 @@
                 </tr>
               </tbody>
             </table>
+          </div>
         </div>
         
 
@@ -217,5 +219,7 @@ export default {
 }
 </script>
 <style>
-  
+.pmc-table{
+  width: 80%;
+}
 </style>

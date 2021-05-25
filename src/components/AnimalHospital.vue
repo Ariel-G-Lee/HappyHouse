@@ -49,13 +49,14 @@
           </div>
         </div>
         
-        <div v-if="isList">
-          <div align="center">
-            <h6 class="mt-3"><strong>{{ hospitalList[0].hptDong }}</strong>에는 <strong>{{ count }}</strong>개의 병원이 있습니다.</h6>
+        <div v-if="isList" align="center">
+          <div>
+            <h5 class="mt-3"><strong>{{ hospitalList[0].hptDong }}</strong>에는 <strong>{{ count }}</strong>개의 병원이 있습니다.</h5>
           </div>
           <animal-hospital-map :hospitalList="hospitalList"></animal-hospital-map>
           <br>
-          <table class="table table-hover" align="center" style="width: 1200px">
+          <div class="hpt-table">
+          <table class="table table-hover">
               <thead>
                 <tr>
                   <th style="width: 15%">병원</th>
@@ -71,6 +72,7 @@
                 </tr>
               </tbody>
             </table>
+          </div>
         </div>
         
 
@@ -154,10 +156,6 @@ export default {
       this.dongSelected = this.$store.state.login.interestArea
       // console.log(this.interestArea);
       this.setHptList();
-
-      if(this.$store.state.login.isLogin && this.$store.state.login.interestArea != undefined) {
-      this.$alertify.success("설정하신 관심지역"+this.hospitalList[0].hptDong+"에 대한 정보입니다.");
-    }
     }
     },
     updateGugun() {
@@ -226,5 +224,8 @@ export default {
 .interest-img{
   width: 500px;
   border: 2px solid rgb(235, 235, 235);
+}
+.hpt-table{
+  width: 80%;
 }
 </style>
