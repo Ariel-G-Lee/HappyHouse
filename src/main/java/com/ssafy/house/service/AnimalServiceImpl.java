@@ -43,7 +43,7 @@ public class AnimalServiceImpl implements AnimalService {
 	public AnimalResultDto searchByDongNamePmc(String dongCode) {
 		AnimalResultDto animalResultDto = new AnimalResultDto();
 		List<AnimalPmcDto> pmcList = animalDao.searchByDongNamePmc(dongCode);
-		int count = animalDao.searchByDongNameHptCount(dongCode);
+		int count = animalDao.searchByDongNamePmcCount(dongCode);
 		
 		animalResultDto.setPmcList(pmcList);
 		animalResultDto.setCount(count);
