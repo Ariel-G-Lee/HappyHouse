@@ -157,8 +157,8 @@ export default new Vuex.Store({
           }
         })
         .then(({ data }) => {
-          console.log("NoticeList: data : ");
-          console.log(data);
+          //console.log("NoticeList: data : ");
+          //console.log(data);
           if( data.result == 'login' ){ 
             router.push("/login")
           }else{
@@ -180,8 +180,8 @@ export default new Vuex.Store({
           }
         })
         .then(({ data }) => {
-          console.log("HouseList: data : ");
-          console.log(data);
+          //console.log("HouseList: data : ");
+          //console.log(data);
           if( data.result == 'login' ){ 
             router.push("/login")
           }else{

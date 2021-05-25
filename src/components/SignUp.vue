@@ -266,7 +266,7 @@ export default {
           formData,
           { headers: { 'Content-Type': 'multipart/form-data' } })
           .then(({ data }) => {
-            console.log("InsertUser: data : ");
+            //console.log("InsertUser: data : ");
             console.log(data);
             if( data.result == 'login' ){
               this.$router.push("/login")

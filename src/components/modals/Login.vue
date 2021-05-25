@@ -45,7 +45,7 @@ export default {
         }
       )
       .then(({ data }) => {
-        console.log("LoginVue: data : ");
+        //("LoginVue: data : ");
         console.log(data);
 
         // $emit 사용 X
@@ -62,14 +62,14 @@ export default {
 
         this.closeModal()
         this.$alertify.success("로그인에 성공했습니다")
-        console.log(this.$store.state.login.isLogin) 
+        //console.log(this.$store.state.login.isLogin) 
         if(this.$route.path=='/signup'){
           this.$router.push("/")
         }
         
       })
       .catch( error => {
-        console.log("LoginVue: error : ");
+        //console.log("LoginVue: error : ");
         console.log(error);
         if( error.response.status == '404'){
           this.$alertify.error('이메일 또는 비밀번호를 확인하세요.');
