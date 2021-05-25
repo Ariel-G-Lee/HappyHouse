@@ -1,13 +1,13 @@
 <template>
-  <div align="center">
-    <div id="map" class="mt-4 hpt-map-size"></div>
+  <div>
+    <div id="map" class="mt-4 pmc-map-size"></div>
   </div>
 </template>
 <script>
 export default {
-  props:['hospitalList'],
+  props:['pharmacyList'],
   mounted(){
-    // console.log(this.hospitalList)
+    // console.log(this.pharmacyList)
     if (window.kakao && window.kakao.maps) {
       this.initMap();
     } else {
@@ -30,11 +30,11 @@ export default {
       var bounds = new kakao.maps.LatLngBounds();   //범위 저장할 변수  
       var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
 
-      this.hospitalList.forEach(e => {
+      this.pharmacyList.forEach(e => {
 
         var geocoder = new kakao.maps.services.Geocoder(), // 좌표계 변환 객체를 생성합니다
-          wtmX = e.hptX, // 변환할 WTM X 좌표 입니다
-          wtmY = e.hptY; // 변환할 WTM Y 좌표 입니다
+          wtmX = e.pmcX, // 변환할 WTM X 좌표 입니다
+          wtmY = e.pmcY; // 변환할 WTM Y 좌표 입니다
           // console.log(wtmX)
           // WTM 좌표를 WGS84 좌표계의 좌표로 변환합니다
           geocoder.transCoord(wtmX, wtmY, transCoordCB, {
@@ -60,24 +60,19 @@ export default {
             image : markerImage, // 마커 이미지 
             map:map
           })
-
           
           marker.setMap(map)
           bounds.extend(latlng);
         }
         map.setBounds(bounds) //추가된 좌표에 따른 범위 재설정
       } 
-      
-      
-      
     } //initMap() end
   },
 }
 </script>
 <style>
-  .hpt-map-size{
-    
-  width:80%;
+  .pmc-map-size{
+  width:100%;
   height:400px;
   border: 2px solid rgb(235, 235, 235);
 }

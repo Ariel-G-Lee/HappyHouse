@@ -53,9 +53,8 @@
           <div align="center">
             <h6 class="mt-3"><strong>{{ hospitalList[0].hptDong }}</strong>에는 <strong>{{ count }}</strong>개의 병원이 있습니다.</h6>
           </div>
-          <div class="justify-content-center">
           <animal-hospital-map :hospitalList="hospitalList"></animal-hospital-map>
-          </div>
+          <br>
           <table class="table table-hover" align="center" style="width: 1200px">
               <thead>
                 <tr>
