@@ -70,6 +70,7 @@ export default{
 
         marker.setMap(map)  //좌표하나를 마커에 추가
         bounds.extend(positions[i].latlng); //좌표하나를 범위에 추가
+        console.log(positions[i].latlng)
         
       } //position for문 끝
       map.setBounds(bounds) //추가된 좌표에 따른 범위 재설정

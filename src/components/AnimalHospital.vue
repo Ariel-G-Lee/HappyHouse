@@ -53,8 +53,7 @@
           <div align="center">
             <h6 class="mt-3"><strong>{{ hospitalList[0].hptDong }}</strong>에는 <strong>{{ count }}</strong>개의 병원이 있습니다.</h6>
           </div>
-          <h5><strong>지도</strong></h5>
-          <div id="map" style="width:500px;height:400px;"></div>
+          <animal-hospital-map :hospitalList="hospitalList"></animal-hospital-map>
           <h5 class="ms-5"><strong>병원 목록</strong></h5>
           <table class="table table-hover" align="center" style="width: 1200px">
               <thead>
@@ -83,8 +82,11 @@
 <script> 
 import http from "@/common/axios.js";
 
+import AnimalHospitalMap from './AnimalHospitalMap.vue';
+
 export default {
-  name:'AnimalHospital',
+  name:'AnimalHospital', 
+  components: { AnimalHospitalMap },
   data(){
     return{
       sidoOptions : [],
@@ -107,7 +109,7 @@ export default {
   watch: {
     loginAreaCheck(){
       this.init();
-    }
+    }, 
   },
   computed:{
     loginAreaCheck(){
@@ -116,7 +118,7 @@ export default {
     showCheck(){
       if(this.interestArea == '' || this.interestArea == undefined) return false;
       else return true; 
-    },
+    }, 
   },
   created(){
     this.init();
@@ -196,8 +198,7 @@ export default {
     hospitalSearch(){
       // 선택된 동으로 검색!
       this.interestArea = this.dongSelected;
-      this.setHptList();
-
+      this.setHptList(); 
     },
     setHptList(){
       http
@@ -207,12 +208,12 @@ export default {
         this.hospitalList = data.hptList;
         if(this.hospitalList.length == 0) this.isList = false;
         else this.isList = true;
-        console.log(this.hospitalList);
+        // console.log(this.hospitalList);
       })
       .catch((error) =>{
         console.log(error);
       })
-    }
+    },
   }
 }
 
