@@ -65,7 +65,7 @@ export default {
   methods:{
     // 부모에게 event 전달
     paginationChanged(pageIndex){
-      console.log("paginationVue : paginationChanged : pageIndex : " + pageIndex );
+      //console.log("paginationVue : paginationChanged : pageIndex : " + pageIndex );
       this.$emit('call-parent', pageIndex);
     }
   },

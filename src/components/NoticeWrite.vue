@@ -58,9 +58,9 @@ export default {
           { 
             title: this.title,
             content: this.CKEditor.getData()
-           })
+          })
           .then(({ data }) => {
-            console.log("InsertNotice: data : ");
+            //console.log("InsertNotice: data : ");
             console.log(data);
             if( data.result == 'login' ){
               this.$router.push("/login")
