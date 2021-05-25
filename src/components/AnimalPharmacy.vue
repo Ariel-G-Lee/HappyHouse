@@ -25,7 +25,7 @@
             </select>
           </div>
           <div> 
-          <button @click="hospitalSearch" class="btn btn-green">검색</button>
+          <button @click="pharmacySearch" class="btn btn-green">검색</button>
           </div>
         </div>
     </div>
@@ -53,10 +53,8 @@
           <div align="center">
             <h6 class="mt-3"><strong>{{ pharmacyList[0].pmcDong }}</strong>에는 <strong>{{ count }}</strong>개의 약국이 있습니다.</h6>
           </div>
-          <h5><strong>지도</strong></h5>
-          <div id="map" style="width:500px;height:400px;"></div>
-
-          <h5 class="ms-5"><strong>약국 목록</strong></h5>
+          <animal-pharmacy-map :pharmacyList="pharmacyList"></animal-pharmacy-map>
+          <br>
           <table class="table table-hover" align="center" style="width: 1200px">
               <thead>
                 <tr>
@@ -83,8 +81,12 @@
 </template>
 <script>
 import http from "@/common/axios.js";
+
+import AnimalPharmacyMap from './AnimalPharmacyMap.vue';
+
 export default {
   name:'AnimalPharmacy',
+  components: { AnimalPharmacyMap },
   data(){
     return{
       sidoOptions : [],
@@ -191,7 +193,7 @@ export default {
         console.log(error);
       })
     },
-    hospitalSearch(){
+    pharmacySearch(){
       // 선택된 동으로 검색!
       this.interestArea = this.dongSelected;
       this.setPmcList();
