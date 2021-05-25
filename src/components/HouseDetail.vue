@@ -1,5 +1,5 @@
 <template>
-  <div class="housedetail-table mt-5">
+  <div class="housedetail-table mt-5 p-2">
     <div class="house-name ps-2">
        <h5><strong>{{ $store.state.house.aptName }}</strong></h5>
     </div>

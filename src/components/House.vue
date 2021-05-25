@@ -1,5 +1,5 @@
 <template>
-<div>
+<div >
   <main id="main">
     <section id="house-header" class="house-header">
       <div class="container" data-aos="fade-up">
@@ -28,9 +28,7 @@
           </div>
         </div>
       </div>
-    </section>
-  </main>
-    <div id="house-body" class="house-body">
+      <div id="house-body" class="house-body">
       <div class="container-fluid container" data-aos="fade-up">
         <div class="row">
           <div class="col-md-6">
@@ -43,6 +41,9 @@
         </div>
       </div>
     </div>
+    </section>
+  </main>
+    
   </div> 
 </template>
 <script>

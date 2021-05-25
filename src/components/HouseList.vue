@@ -1,6 +1,6 @@
 <template> 
   <div>
-    <h5><strong>매물 목록</strong></h5>
+    <div>
     <div class="list-table">
     <table class="table table-hover">
       <thead>
@@ -22,6 +22,7 @@
     </table>
     </div>
     <pagination-house v-on:call-parent="movePage"></pagination-house>
+    </div>
   </div> 
 </template>
 <script>  

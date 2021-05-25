@@ -152,6 +152,10 @@ export default {
       this.dongSelected = this.$store.state.login.interestArea
       // console.log(this.interestArea);
       this.setHptList();
+
+      if(this.$store.state.login.isLogin && this.$store.state.login.interestArea != undefined) {
+      this.$alertify.success("설정하신 관심지역"+this.hospitalList[0].hptDong+"에 대한 정보입니다.");
+    }
     }
     },
     updateGugun() {

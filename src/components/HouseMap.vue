@@ -1,6 +1,5 @@
 <template>
   <div> 
-    <h5><strong>지도</strong></h5>
     <div id="map" class="mt-4 map-size"></div>
   </div>
 </template> 

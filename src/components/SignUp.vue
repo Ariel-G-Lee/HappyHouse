@@ -20,9 +20,10 @@
                 <label for="user-id">아이디</label>
                 <input type="text" class="form-control" name="user-id" v-model="userId" placeholder="Your ID"
                 :class="{ 'is-valid': isUserIdFocusAndValid , 'is-invalid': isUserIdFocusAndInvalid  }"         
-                  @focusout="validateUserId"
+                  @input="validateUserId"
                   @focus="isUserIdFocus = true"
                 />
+                <div class="invalid-feedback">사용 불가능한 아이디입니다.</div>
               </div>
               
               <div class="form-group mt-3" align="left">
@@ -200,15 +201,14 @@ export default {
   methods: {
 
     validateUserId() {
-      var self = this;
       http
       .get('/users/'+this.userId)
       .then(() => {        
-        self.isUserNameValid = false;
+        this.isUserIdValid = false;
         // console.log(this.isUserNameValid)
       })
       .catch(() =>{
-        self.isUserNameValid = true;
+        this.isUserIdValid = true;
         // console.log(this.isUserNameValid)
       })
     },
@@ -225,7 +225,7 @@ export default {
     },
 
     validateUserName() {
-      this.isUserNamealid = this.userName.length > 0 ? true : false;
+      this.isUserNameValid = this.userName.length > 0 ? true : false;
     },
 
     validateEmail() {
