@@ -21,8 +21,8 @@
       </tbody>
     </table>
     </div>
-    <pagination-house v-on:call-parent="movePage"></pagination-house>
     </div>
+    <pagination-house v-on:call-parent="movePage"></pagination-house>
   </div> 
 </template>
 <script>  
