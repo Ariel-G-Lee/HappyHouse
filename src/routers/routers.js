@@ -43,16 +43,16 @@ export default new VueRouter({
       name: "House",path: "/house",component: House
     },
     {
-      name: "Animal",path: "/animal",component: Animal,
+      path: "/animal",component: Animal,
       children: [
         { 
-          name: "AnimalChart",path: "",component: AnimalChart
+          path: "",component: AnimalChart
         },
         {
-          name: "AnimalHospital",path: "/animalhospital",component: AnimalHospital
+          path: "/animalhospital",component: AnimalHospital
         },
         {
-          name: "AnimalPharmacy",path: "/animalpharmacy",component: AnimalPharmacy
+          path: "/animalpharmacy",component: AnimalPharmacy
         }
       ]
     },
