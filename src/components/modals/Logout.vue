@@ -36,7 +36,7 @@ export default {
         this.$store.commit(
           'SET_LOGIN',
           { isLogin: false, userName: "", userProfileImageUrl: "",
-            userId: "admin", userPwd: "admin",
+            userId: "", userPwd: "",
             email: "", address: "", interestArea: "", userCode: ""}
         );
         

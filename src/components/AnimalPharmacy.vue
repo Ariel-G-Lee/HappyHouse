@@ -53,7 +53,7 @@
           <div>
             <h5 class="mt-3"><strong>{{ pharmacyList[0].pmcDong }}</strong>에는 <strong>{{ count }}</strong>개의 약국이 있습니다.</h5>
           </div>
-          <animal-pharmacy-map :pharmacyList="pharmacyList"></animal-pharmacy-map>
+          <animal-pharmacy-map :pharmacyList="pharmacyList" v-if="this.isOk"></animal-pharmacy-map>
           <br>
           <div class="pmc-table">
           <table class="table table-hover">
@@ -100,6 +100,8 @@ export default {
       isList : false,
       count : 0,
       interestArea: '',
+
+      isOk: false,
 
       sidoSelected : '도/광역시',
       gugunSelected : '시/구/군',
@@ -199,6 +201,7 @@ export default {
 
     },
     setPmcList(){
+      this.isOk = false;
       http
       .get('/animalpmc/'+this.interestArea)
       .then(({data}) => {
@@ -207,6 +210,7 @@ export default {
         this.pharmacyList = data.pmcList;
         if(this.pharmacyList.length == 0) this.isList = false;
         else this.isList = true;
+        this.isOk = true;
       })
       .catch((error) =>{
         console.log(error);

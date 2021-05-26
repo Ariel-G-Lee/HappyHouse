@@ -53,7 +53,7 @@
           <div>
             <h5 class="mt-3"><strong>{{ hospitalList[0].hptDong }}</strong>에는 <strong>{{ count }}</strong>개의 병원이 있습니다.</h5>
           </div>
-          <animal-hospital-map :hospitalList="hospitalList"></animal-hospital-map>
+          <animal-hospital-map :hospitalList="hospitalList" v-if="this.isOk"></animal-hospital-map>
           <br>
           <div class="hpt-table">
           <table class="table table-hover">
@@ -102,6 +102,8 @@ export default {
       interestArea: '',
 
       count: 0,
+
+      isOk: false,
 
       sidoSelected : '도/광역시',
       gugunSelected : '시/구/군',
@@ -200,6 +202,7 @@ export default {
       this.setHptList(); 
     },
     setHptList(){
+      this.isOk = false;
       http
       .get('/animalhpt/'+this.interestArea)
       .then(({data}) => {
@@ -207,6 +210,7 @@ export default {
         this.hospitalList = data.hptList;
         if(this.hospitalList.length == 0) this.isList = false;
         else this.isList = true;
+        this.isOk = true;
         // console.log(this.hospitalList);
       })
       .catch((error) =>{
