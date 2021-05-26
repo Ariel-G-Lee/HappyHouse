@@ -1,9 +1,17 @@
 <template>
   <div class="cloud">
     <vue-word-cloud
+      style="
+          height: 550px;
+          width: 450px;
+          margin-left: 30px;
+          cursor: pointer;
+        "
       :words="words"
-      :color="([ , weight]) => weight > 1000 ? 'DeepPink' : weight > 5 ? 'RoyalBlue' : 'Indigo'"
-      font-family="Roboto"
+      :color="color"
+      font-family="Anton"
+      font-weight="Bold"
+      :font-size-ratio="Ratio"
     />
     
   </div>
@@ -11,6 +19,9 @@
 <script> 
 import VueWordCloud from 'vuewordcloud';
 import http from "@/common/axios.js";
+
+let Chance = require('chance')
+let chance = new Chance();
 
 export default {
   name:'AnimalName',
@@ -21,8 +32,24 @@ export default {
 		return {
 			loaded: false,
 			words: [], 
+      colorItemIndex: undefined,
+      colorItems: [
+        ['#FEDE00', '#B4F8C8', '#6AB8EE'],
+        ['#4C5270', '#F652A0', '#36EEE0', '#BCECE0'],
+        ['#ffd077', '#3bc4c7', '#3a9eea', '#ff4e69', '#461e47'],
+        ['#DB1F48', '#004369', '#01949A', '#E5DDC8'],
+        ['#E7DED9', '#13292A', '#988780']
+      ],
 		}
 	},
+  computed:{ 
+    color() {
+      const colors = this.colorItems[this.colorItemIndex]
+      return function() {
+        return chance.pickone(colors)
+      }
+    },
+  },
   created(){
 		http.get('/animalname')
       .then(({ data }) => {
@@ -37,13 +64,10 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+    this.colorItemIndex = chance.integer({min: 0, max: this.colorItems.length - 1});
 	},
 
 }
 </script>
-<style>
-.cloud{ 
-  height: 480px;
-  width: 640px; 
-}
+<style> 
 </style>
