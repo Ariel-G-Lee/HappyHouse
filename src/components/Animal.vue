@@ -33,4 +33,17 @@ export default {
 .animal-button:hover{
   opacity: 0.5;
 }
+.animalH{
+  width: 320px;
+  height: 120px;
+  background: url("/img/hospital_move.png");
+  border: 2px solid rgb(235, 235, 235);
+}
+
+.animalP{
+  width: 320px;
+  height: 120px;
+  background: url("/img/pharmacy_move.png");
+  border: 2px solid rgb(235, 235, 235);
+}
 </style>

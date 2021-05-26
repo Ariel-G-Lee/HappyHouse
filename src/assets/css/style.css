@@ -422,7 +422,7 @@ h6 {
 #hero {
   width: 100%;
   height: 100vh;
-  background: url("../img/house_main.jpg") top right;
+  background: url("/img/house_main.jpg") top right;
   background-size: cover;
 }
 
@@ -796,19 +796,6 @@ section {
   }
 }
 
-.animalH{
-  width: 320px;
-  height: 120px;
-  background: url("../img/hospital_move.png");
-  border: 2px solid rgb(235, 235, 235);
-}
-
-.animalP{
-  width: 320px;
-  height: 120px;
-  background: url("../img/pharmacy_move.png");
-  border: 2px solid rgb(235, 235, 235);
-}
 
 /*--------------------------------------------------------------
 # Footer

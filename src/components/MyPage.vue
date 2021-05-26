@@ -150,9 +150,9 @@ export default {
   computed: {
     profileImg(){
       if( this.$store.state.login.profileImageUrl == undefined) {
-        return require('../assets/img/noProfile.png');
+        return '/img/noProfile.png';
       }else{
-        return require('../upload/' + this.$store.state.login.profileImageUrl);
+        return '/' + this.$store.state.login.profileImageUrl;
       }
     }
   },

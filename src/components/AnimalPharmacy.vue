@@ -35,7 +35,7 @@
       <div align="center" class="mt-5 mb-5">
         설정하신 관심 지역이 없습니다!
         <h5><strong>관심 지역을 선택해주세요.</strong></h5>
-        <img src="@/assets/img/interest.png" class="interest-img">
+        <img src="/img/interest.png" class="interest-img">
       </div>
     </div>
 
@@ -45,7 +45,7 @@
         <div v-if="!isList">
           <div align="center" class="mt-5 mb-5">
           <h5><strong>해당 지역 동물 약국 정보가 없습니다.</strong></h5>
-          <img src="@/assets/img/no_list.jpg" class="interest-img">
+          <img src="/img/no_list.jpg" class="interest-img">
           </div>
         </div>
         
