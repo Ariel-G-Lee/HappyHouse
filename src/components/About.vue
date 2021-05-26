@@ -7,21 +7,25 @@
           <h2>About</h2> 
           <br> 
 
-          <div class="row" id="about-team">
+          <div class="row" id="about-team" align="center">
             <h6><strong>팀원소개</strong></h6>
             <div class="col-md-3">
             </div>
             <div class="col-md-3">
-              <p>이가빈</p>
-              <img src="/logo.png">
+              <p><strong>이가빈</strong></p>
+              <img class="developer-profile" src="../assets/img/gv_profile.png">
               <br>
-              <a href="#">github</a>
+              <div class="mt-1">
+              <img class="git-img" src="../assets/img/github.png"><a href="https://github.com/Ariel-G-Lee" class="text-dark">github</a>
+              </div>
             </div>
             <div class="col-md-3">
-              <p>정진주</p>
-              <img src="/logo.png">
+              <p><strong>정진주</strong></p>
+              <img class="developer-profile" src="../assets/img/jj_profile.png">
               <br>
-              <a href="#">github</a>
+              <div class="mt-1">
+              <img class="git-img" src="../assets/img/github.png"><a href="https://github.com/ritajeong" class="text-dark">github</a>
+              </div>
             </div>
             <div class="col-md-3">
             </div>
@@ -73,5 +77,12 @@ export default {
 }
 </script>
 <style>
-  
+.developer-profile{
+  width: 250px;
+  border-radius: 50%;
+  border: 2px solid rgb(235, 235, 235);
+}
+.git-img{
+  width:25px;
+}
 </style>
