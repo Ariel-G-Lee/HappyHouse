@@ -133,9 +133,6 @@ export default {
       .get('/area/sido')
       .then(({ data }) => {
         this.sidoOptions = data;
-        if( data.result == 'login' ){
-          this.$router.push("/login")
-        }
       })
       .catch((error) => {
         console.log(error);

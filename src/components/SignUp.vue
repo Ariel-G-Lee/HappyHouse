@@ -189,10 +189,7 @@ export default {
       .then(({ data }) => {
         // console.log("sido data : ");
         this.sidoOptions = data;
-        // console.log(this.sidoOptions);
-        if( data.result == 'login' ){
-          this.$router.push("/login")
-        }
+        // console.log(this.sidoOptions); 
       })
       .catch((error) => {
         console.log(error);
@@ -267,13 +264,9 @@ export default {
           { headers: { 'Content-Type': 'multipart/form-data' } })
           .then(({ data }) => {
             //console.log("InsertUser: data : ");
-            console.log(data);
-            if( data.result == 'login' ){
-              this.$router.push("/login")
-            }else{
-              this.$alertify.alert('회원 가입 성공', '회원 가입이 완료되었습니다.\n메인 페이지로 이동합니다.');
-              this.$router.push("/");
-            }
+            console.log(data); 
+            this.$alertify.alert('회원 가입 성공', '회원 가입이 완료되었습니다.\n메인 페이지로 이동합니다.');
+            this.$router.push("/"); 
           })
           .catch((error) => {
             this.$alertify.alert('회원 가입 오류', '회원 가입에 오류가 생겼습니다.')

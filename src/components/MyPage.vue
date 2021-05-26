@@ -129,9 +129,6 @@ export default {
         // console.log("sido data : ");
         this.sidoOptions = data;
         // console.log(this.sidoOptions);
-        if( data.result == 'login' ){
-          this.$router.push("/login")
-        }
       })
       .catch((error) => {
         console.log(error);
@@ -233,18 +230,15 @@ export default {
       .then(({ data }) => {
         //console.log("UpdateUser: data : ");
         console.log(data);
-        if( data.result == 'login' ){
-          this.$router.push("/login")
-        }else{
-          this.$store.commit(
-          'SET_USER_UPDATE',
-          { userPwd: data.userPwd, userName: data.userName, email: data.email,
-            address: data.address, interestArea: data.interestArea,
-            profileImageUrl: data.profileImageUrl},
-          );
-          //console.log(this.$store.state.login.profileImageUrl);
-          this.$alertify.alert('회원 정보 수정 성공','회원 정보가 수정 되었습니다.');
-        }
+        this.$store.commit(
+        'SET_USER_UPDATE',
+        { userPwd: data.userPwd, userName: data.userName, email: data.email,
+          address: data.address, interestArea: data.interestArea,
+          profileImageUrl: data.profileImageUrl},
+        );
+        //console.log(this.$store.state.login.profileImageUrl);
+        this.$alertify.alert('회원 정보 수정 성공','회원 정보가 수정 되었습니다.');
+      
       })
       .catch((error) => {
         //console.log("UpdateUser: error ");
@@ -257,12 +251,9 @@ export default {
           .then(({ data }) => {
             //console.log("UpdateUser: data : ");
             console.log(data);
-            if( data.result == 'login' ){
-              this.$router.push("/login")
-            }else{
-              this.$store.state.login.isLogin = false;
-              this.$alertify.alert('회원 탈퇴 성공','회원 탈퇴되었습니다.');
-            }
+            this.$store.state.login.isLogin = false;
+            this.$alertify.alert('회원 탈퇴 성공','회원 탈퇴되었습니다.');
+            this.$router.push("/")
           })
           .catch((error) => {
             //console.log("UpdateUser: error ");
