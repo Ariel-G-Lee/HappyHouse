@@ -17,19 +17,35 @@
             <form action="forms/contact.php" method="post" role="form" class="php-email-form">
               <div class="form-group mt-3" align="left">
                 <label for="user-id">아이디</label>
-                <input type="text" class="form-control" name="user-id" id="user-id" required readonly v-model=userId>
+                <input type="text" class="form-control" name="user-id" id="user-id" readonly v-model=userId>
               </div>
+
               <div class="form-group mt-3" align="left">
                 <label for="password">비밀번호</label>
-                <input type="password" class="form-control" name="user-pwd" id="user-pwd" required v-model=userPwd>
+                <input type="password" class="form-control" name="user-pwd" id="user-pwd" v-model=userPwd
+                :class="{ 'is-valid': isUserPwdFocusAndValid , 'is-invalid': isUserPwdFocusAndInvalid  }"         
+                  @input="validateUserPwd"
+                  @focus="isUserPwdFocus = true"
+                />
+                <div class="invalid-feedback">1개 이상의 대소문자 및 숫자를 포함하고 8자리 이상이여야 합니다.</div>
               </div>
               <div class="form-group mt-3" align="left">
                 <label for="user-name">이름</label>
-                <input type="text" name="user-name" class="form-control" id="user-name" required v-model=userName>
+                <input type="text" name="user-name" class="form-control" id="user-name" v-model=userName
+                :class="{ 'is-valid': isUserNameFocusAndValid , 'is-invalid': isUserNameFocusAndInvalid  }" 
+                  @input="validateUserName" 
+                  @focus="isUserNameFocus = true"
+                />
+                <div class="invalid-feedback">이름을 입력해주세요.</div>
               </div>
               <div class="form-group mt-3" align="left">
                 <label for="email">이메일</label>
-                <input type="email" class="form-control" name="email" id="email" v-model=email>
+                <input type="email" class="form-control" name="email" id="email" v-model=email
+                :class="{ 'is-valid': isEmailFocusAndValid , 'is-invalid': isEmailFocusAndInValid  }" 
+                  @input="validateEmail" 
+                  @focus="isEmailFocus = true"
+                />
+                <div class="invalid-feedback">이메일 형식에 맞춰 입력해주세요.</div>
               </div>
               <div class="form-group mt-3" align="left">
                 <label for="address">주소</label>
@@ -111,6 +127,14 @@ export default {
       sidoSelected : '도/광역시',
       gugunSelected : '시/구/군',
       dongSelected: '동',
+
+      isUserPwdFocus: false,
+      isUserNameFocus: false,
+      isEmailFocus: false,
+
+      isUserPwdValid: false,
+      isUserNameValid: false,
+      isEmailValid: false,
     }
   },
   created: function(){
@@ -151,9 +175,50 @@ export default {
       }else{
         return '/' + this.$store.state.login.profileImageUrl;
       }
-    }
+    },
+
+    isUserPwdFocusAndValid(){
+      return this.isUserPwdFocus && this.isUserPwdValid;
+    },
+    isUserPwdFocusAndInvalid(){
+      return this.isUserPwdFocus && ! this.isUserPwdValid;
+    },
+
+    isUserNameFocusAndValid(){
+      return this.isUserNameFocus && this.isUserNameValid;
+    },
+    isUserNameFocusAndInvalid(){
+      return this.isUserNameFocus && ! this.isUserNameValid;
+    },
+
+    isEmailFocusAndValid(){
+      return this.isEmailFocus && this.isEmailValid;
+    },
+    isEmailFocusAndInValid(){
+      return this.isEmailFocus && ! this.isEmailValid;
+    },
   },
   methods: {
+
+    validateUserPwd() {
+      let patternEngAtListOne = new RegExp(/[a-zA-Z]+/);// + for at least one
+      let patternNumAtListOne = new RegExp(/[0-9]+/);// + for at least one
+      
+      this.isUserPwdValid = 
+        ( patternEngAtListOne.test( this.userPwd ) 
+          && patternNumAtListOne.test( this.userPwd )
+          && this.userPwd.length >= 8
+        ) ? true : false;
+    },
+
+    validateUserName() {
+      this.isUserNameValid = this.userName.length > 0 ? true : false;
+    },
+
+    validateEmail() {
+      let regexp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+      this.isEmailValid = (regexp.test(this.email)) ? true : false;
+    },
     
     updateGugun() {
       this.gugunSelected = '시/구/군';
