@@ -15,6 +15,7 @@ import Animal from "@/components/Animal.vue";
 import AnimalChart from "@/components/AnimalChart.vue"; 
 import AnimalHospital from "@/components/AnimalHospital.vue"; 
 import AnimalPharmacy from "@/components/AnimalPharmacy.vue"; 
+import About from "@/components/About.vue";  
 
 export default new VueRouter({
   routes: [
@@ -41,6 +42,9 @@ export default new VueRouter({
     },
     {
       name: "House",path: "/house",component: House
+    },
+    {
+      name: "About",path: "/about",component: About
     },
     {
       path: "/animal",component: Animal,

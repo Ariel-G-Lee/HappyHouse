@@ -13,6 +13,7 @@
             <li><router-link to="/noticelist" >공지사항</router-link></li>
             <li><router-link to="/house" >실거래 매물 검색</router-link></li>
             <li><router-link to="/animal" >관심지역 동행</router-link></li>
+            <li><router-link to="/about" >About</router-link></li>
             <!-- <li><a href="resume.html">QnA</a></li> -->
           </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>
