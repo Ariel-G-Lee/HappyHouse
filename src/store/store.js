@@ -11,9 +11,9 @@ export default new Vuex.Store({
   state: {
     login: {
       isLogin: false,
-      userId: "admin",
+      userId: "",
       userName: "",
-      userPwd: "admin",
+      userPwd: "",
       email: "",
       address: "",
       interestArea: "",

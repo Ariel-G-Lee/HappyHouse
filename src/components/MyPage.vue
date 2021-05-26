@@ -303,7 +303,7 @@ export default {
         );
         //console.log(this.$store.state.login.profileImageUrl);
         this.$alertify.alert('회원 정보 수정 성공','회원 정보가 수정 되었습니다.');
-      
+        this.$router.push("/");
       })
       .catch((error) => {
         //console.log("UpdateUser: error ");
