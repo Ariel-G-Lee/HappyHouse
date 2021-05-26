@@ -1,33 +1,49 @@
 <template>
-  <div id="anlmai-name">
-      <!-- <cloud></cloud> -->
+  <div class="cloud">
+    <vue-word-cloud
+      :words="words"
+      :color="([ , weight]) => weight > 1000 ? 'DeepPink' : weight > 5 ? 'RoyalBlue' : 'Indigo'"
+      font-family="Roboto"
+    />
+    
   </div>
 </template>
+<script> 
+import VueWordCloud from 'vuewordcloud';
+import http from "@/common/axios.js";
 
-<script>
-// import Cloud from 'vue-d3-cloud';
-// //animalname get
-// export default {
-// 	name: 'AnimalName',
-// 	data() {
-// 		return {
-// 			loaded: false,
-// 			words: [],
-// 			color: 'Category10',
-// 			fontSizeMapper: word => Math.log2(word.value*20)*3,
-// 			font: "Times New Roman",
-// 			colorCount: 2,
-// 		}
-// 	},
-// 	components: {
-// 		Cloud,
-// 	},
-// 	created(){
-		
-// 	},
-// }
+export default {
+  name:'AnimalName',
+  components: {
+    [VueWordCloud.name]: VueWordCloud,
+  },
+  data() {
+		return {
+			loaded: false,
+			words: [], 
+		}
+	},
+  created(){
+		http.get('/animalname')
+      .then(({ data }) => {
+        data.forEach((el) =>{
+          this.words.push({text: el.name, weight: el.count}); 
+        })
+        this.loaded = true;
+				console.log(data)
+				console.log(this.words)
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+	},
+
+}
 </script>
-
 <style>
-
+.cloud{ 
+  height: 480px;
+  width: 640px; 
+}
 </style>

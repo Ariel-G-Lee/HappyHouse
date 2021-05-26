@@ -11,7 +11,7 @@
       </div>
     </section>
   </main>
-  <div>
+  <div align="center">
     <animal-name></animal-name>
     <shelter></shelter>
   </div>
