@@ -40,4 +40,8 @@
  		FROM ANIMAL_PHARMACY a, DONG_CODE d
  		WHERE a.PMC_DONG = d.DONG_NAME AND d.DONG_CODE = #{dongCode}
  	</select>
+ 	
+ 	<select id="searchAnmimalNameStats" resultType="com.ssafy.house.dto.AnimalStatsDto">
+ 		SELECT * FROM ANIMAL_NAME
+ 	</select>
 </mapper> 

@@ -22,5 +22,7 @@ public interface AnimalDao {
 	List<AnimalHptDto> searchByDongNameHpt(String dongCode);
 
 	int searchByDongNameHptCount(String dongCode);
+
+	List<AnimalStatsDto> searchAnmimalNameStats();
 	
 }

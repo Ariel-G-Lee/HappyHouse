@@ -50,4 +50,9 @@ public class AnimalServiceImpl implements AnimalService {
 		return animalResultDto;
 	}
 
+	@Override
+	public List<AnimalStatsDto> searchAnmimalNameStats() {
+		return animalDao.searchAnmimalNameStats();
+	}
+
 }
