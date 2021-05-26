@@ -13,18 +13,18 @@
             </div>
             <div class="col-md-3">
               <p><strong>이가빈</strong></p>
-              <img class="developer-profile" src="../assets/img/gv_profile.png">
+              <img class="developer-profile" src="/img/gv_profile.png">
               <br>
               <div class="mt-1">
-              <img class="git-img" src="../assets/img/github.png"><a href="https://github.com/Ariel-G-Lee" class="text-dark">github</a>
+              <img class="git-img" src="/img/github.png"><a href="https://github.com/Ariel-G-Lee" class="text-dark">github</a>
               </div>
             </div>
             <div class="col-md-3">
               <p><strong>정진주</strong></p>
-              <img class="developer-profile" src="../assets/img/jj_profile.png">
+              <img class="developer-profile" src="/img/jj_profile.png">
               <br>
               <div class="mt-1">
-              <img class="git-img" src="../assets/img/github.png"><a href="https://github.com/ritajeong" class="text-dark">github</a>
+              <img class="git-img" src="/img/github.png"><a href="https://github.com/ritajeong" class="text-dark">github</a>
               </div>
             </div>
             <div class="col-md-3">
