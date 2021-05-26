@@ -1,28 +1,34 @@
 <template>
-	<div id="anlmai-name">
-		<cloud :data="words" :fontSizeMapper="fontSizeMapper" />
-	</div>
+  <div id="anlmai-name">
+      <cloud>
+      </cloud>
+  </div>
 </template>
 
 <script>
-import Cloud from 'vue-d3-cloud'
+import Cloud from 'vue-d3-cloud';
 //animalname get
 export default {
 	name: 'AnimalName',
 	data() {
 		return {
-			words: [
-				{ text: 'Vue', value: 1000 },
-				{ text: 'js', value: 200 },
-				{ text: 'is', value: 800 },
-				{ text: 'very cool', value: 1000000 },
-				{ text: 'lunch', value: 100 },
-			],
-			fontSizeMapper: word => Math.log2(word.value) * 5,
+			loaded: false,
+			words: [],
+			color: 'Category10',
+			fontSizeMapper: word => Math.log2(word.value*20)*3,
+			font: "Times New Roman",
+			colorCount: 2,
 		}
 	},
 	components: {
 		Cloud,
 	},
+	created(){
+		
+	},
 }
 </script>
+
+<style>
+
+</style>
