@@ -30,11 +30,31 @@
             <div class="col-md-3">
             </div>
           </div> 
-
+          
           <div>
             <br>
-            <h6><strong>기획의도</strong></h6>
-            <p>싸피 파이널 프로젝트인 happyhouse와 저희의 관심사인 동물을 싸피 파이널 프로젝트인 happyhouse와 저희의 관심사인 동물을 싸피 파이널 프로젝트인 happyhouse와 저희의 관심사인 동물을 싸피 파이널 프로젝트인 happyhouse와 저희의 관심사인 동물을 싸피 파이널 프로젝트인 happyhouse와 저희의 관심사인 동물을 </p>
+            <div class="row" id="about-project">
+              <h6><strong>프로젝트 소개</strong></h6>
+              <div class="col-md-3">
+              </div>
+              <div class="col-md-6">
+                <p></p>
+                <ul>
+                  <li>주제 : HAPPY HOUSE</li>
+                  <li>목적 : 이사할 동네가 동물을 키우기에 적합한 곳인지 알아본다. </li>
+                  <li>기능
+                    <ol>
+                      <li>동/아파트별 매매정보 검색</li>
+                      <li>서울시 동물병원/약국 통계</li>
+                      <li>동별 동물병원/약국 검색</li>
+                    </ol>
+                  <li>팀명 : 멋쟁이 고양이처럼</li>
+                  <li>개발기간 : 2021.05.18 ~ 20201.05.26 (9일)</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+              </div> 
+            </div>
           </div>
 
 
