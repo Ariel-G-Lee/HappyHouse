@@ -152,7 +152,7 @@ export default {
       if( this.$store.state.login.profileImageUrl == undefined) {
         return require('../assets/img/noProfile.png');
       }else{
-        return require('../assets/' + this.$store.state.login.profileImageUrl);
+        return require('../upload/' + this.$store.state.login.profileImageUrl);
       }
     }
   },
