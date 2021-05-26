@@ -1,20 +1,22 @@
 <template>
-  <div>
-    <h6><strong>서울시 동물 보호소</strong></h6>
+  <div class="container">
+    <h5><strong>서울시 동물 보호소</strong></h5>
+    <p>사지말고 입양하세요</p>
     <div class="d-flex justify-content-center mt-2">     
       <div class="selectbox me-2 mt-1">
         <!-- @change="searchShelter" -->
         <select v-model="sigunguSelected" @change="searchShelter" class="form-select py-2 btn btn-light">
-          <option selected>시/구/군</option>
+          <option selected value="시/군/구">시/구/군</option>
           <option v-for="(option, index) in sigungu" :key="index" :value="option.code">{{ option.name }}</option>
         </select>
       </div>
     </div>
-    <table class="table table-hover">
+    <div class="shelter-table mt-2">
+    <table v-if="this.isExist" class="table table-hover">
       <thead>
         <tr>
-          <th class="col-2">보호소번호</th>
-          <th class="col-2">보호소명</th> 
+          <th class="col-5">보호소번호</th>
+          <th class="col-7">보호소명</th> 
         </tr>
       </thead>
       <tbody>
@@ -24,6 +26,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 </template>
 <script>
@@ -34,8 +37,9 @@ export default {
   data() {
     return {
       // sidos : [],
+      isExist: false,
       UPR_CD:'6110000',
-      sigunguSelected: '시/구/군',
+      sigunguSelected: '시/군/구',
       sigungu : [],
       shelter: [],
     };
@@ -44,6 +48,7 @@ export default {
     
   },
   created(){
+
     // this.Sido() //Sido -> sidos에 저장
     this.getSigungu() 
     // this.getShelter()
@@ -73,17 +78,30 @@ export default {
         });
     },
     searchShelter() {
+      this.isExist = false;
       const SERVICE_URL='http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/shelter?upr_cd='+this.UPR_CD+'&org_cd='+this.sigunguSelected+'&ServiceKey='+SERVICE_KEY;
       if(this.sigunguSelected != '시/군/구'){
         axios.get(SERVICE_URL, { 
         })
         .then((response) => { 
-          console.log(response.data.response.body.items.item);
-          this.shelter = response.data.response.body.items.item;
+          this.shelter = [];
+          if(response.data.response.body.items.item.constructor == Array){
+              response.data.response.body.items.item.forEach((el) => {
+              this.shelter.push({careRegNo: el.careRegNo, careNm: el.careNm});
+            });
+          } else {
+            this.shelter.push(response.data.response.body.items.item);
+          }
+          
+          // console.log(this.shelter);
+          this.isExist = true;
         })
         .catch((error) => {
           console.dir(error);
         });
+      } else {
+        console.log(this.sigunguSelected);
+        this.isExist = false;
       }
       
     },
@@ -91,5 +109,7 @@ export default {
 }
 </script>
 <style>
-  
+.shelter-table{
+  width: 80%;
+}
 </style>

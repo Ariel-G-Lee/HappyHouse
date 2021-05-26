@@ -1,9 +1,10 @@
 <template>
   <div class="cloud">
+		<h5><strong>인기가 많은 반려동물 이름이래요!</strong></h5>
     <vue-word-cloud
       style="
           height: 550px;
-          width: 450px;
+          width: 550px;
           margin-left: 30px;
           cursor: pointer;
         "
@@ -33,11 +34,7 @@ export default {
 			words: [], 
       colorItemIndex: undefined,
       colorItems: [
-        ['#FEDE00', '#B4F8C8', '#6AB8EE'],
-        ['#4C5270', '#F652A0', '#36EEE0', '#BCECE0'],
-        ['#ffd077', '#3bc4c7', '#3a9eea', '#ff4e69', '#461e47'],
-        ['#DB1F48', '#004369', '#01949A', '#E5DDC8'],
-        ['#E7DED9', '#13292A', '#988780']
+        ['#E7DED9', '#16306a', '#988780', '#01949a', '#5ba9ac']
       ],
 		}
 	},
