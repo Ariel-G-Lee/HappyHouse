@@ -106,23 +106,18 @@ export default {
       .then(({ data }) => {
         //console.log("DetailNotice: data : ");
         //console.log(data);
-
-        if( data.result == 'login' ){
-          this.$router.push("/login")
-        }else{
-          this.$store.commit(
-            'SET_NOTICE_DETAIL',
-            {  
-              noticeId: data.dto.noticeId,
-              userName: data.dto.userName,
-              title: data.dto.title,
-              content: data.dto.content,
-              regDt: this.makeDateStr(data.dto.regDt.date.year, data.dto.regDt.date.month, data.dto.regDt.date.day, '.'),
-              isOwner: data.isOwner, // not data.dto.isOwner
-            }
-          );
-          this.$router.push("/noticedetail");
-        }
+        this.$store.commit(
+          'SET_NOTICE_DETAIL',
+          {  
+            noticeId: data.dto.noticeId,
+            userName: data.dto.userName,
+            title: data.dto.title,
+            content: data.dto.content,
+            regDt: this.makeDateStr(data.dto.regDt.date.year, data.dto.regDt.date.month, data.dto.regDt.date.day, '.'),
+            isOwner: data.isOwner, // not data.dto.isOwner
+          }
+        );
+        this.$router.push("/noticedetail");
       })
       .catch((error) => {
         //console.log("DetailModalVue: error ");

@@ -55,9 +55,7 @@ export default {
       .then(({ data }) => {
         this.hospitalList = data.stsHptList; 
         this.pharmacyList = data.stsPmcList;  
-        if( data.result == 'login' ){
-          this.$router.push("/login")
-        }
+        console.log(data.result)
 
         this.hospitalList.forEach((el) =>{
           this.guguns.push(el.name);
