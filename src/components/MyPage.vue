@@ -262,6 +262,7 @@ export default {
             }else{
               this.$store.state.login.isLogin = false;
               this.$alertify.alert('회원 탈퇴 성공','회원 탈퇴되었습니다.');
+              this.$router.push("/")
             }
           })
           .catch((error) => {

@@ -1,6 +1,7 @@
 <template>
   <div id="anlmai-name">
-      <!-- <cloud></cloud> -->
+      <!-- <cloud>
+      </cloud> -->
   </div>
 </template>
 
