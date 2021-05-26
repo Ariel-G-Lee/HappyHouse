@@ -30,7 +30,8 @@ public class WebMvcConfig implements WebMvcConfigurer{
 				"/houses/**",
 				"/animalhpt/**",
 				"/animalpmc/**",
-				"/animalstats/**"
+				"/animalstats/**",
+				"/animalname/**"
 				); // static folder
 	}
 	

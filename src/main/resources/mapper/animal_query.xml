@@ -42,6 +42,6 @@
  	</select>
  	
  	<select id="searchAnmimalNameStats" resultType="com.ssafy.house.dto.AnimalStatsDto">
- 		SELECT * FROM ANIMAL_NAME
+ 		SELECT * FROM ANIMAL_NAME ORDER BY COUNT DESC LIMIT 100;
  	</select>
 </mapper> 
