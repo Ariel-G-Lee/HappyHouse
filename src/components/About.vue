@@ -7,13 +7,22 @@
           <h2>About</h2>
           <p>소개페이지</p>
           <br>
+          <text>소개내용</text>
+          <p>만약 동물 입양을 원하는 당신이라면...</p>
+          <a>클릭</a>
         </div>
       </div>
     </section>
   </main>
   <div align="center">
-    <animal-name></animal-name>
-    <shelter></shelter>
+    <div class="row">
+          <div class="col-md-6">
+            <shelter></shelter>
+          </div>
+          <div class="col-md-6">
+            <animal-name></animal-name>
+          </div>
+    </div>
   </div>
 </div>
 </template>
