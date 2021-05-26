@@ -8,7 +8,7 @@
           <br> 
 
           <div class="row" id="about-team" align="center">
-            <h6><strong>팀원소개</strong></h6>
+            <h5><strong>팀원소개</strong></h5>
             <div class="col-md-3">
             </div>
             <div class="col-md-3">
@@ -31,29 +31,22 @@
             </div>
           </div> 
           
-          <div>
+          <div class="mb-4">
             <br>
             <div class="row" id="about-project">
-              <h6><strong>프로젝트 소개</strong></h6>
-              <div class="col-md-3">
+              <h5><strong>프로젝트 소개</strong></h5>
+              <div align="center">
+                <h6><strong>HAPPY HOUSE</strong></h6>
+                <p>반려동물과 함께 살 최적의 집을 찾기 위한 서비스 제공</p>
+                <br>
+                <p>기능</p>
+                <p>동/아파트별 매매정보 검색</p>
+                <p>서울시 동물병원/약국 통계</p>
+                <p>동별 동물병원/약국 검색</p>
+                <br>
+                <p>팀명 : 멋쟁이 고양이처럼</p>
+                <p>개발기간 : 2021.05.18 ~ 20201.05.26 (9일)</p>
               </div>
-              <div class="col-md-6">
-                <p></p>
-                <ul>
-                  <li>주제 : HAPPY HOUSE</li>
-                  <li>목적 : 이사할 동네가 동물을 키우기에 적합한 곳인지 알아본다. </li>
-                  <li>기능
-                    <ol>
-                      <li>동/아파트별 매매정보 검색</li>
-                      <li>서울시 동물병원/약국 통계</li>
-                      <li>동별 동물병원/약국 검색</li>
-                    </ol>
-                  <li>팀명 : 멋쟁이 고양이처럼</li>
-                  <li>개발기간 : 2021.05.18 ~ 20201.05.26 (9일)</li>
-                </ul>
-              </div>
-              <div class="col-md-6">
-              </div> 
             </div>
           </div>
 
