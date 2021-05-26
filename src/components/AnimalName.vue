@@ -11,7 +11,6 @@
       :color="color"
       font-family="Anton"
       font-weight="Bold"
-      :font-size-ratio="Ratio"
     />
     
   </div>
@@ -57,9 +56,6 @@ export default {
           this.words.push({text: el.name, weight: el.count}); 
         })
         this.loaded = true;
-				console.log(data)
-				console.log(this.words)
-
       })
       .catch((error) => {
         console.log(error);
