@@ -50,7 +50,7 @@
           </div>
 
 
-          <a href="#" @click="toggleOnOff">동물 입양을 고려하고 있는 당신에게...</a>
+          <a href="#" @click="toggleOnOff"><strong>동물 입양을 고려하고 있는 당신에게...</strong></a>
           <div class="mt-5" v-show="isStatusOn" align="center">
             <div class="row">
               <div class="col-md-6">
