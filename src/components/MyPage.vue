@@ -251,19 +251,9 @@ export default {
           .then(({ data }) => {
             //console.log("UpdateUser: data : ");
             console.log(data);
-<<<<<<< HEAD
-            if( data.result == 'login' ){
-              this.$router.push("/login")
-            }else{
-              this.$store.state.login.isLogin = false;
-              this.$alertify.alert('회원 탈퇴 성공','회원 탈퇴되었습니다.');
-              this.$router.push("/")
-            }
-=======
             this.$store.state.login.isLogin = false;
             this.$alertify.alert('회원 탈퇴 성공','회원 탈퇴되었습니다.');
             this.$router.push("/")
->>>>>>> 596da778adad70dc3c14ec53a92ecab099103084
           })
           .catch((error) => {
             //console.log("UpdateUser: error ");
