@@ -10,7 +10,7 @@
       :words="words"
       :color="color"
       font-family="Anton"
-      font-weight="Bold"
+      font-weight="Bold" 
     />
     
   </div>
@@ -28,8 +28,7 @@ export default {
     [VueWordCloud.name]: VueWordCloud,
   },
   data() {
-		return {
-			loaded: false,
+		return { 
 			words: [], 
       colorItemIndex: undefined,
       colorItems: [
@@ -55,7 +54,6 @@ export default {
         data.forEach((el) =>{
           this.words.push({text: el.name, weight: el.count}); 
         })
-        this.loaded = true;
       })
       .catch((error) => {
         console.log(error);
