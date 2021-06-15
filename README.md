@@ -73,7 +73,7 @@ Back-End
 
 ## 5. 주요 화면
 
-<img src="./img/메인.png">
+<img src="./img/메인.png" width="600">
 
 <img src="./img/회원정보수정.png">
 
@@ -83,5 +83,5 @@ Back-End
 
 <img src="./img/관심지역동행-검색.png">
 
-<img src="./img/어바웃.png">
+<img src="./img/어바웃.png" width="600">
 
