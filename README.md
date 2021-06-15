@@ -67,7 +67,7 @@ Back-End
 
 ## 4. DB ERD
 
-<img src="./img/ERD.png">
+<img src="./img/ERD.PNG">
 
 
 
