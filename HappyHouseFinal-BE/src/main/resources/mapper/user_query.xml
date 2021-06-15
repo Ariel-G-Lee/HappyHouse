@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.ssafy.house.dao.UserDao">
+ 
+	<!-- 회원 상세 정보 -->
+	<select id="userDetail" parameterType="string" resultType="com.ssafy.house.dto.UserDto">
+		SELECT * FROM USER WHERE USER_ID = #{userId}
+	</select>
+	
+	<!-- 회원 가입 -->
+	<insert id="userInsert" parameterType="com.ssafy.house.dto.UserDto">
+		INSERT INTO USER ( USER_ID, USER_NAME, USER_PWD, EMAIL, ADDRESS, INTEREST_AREA, PROFILE_IMAGE_URL, JOINDATE, USER_CODE )
+		VALUES (#{userId}, #{userName}, #{userPwd}, #{email}, #{address}, #{interestArea}, #{profileImageUrl}, now(), '002')
+	</insert>
+	
+	<select id="profileFileUrlDelete" parameterType="string" resultType="string">
+		SELECT PROFILE_IMAGE_URL FROM USER WHERE USER_ID = #{userId}
+	</select>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="userUpdate" parameterType="com.ssafy.house.dto.UserDto">		
+		UPDATE USER SET USER_NAME = #{userName}, USER_PWD = #{userPwd}, EMAIL = #{email},
+		ADDRESS = #{address}, INTEREST_AREA = #{interestArea}
+		<if test="profileImageUrl != null">
+		, PROFILE_IMAGE_URL = #{profileImageUrl}
+		</if>
+		WHERE USER_ID = #{userId}
+	</update>
+	
+	<delete id="userDelete" parameterType="string">
+		DELETE FROM USER WHERE USER_ID = #{userId}
+	</delete>
+	
+	<delete id="noticeUserReadDelete" parameterType="string">
+		DELETE FROM NOTICE_USER_READ WHERE USER_ID = #{userId}
+	</delete>
+
+</mapper> 

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.ssafy.house.dao.NoticeDao">
+ 
+ 	<!-- 공지 글 등록 -->
+	<insert id="noticeInsert" parameterType="com.ssafy.house.dto.NoticeDto">
+		INSERT INTO NOTICE ( USER_ID, TITLE, CONTENT, REG_DT, READ_COUNT )
+		            VALUES ( #{userId}, #{title}, #{content}, now(), 0 )
+	</insert>
+	
+	<!-- 공지 글 조회 -->
+	<select id="noticeDetail" parameterType="int" resultType="com.ssafy.house.dto.NoticeDto">
+		SELECT n.NOTICE_ID, n.USER_ID, u.USER_NAME, u.PROFILE_IMAGE_URL,
+			   n.TITLE, n.CONTENT, n.REG_DT, n.READ_COUNT
+		FROM NOTICE n, USER u
+		WHERE n.NOTICE_ID = #{noticeId}
+		AND n.USER_ID = u.USER_ID
+	</select>
+	
+	<select id="noticeUserReadCount" parameterType="map" resultType="int">
+		SELECT COUNT(*) FROM NOTICE_USER_READ WHERE NOTICE_ID = #{noticeId} and USER_ID = #{userId}
+	</select>
+	
+	<insert id="noticeUserReadInsert" parameterType="map">
+		INSERT INTO NOTICE_USER_READ ( NOTICE_ID, USER_ID )
+		            VALUES ( #{noticeId}, #{userId} )
+	</insert>
+
+	<update id="noticeReadCountUpdate" parameterType="int">
+		UPDATE NOTICE SET READ_COUNT = READ_COUNT + 1
+		WHERE NOTICE_ID = #{noticeId}
+	</update>
+	
+	<update id="noticeUpdate" parameterType="com.ssafy.house.dto.NoticeDto">
+		UPDATE NOTICE
+		SET TITLE = #{title},
+		CONTENT   = #{content}
+		WHERE NOTICE_ID = #{noticeId}
+	</update>
+	
+	<select id="noticeList" parameterType="map" resultType="com.ssafy.house.dto.NoticeDto">
+		SELECT n.NOTICE_ID, n.USER_ID, u.USER_NAME,
+		  	   n.TITLE, n.CONTENT, n.REG_DT, n.READ_COUNT
+		  FROM NOTICE n, USER u
+		 WHERE n.USER_ID = u.USER_ID
+		 ORDER BY n.NOTICE_ID DESC
+		 LIMIT #{limit} OFFSET #{offset}
+	</select>
+	
+	<select id="noticeListTotalCount" resultType="int">
+		SELECT COUNT(*) FROM NOTICE
+	</select>
+	
+	<select id="noticeListSearchWord" parameterType="map" resultType="com.ssafy.house.dto.NoticeDto">
+		SELECT n.NOTICE_ID, n.USER_ID, u.USER_NAME,
+		  	   n.TITLE, n.CONTENT, n.REG_DT, n.READ_COUNT
+		  FROM NOTICE n, USER u
+		  WHERE n.USER_ID = u.USER_ID
+		    AND n.TITLE LIKE CONCAT('%', #{searchWord} ,'%')
+		  ORDER BY n.NOTICE_ID DESC
+		  LIMIT #{limit} OFFSET #{offset}
+	</select>
+	
+	<select id="noticeListSearchWordTotalCount" parameterType="string" resultType="int">
+		SELECT COUNT(*)
+		  FROM NOTICE
+		 WHERE TITLE LIKE CONCAT('%', #{searchWord} ,'%')
+	</select>
+
+	<update id="noticeReadCountDelete" parameterType="int">
+		DELETE FROM NOTICE_USER_READ WHERE NOTICE_ID = #{noticeId}
+	</update>
+	
+	<delete id="noticeDelete" parameterType="int">
+		DELETE FROM NOTICE WHERE NOTICE_ID = #{noticeId}
+	</delete>
+
+</mapper> 
